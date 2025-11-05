@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { APP_CONFIG } from "@/lib/constants";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -15,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/dashboard/", "/onboarding/"],
       },
     ],
-    sitemap: `${APP_CONFIG.url}/sitemap.xml`,
+    sitemap: `http://localhost:3000/sitemap.xml`,
   };
 }
