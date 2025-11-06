@@ -6,7 +6,7 @@
 
 /* ===== Inline Theme Tokens ===== */
 @theme inline {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
   /* Primary Colors */
   --color-primary-50: #fef5f3;
@@ -14,7 +14,7 @@
   --color-primary-200: #fbd0c8;
   --color-primary-300: #f7ae9f;
   --color-primary-400: #f17e6a;
-  --color-primary-500: #E16349;
+  --color-primary-500: #e16349;
   --color-primary-600: #c94a32;
   --color-primary-700: #a83c28;
   --color-primary-800: #8b3424;
@@ -93,11 +93,13 @@
 
   html {
     @apply scroll-smooth;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    
   }
 }
 
@@ -144,7 +146,7 @@
 /* ===== Utilities Layer ===== */
 @layer utilities {
   .bg-gradient-primary {
-    background: linear-gradient(135deg, #E16349 0%, #c94a32 100%);
+    background: linear-gradient(135deg, #e16349 0%, #c94a32 100%);
   }
 
   .shadow-primary {
@@ -153,6 +155,10 @@
 
   .shadow-primary-lg {
     box-shadow: 0 10px 40px rgba(225, 99, 73, 0.2);
+  }
+
+  .text-secondary {
+    color: #878787;
   }
 
   .scrollbar-hide {
@@ -193,4 +199,17 @@
 .dark ::selection {
   background-color: rgba(225, 99, 73, 0.3);
   color: var(--color-primary-foreground);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }

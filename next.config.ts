@@ -1,7 +1,10 @@
+// next.config.js or next.config.ts
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: ["www.google.com"], // ✅ Add external image domain here
+  },
 };
 
 export default nextConfig;

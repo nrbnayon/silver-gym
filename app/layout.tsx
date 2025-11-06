@@ -2,8 +2,18 @@ import type React from "react";
 import type { Metadata, Viewport } from "next";
 import ClientLayout from "./ClientLayout";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { generateSEO } from "@/lib/seo";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = generateSEO({
   title: "Silver GYM",
@@ -25,19 +35,33 @@ export const viewport: Viewport = {
   ],
 };
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang='en' className={inter.className} suppressHydrationWarning>
-      <body className='antialiased'>
+    <html lang='en' suppressHydrationWarning>
+      <head>
+        {/* ✅ JSON-LD structured data for SEO */}
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              name: "Silver GYM",
+              description:
+                "A powerful gym management software to manage your gym, clients, trainers, and memberships all in one place.",
+              applicationCategory: "GYM Management System",
+              operatingSystem: "Web",
+              url: process.env.NEXT_PUBLIC_BASE_URL,
+            }),
+          }}
+        />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-white text-gray-900`}
+        suppressHydrationWarning
+      >
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
