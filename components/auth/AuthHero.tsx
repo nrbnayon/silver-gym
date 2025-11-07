@@ -1,55 +1,72 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
-
-import Image from "next/image";
-import { Marquee } from "@/components/ui/marquee";
 
 export default function AuthHero() {
   const gymNames = ["Silver Gym", "Silver Gym", "Silver Gym", "Silver Gym"];
 
   return (
-    <div className='hidden lg:flex lg:w-1/2 bg-primary text-white p-12 flex-col justify-between relative overflow-hidden'>
-      {/* Top Content */}
-      <div className='relative z-10'>
-        <h3 className='text-3xl font-bold mb-4 leading-tight'>
-          All-in-One Gym Management Platform
-        </h3>
-        <p className='text-lg leading-relaxed'>
-          <span className='font-semibold'>
-            Simplify your daily operations and grow your business
-          </span>{" "}
-          <span className='text-white/80'>
-            — Easily manage memberships, billing, expenses, packages, and
-            analytics — everything you need to run your gym smoothly in one
-            smart system.
-          </span>
-        </p>
-        <div className='w-3xs h-1 bg-white/80 mt-6 rounded-full'></div>
-      </div>
+    <div className="relative flex-1 bg-primary flex flex-col px-8 py-12 overflow-hidden">
+      <div className="absolute -top-20 -right-20 w-[420px] h-[420px] bg-[#F89238] rounded-full blur-[210px]  pointer-events-none" />
 
-      {/* Dashboard Preview Image */}
-      <div className='relative z-10 mt-8'>
-        <Image
-          src='/images/auth.png'
-          alt='Gym Management Dashboard'
-          width={656}
-          height={578}
-          className='w-full h-auto drop-shadow-2xl rounded-lg'
-          priority
-        />
-      </div>
+      <div className="relative z-10 flex flex-col h-full justify-between gap-5">
+        <section className="flex flex-col items-start gap-4 w-full">
+          <div className="flex flex-col items-start gap-1 w-full">
+            <h1 className="w-full  font-bold text-white text-4xl tracking-[0] leading-14">
+              All-in-One Gym Management Platform
+            </h1>
 
-      {/* Marquee at Bottom */}
-      <div className='relative z-10 mt-8'>
-        <Marquee className='[--duration:30s]' pauseOnHover>
-          {gymNames.map((name, i) => (
-            <span
-              key={i}
-              className='text-3xl font-bold text-white/30 whitespace-nowrap mx-6'
-            >
-              {name}
-            </span>
-          ))}
-        </Marquee>
+            <p className="w-full  font-normal text-transparent text-xl tracking-[0] leading-7">
+              <span className="font-bold text-white">
+                Simplify your daily operations and grow your business
+              </span>
+
+              <span className="text-white"> —</span>
+
+              <span className="text-[#ffded7]">
+                Easily manage memberships, billing, expenses, packages, and
+                analytics — everything you need to run your gym smoothly in one
+                smart system.
+              </span>
+            </p>
+          </div>
+
+          <div className="w-64 h-px bg-white"></div>
+        </section>
+
+        <div className="w-full mx-auto flex justify-center items-center">
+          <img
+            src="/images/auth.png"
+            alt="Gym Management Dashboard"
+            className="w-[656] h-auto drop-shadow-2xl object-contain"
+          />
+        </div>
+
+        <section className="relative w-full overflow-hidden">
+          {/* Track - Duplicate content for seamless loop */}
+          <div className="flex animate-marquee gap-8 w-max">
+            {/* First set */}
+            {gymNames.map((name, index) => (
+              <span
+                key={`gym-1-${index}`}
+                className="inline-flex font-semibold text-white text-3xl tracking-0 leading-10 whitespace-nowrap"
+              >
+                {name}
+              </span>
+            ))}
+            {/* Second set (duplicate) */}
+            {gymNames.map((name, index) => (
+              <span
+                key={`gym-2-${index}`}
+                className="inline-flex font-semibold text-white text-3xl tracking-0 leading-10 whitespace-nowrap"
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+
+          {/* Fade edges */}
+          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(90deg,rgba(225,99,73,1)_10%,rgba(225,100,74,0)_30%,rgba(225,100,74,0)_70%,rgba(225,99,73,1)_90%)]" />
+        </section>
       </div>
     </div>
   );

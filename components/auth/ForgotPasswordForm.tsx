@@ -1,50 +1,53 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "../ui/card";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     console.log("Finding account for:", email);
     // Implement account recovery logic
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-linear-to-br from-orange-50 via-white to-orange-50/50'>
-      <div className='w-full max-w-md bg-white rounded-lg shadow-sm border border-orange-100/50 p-8 sm:p-10'>
-        <h2 className='text-2xl sm:text-3xl font-bold text-foreground mb-3 text-center'>
-          Find Your Account
-        </h2>
-        <p className='text-muted-foreground text-base mb-8 text-center leading-relaxed'>
-          Please enter your email address or mobile number to search for your
-          account.
-        </p>
+    <div className="flex items-center justify-center min-h-screen p-4 relative w-full overflow-hidden bg-white">
+      <div className="absolute top-[-65px] left-[1236px] w-[501px] h-[234px] bg-white rounded-[250.46px/117.05px] -rotate-45 blur-[234px]" />
+      <div className="w-full max-w-2xl p-4 rounded-4xl border  before:pointer-events-none relative">
+        <Card className="bg-white rounded-2xl shadow-[-76px_59px_212px_#ff73001a,-305px_235px_250px_#ff730017,-687px_529px_250px_#ff73000d,-1221px_940px_250px_#ff730003,-1908px_1469px_250px_transparent] border-none">
+          <CardContent className="p-8">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col items-center justify-center gap-1">
+                <h1 className=" font-semibold text-[#505050] text-2xl text-center tracking-[0] leading-9">
+                  Find Your Account
+                </h1>
+              </div>
 
-        <form onSubmit={handleSubmit} className='space-y-6'>
-          <Input
-            type='text'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder='Enter your email or phone number'
-            className='h-14 rounded-lg text-base'
-          />
+              <div className="flex flex-col items-center justify-center gap-6">
+                <p className="w-full max-w-lg  font-normal text-[#505050] text-xl text-center tracking-[0] leading-7">
+                  Please enter your email address or mobile number to search for
+                  your account.
+                </p>
 
-          <Button
-            type='submit'
-            disabled={!email}
-            className={`w-full h-14 rounded-lg text-base ${
-              email
-                ? "btn-primary"
-                : "bg-gray-200 text-gray-400 cursor-not-allowed hover:bg-gray-200"
-            }`}
-          >
-            Next
-          </Button>
-        </form>
+                <div className="flex flex-col items-start gap-1 w-full">
+                  <div className="flex flex-col items-start gap-2 p-0.5 w-full rounded-lg">
+                    <Input
+                      placeholder="Enter your email or phone number"
+                      className="w-full px-3 h-14 rounded-lg border border-solid border-[#E1E1E1]  font-normal text-secondary text-base tracking-[0] leading-5 "
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <Button className="w-full px-2 py-3 bg-secondary rounded-lg  font-medium text-secondary text-xl tracking-[0] leading-7 h-auto hover:bg-secondary">
+                Next
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

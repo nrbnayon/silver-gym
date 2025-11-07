@@ -15,17 +15,16 @@ export default function GoogleButton({ text }: GoogleButtonProps) {
 
   return (
     <Button
-      type='button'
-      variant='outline'
+      type="button"
+      variant="outline"
       onClick={handleGoogleSignIn}
-      className='w-full h-14 rounded-lg border-2 text-base font-medium hover:bg-accent transition-colors'
+      className="w-full h-14 rounded-lg border-2 text-base font-medium hover:bg-accent transition-colors flex items-center justify-center gap-3"
     >
       <Image
-        src='https://www.google.com/favicon.ico'
-        alt='Google'
+        src="https://www.google.com/favicon.ico"
+        alt="Google"
         width={20}
         height={20}
-        className='mr-3'
       />
       {text}
     </Button>
