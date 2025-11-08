@@ -1,9 +1,17 @@
+// components/auth/VerificationModal.tsx
 "use client";
 
 import { useState, useRef, KeyboardEvent, useEffect } from "react";
-import { Mail, Phone } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { ImageIcon } from "@/components/utils/ImageIcon";
 
 interface VerificationModalProps {
   open: boolean;
@@ -29,7 +37,7 @@ export default function VerificationModal({
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Load state from localStorage on mount
+  // Load state from localStorage on mount or when modal opens
   useEffect(() => {
     if (open) {
       const savedState = localStorage.getItem(STORAGE_KEY);
@@ -42,20 +50,24 @@ export default function VerificationModal({
           const remaining = Math.floor((expiresAt - now) / 1000);
           setTimeLeft(remaining);
         } else {
-          // Start new timer
+          // Start new timer and save with type
           initializeTimer();
         }
       } else {
+        // Start new timer and save with type
         initializeTimer();
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, contact]);
 
   // Initialize timer and save to localStorage
   const initializeTimer = () => {
     const expiresAt = Date.now() + COUNTDOWN_DURATION * 1000;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ expiresAt, contact }));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ expiresAt, contact, type })
+    );
     setTimeLeft(COUNTDOWN_DURATION);
   };
 
@@ -66,6 +78,8 @@ export default function VerificationModal({
         setTimeLeft((prev) => {
           if (prev <= 1) {
             clearInterval(timerRef.current!);
+            // Clear storage when timer expires
+            localStorage.removeItem(STORAGE_KEY);
             return 0;
           }
           return prev - 1;
@@ -186,9 +200,22 @@ export default function VerificationModal({
     // Add toast notification here
   };
 
+  const handleManualClose = () => {
+    // Clear all related localStorage
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem("verification_complete");
+    localStorage.removeItem("signupData");
+
+    // Close modal
+    onOpenChange(false);
+  };
+
   const isComplete = code.every((digit) => digit !== "");
 
-  // Prevent closing modal
+  // Prevent closing modal via overlay or ESC
   const handleOpenChange = (newOpen: boolean) => {
     // Only allow closing if verification is complete
     if (!newOpen) {
@@ -210,94 +237,126 @@ export default function VerificationModal({
         className="sm:max-w-[500px] p-0 gap-0 bg-transparent border-0"
         onPointerDownOutside={(e) => e.preventDefault()}
         onEscapeKeyDown={(e) => e.preventDefault()}
+        aria-describedby="verification-description"
       >
-        <div className="bg-white rounded-lg p-8 flex flex-col items-center text-center">
-          {/* Icon */}
-          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-            {type === "email" ? (
-              <Mail className="w-10 h-10 text-primary" />
-            ) : (
-              <Phone className="w-10 h-10 text-primary" />
-            )}
-          </div>
+        <VisuallyHidden>
+          <DialogTitle>Verification Code Entry</DialogTitle>
+        </VisuallyHidden>
+        <VisuallyHidden>
+          <DialogDescription id="verification-description">
+            Enter the 6-digit verification code sent to your{" "}
+            {type === "email" ? "email" : "phone number"}
+          </DialogDescription>
+        </VisuallyHidden>
 
-          {/* Title */}
-          <h2 className="text-2xl font-bold text-foreground mb-2">
-            Enter Verification Code
-          </h2>
-
-          {/* Description */}
-          <p className="text-muted-foreground mb-8">
-            We sent a code to your{" "}
-            <span className="font-medium text-foreground">
-              {type === "email" ? "email address" : "phone number"}:{" "}
-              {maskContact(contact)}
-            </span>
-          </p>
-
-          {/* Code Input */}
-          <div className="flex gap-3 mb-4 justify-center" onPaste={handlePaste}>
-            {code.map((digit, index) => (
-              <input
-                key={index}
-                ref={(el) => {
-                  inputRefs.current[index] = el;
-                }}
-                type="text"
-                inputMode="numeric"
-                maxLength={1}
-                value={digit}
-                onChange={(e) => handleChange(index, e.target.value)}
-                onKeyDown={(e) => handleKeyDown(index, e)}
-                className="w-14 h-14 text-center text-2xl font-semibold border-2 border-input rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                disabled={isVerifying}
-              />
-            ))}
-          </div>
-
-          {/* Timer */}
-          <p className="text-sm text-muted-foreground mb-6">
-            {timeLeft > 0 ? (
-              <>
-                Time remaining:{" "}
-                <span className="font-semibold text-primary">
-                  {formatTime(timeLeft)}
-                </span>
-              </>
-            ) : (
-              <span className="text-red-500">Code expired</span>
-            )}
-          </p>
-
-          {/* Resend Link */}
-          <p className="text-muted-foreground mb-6">
-            Don&apos;t received the code?{" "}
+        {/* Glass effect border wrapper */}
+        <div className="relative rounded-2xl p-3 bg-[#EEEEEE4D] backdrop-blur-sm">
+          <div className="bg-white rounded-2xl p-6 flex flex-col items-center text-center relative">
+            {/* Manual Close Button */}
             <button
-              type="button"
-              onClick={handleResend}
-              disabled={timeLeft > 0}
-              className={`transition-colors underline ${
-                timeLeft > 0
-                  ? "text-gray-400 cursor-not-allowed"
-                  : "text-primary hover:text-primary/80"
+              onClick={handleManualClose}
+              className="absolute top-0.5 right-0.5 w-5 h-5 z-10 bg-red-300 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors "
+              aria-label="Close verification modal"
+            >
+              <X className="w-5 h-5 text-primary" />
+            </button>
+
+            {/* Icon */}
+            <div className=" rounded-full flex items-center justify-center mb-4">
+              <ImageIcon
+                activeImage={
+                  type === "email"
+                    ? "/icons/verify-email.svg"
+                    : "/icons/verify-phone.svg"
+                }
+                alt={
+                  type === "email" ? "Email verification" : "Phone verification"
+                }
+                size={60}
+              />
+            </div>
+
+            {/* Title */}
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Enter Verification Code
+            </h2>
+
+            {/* Description */}
+            <p className="text-muted-foreground mb-8">
+              We sent a code to{" "}
+              <span className="font-medium text-foreground">
+                {maskContact(contact)}
+              </span>
+            </p>
+
+            {/* Code Input */}
+            <div
+              className="flex gap-3 mb-4 justify-center"
+              onPaste={handlePaste}
+            >
+              {code.map((digit, index) => (
+                <input
+                  key={index}
+                  ref={(el) => {
+                    inputRefs.current[index] = el;
+                  }}
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={digit}
+                  onChange={(e) => handleChange(index, e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(index, e)}
+                  className="w-14 h-14 text-center text-2xl font-semibold border-2 border-input rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  disabled={isVerifying}
+                  aria-label={`Digit ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Timer */}
+            <p className="text-sm text-muted-foreground mb-6">
+              {timeLeft > 0 ? (
+                <>
+                  Time remaining:{" "}
+                  <span className="font-semibold text-primary">
+                    {formatTime(timeLeft)}
+                  </span>
+                </>
+              ) : (
+                <span className="text-red-500">Code expired</span>
+              )}
+            </p>
+
+            {/* Resend Link */}
+            <p className="text-muted-foreground mb-6">
+              Don&apos;t received the code?{" "}
+              <button
+                type="button"
+                onClick={handleResend}
+                disabled={timeLeft > 0}
+                className={`transition-colors underline ${
+                  timeLeft > 0
+                    ? "text-gray-400 cursor-not-allowed"
+                    : "text-primary hover:text-primary/80"
+                }`}
+              >
+                Resend
+              </button>
+            </p>
+
+            {/* Verify Button */}
+            <Button
+              onClick={handleVerify}
+              disabled={!isComplete || isVerifying || timeLeft === 0}
+              className={`w-full h-14 rounded-lg text-base ${
+                isComplete && !isVerifying && timeLeft > 0
+                  ? "btn-primary"
+                  : "bg-gray-200 text-gray-400 cursor-not-allowed hover:bg-gray-200"
               }`}
             >
-              Resend
-            </button>
-          </p>
-
-          {/* Verify Button */}
-          <Button
-            onClick={handleVerify}
-            disabled={!isComplete || isVerifying || timeLeft === 0}
-            className={`w-full h-14 rounded-lg text-base ${
-              isComplete && !isVerifying && timeLeft > 0
-                ? "btn-primary"
-                : "bg-gray-200 text-gray-400 cursor-not-allowed hover:bg-gray-200"
-            }`}
-          >
-            {isVerifying ? "Verifying..." : "Verify"}
-          </Button>
+              {isVerifying ? "Verifying..." : "Verify"}
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

@@ -1,9 +1,9 @@
+// components/auth/SignUpForm.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,7 +46,6 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function SignUpForm() {
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [verificationOpen, setVerificationOpen] = useState(false);
   const [verificationType, setVerificationType] = useState<"email" | "phone">(
@@ -73,6 +72,34 @@ export default function SignUpForm() {
   });
 
   const termsValue = watch("terms");
+
+  // Check for pending verification on mount
+  useEffect(() => {
+    const checkPendingVerification = () => {
+      const verificationState = localStorage.getItem("verification_state");
+      const verificationComplete = localStorage.getItem(
+        "verification_complete"
+      );
+
+      if (verificationState && verificationComplete !== "true") {
+        const { expiresAt, contact, type } = JSON.parse(verificationState);
+        const now = Date.now();
+
+        // Check if timer hasn't expired
+        if (now < expiresAt) {
+          // Re-open verification modal
+          setContactInfo(contact);
+          setVerificationType(type);
+          setVerificationOpen(true);
+        } else {
+          // Timer expired, clear storage
+          localStorage.removeItem("verification_state");
+        }
+      }
+    };
+
+    checkPendingVerification();
+  }, []);
 
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
@@ -118,9 +145,9 @@ export default function SignUpForm() {
       <div className="min-h-screen w-full flex h-screen overflow-hidden">
         {/* Left Side - Form */}
         <div className="w-full lg:w-1/2 flex items-center justify-center p-5 lg:p-10 overflow-hidden">
-          <div className="w-full max-w-[480px]">
+          <div className="w-full max-w-2xl">
             <div className="mb-12">
-              <h1 className="text-[40px] lg:text-[48px] font-bold text-foreground mb-3 leading-tight">
+              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-3 leading-tight">
                 Create Your Account
               </h1>
               <p className="text-secondary text-lg">
@@ -129,7 +156,7 @@ export default function SignUpForm() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <div className="space-y-5">
               {/* Name Fields */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -242,7 +269,7 @@ export default function SignUpForm() {
 
               {/* Sign Up Button */}
               <Button
-                type="submit"
+                onClick={handleSubmit(onSubmit)}
                 className="btn-primary h-14 text-base rounded-lg w-full"
                 disabled={isLoading}
               >
@@ -261,7 +288,7 @@ export default function SignUpForm() {
 
               {/* Google Sign Up */}
               <GoogleButton text="Sign Up with Google" />
-            </form>
+            </div>
 
             {/* Sign In Link */}
             <p className="mt-8 text-center text-base text-foreground">

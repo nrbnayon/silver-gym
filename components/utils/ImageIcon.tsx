@@ -1,4 +1,4 @@
-// components/ui/image-icon.tsx
+// components\utils\ImageIcon.tsx
 "use client";
 
 import * as React from "react";
