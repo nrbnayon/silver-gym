@@ -1,6 +1,6 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { Check, Loader } from "lucide-react";
 
 interface StepIndicatorProps {
   currentStep: 1 | 2;
@@ -13,41 +13,67 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
   ];
 
   return (
-    <div className='flex items-center mb-10'>
+    <div className="flex items-center w-full gap-0">
       {steps.map((step, index) => (
-        <div key={step.id} className='flex items-center flex-1'>
+        <div
+          key={step.id}
+          className="flex items-center"
+          style={{ flex: "1 1 0" }}
+        >
           {/* Step Button */}
           <div
-            className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
+            className={`flex items-center gap-3 px-3 py-3 rounded-2xl transition-all w-56 ${
               currentStep === step.id
-                ? "bg-white border-2 border-primary shadow-sm"
+                ? "bg-white border border-[#F5F5F5]"
                 : currentStep > step.id
-                ? "bg-white border-2 border-primary/30"
-                : "bg-gray-50 border border-gray-200"
+                ? "bg-white border-2 border-[#7738F8]"
+                : "bg-white border-2 border-[#E1E1E1]"
             }`}
+            style={
+              currentStep === step.id
+                ? {
+                    boxShadow:
+                      "4px 4px 12px 0px #DDDDDD26, -4px 0px 12px 0px #DDDDDD26, 4px 0px 12px 0px #DDDDDD26",
+                  }
+                : {}
+            }
           >
+            {/* Icon */}
             <div
-              className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+              className={`w-6 h-6 rounded-full flex items-center justify-center transition-all shrink-0 ${
                 currentStep > step.id
-                  ? "bg-primary"
+                  ? "bg-[#7738F8] border-2 border-[#7738F8]"
                   : currentStep === step.id
-                  ? "bg-primary"
-                  : "border-2 border-gray-300 bg-white"
+                  ? "bg-[#F5F5F5]"
+                  : "bg-white border-2 border-[#E5E7EB]"
               }`}
+              style={
+                currentStep === step.id
+                  ? {
+                      boxShadow:
+                        "4px 4px 12px 0px #DDDDDD26, -4px 0px 12px 0px #DDDDDD26, 4px 0px 12px 0px #DDDDDD26",
+                    }
+                  : {}
+              }
             >
               {currentStep > step.id ? (
-                <Check className='w-3.5 h-3.5 text-white' strokeWidth={3} />
+                <Check className="w-4 h-4 text-white" strokeWidth={3} />
               ) : currentStep === step.id ? (
-                <div className='w-2 h-2 bg-white rounded-full'></div>
+                <Loader
+                  className="w-4 h-4 text-[#6B7280] animate-spin"
+                  strokeWidth={2.5}
+                />
               ) : null}
             </div>
+
+            {/* Label */}
             <span
               className={`font-medium text-sm whitespace-nowrap ${
-                currentStep === step.id
-                  ? "text-foreground"
-                  : currentStep > step.id
-                  ? "text-muted-foreground"
-                  : "text-muted-foreground"
+                currentStep > step.id
+                  ? "text-[#7738F8]"
+                  : currentStep === step.id
+                  ? "text-[#505050]"
+                  : "text-[#9CA3AF]"
               }`}
             >
               {step.label}
@@ -56,7 +82,11 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
 
           {/* Connector Line */}
           {index < steps.length - 1 && (
-            <div className='flex-1 h-px bg-gray-200 mx-2'></div>
+            <div
+              className={`h-[2px] w-16 transition-all shrink-0 ${
+                currentStep > step.id ? "bg-[#7738F8]" : "bg-[#E5E7EB]"
+              }`}
+            />
           )}
         </div>
       ))}
