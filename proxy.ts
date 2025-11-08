@@ -1,8 +1,8 @@
-// middleware.ts (place in root directory)
+// proxy.ts (place in root directory)
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Public routes that don't need protection
@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
 
   // Check authentication for protected routes
   // Note: In client-side routing, we handle this in useEffect
-  // This middleware is backup for direct URL access
+  // This proxy is backup for direct URL access
 
   return NextResponse.next();
 }
