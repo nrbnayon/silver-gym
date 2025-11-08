@@ -195,22 +195,11 @@ export default function SignUpForm() {
                 <div className="relative">
                   <Input
                     id="password"
-                    type={showPassword ? "text" : "password"}
+                    type="password"
                     placeholder="••••••••"
                     className="h-14 rounded-lg text-base pr-12"
                     {...register("password")}
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    {showPassword ? (
-                      <Eye className="w-5 h-5" />
-                    ) : (
-                      <EyeOff className="w-5 h-5" />
-                    )}
-                  </button>
                 </div>
                 {errors.password && (
                   <span className="text-sm text-red-500">
@@ -222,7 +211,7 @@ export default function SignUpForm() {
               {/* Terms & Conditions */}
               <div className="space-y-2">
                 <div className="flex items-start gap-3">
-                  <div className="flex items-center h-6">
+                  <div className="flex items-center h-6 ">
                     <Checkbox
                       id="terms"
                       checked={termsValue}
@@ -233,7 +222,7 @@ export default function SignUpForm() {
                   </div>
                   <label
                     htmlFor="terms"
-                    className="text-sm text-muted-foreground flex-1 leading-relaxed cursor-pointer"
+                    className="text-sm text-muted-foreground flex-1 leading-relaxed cursor-pointer mt-0.5"
                   >
                     I agree to the{" "}
                     <Link

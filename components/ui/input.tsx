@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Eye, EyeOff } from "lucide-react";
-
+import {  EyeOff } from "lucide-react";
+import { ImageIcon } from "../utils/ImageIcon";
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
@@ -22,7 +22,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={isPassword && showPassword ? "text" : type}
           className={cn(
             // Base styles
-            "flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs transition-colors",
+            "flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-none transition-colors",
             "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground",
             "placeholder:text-muted-foreground",
             "disabled:cursor-not-allowed disabled:opacity-50",
@@ -46,7 +46,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "border-green-500 focus-visible:border-green-500 focus-visible:shadow-[0_0_0_3px_rgba(34,197,94,0.1)]",
 
             // Password field padding
-            isPassword && "pr-10",
+            isPassword && "pr-12",
 
             className
           )}
@@ -62,9 +62,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? (
-              <EyeOff className="h-4 w-4" />
+              <EyeOff className="h-5 w-5 mr-2" />
             ) : (
-              <Eye className="h-4 w-4" />
+              <ImageIcon
+                activeImage="/icons/eye-closed.svg"
+                alt="Hide password"
+                size={20}
+                className="h-5 w-5 mr-2"
+              />
             )}
           </button>
         )}
