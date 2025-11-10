@@ -2,8 +2,10 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle2 } from "lucide-react";
+// import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { CheckmarkBadge01Icon } from "@hugeicons/core-free-icons";
 
 export default function SuccessPage() {
   const router = useRouter();
@@ -32,10 +34,8 @@ export default function SuccessPage() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-linear-to-br from-orange-50 via-white to-orange-50/50"
-    >
-      <div className="w-full max-w-xl bg-white rounded-lg shadow-sm border border-orange-100/50 p-10 sm:p-12 lg:p-16 text-center">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-linear-to-br from-orange-50 via-white to-orange-50/50">
+      <div className="w-full max-w-xl bg-white rounded-4xl shadow-sm border border-orange-100/50 p-10 sm:p-12 lg:p-16 text-center">
         {/* Title */}
         <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
           Congratulations
@@ -55,9 +55,12 @@ export default function SuccessPage() {
               {/* White Circle with Icon */}
               <div className="w-24 h-24 rounded-full bg-white shadow-lg flex items-center justify-center">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                  <CheckCircle2
-                    className="w-14 h-14 text-primary"
-                    strokeWidth={2.5}
+                  <HugeiconsIcon
+                    icon={CheckmarkBadge01Icon}
+                    size={80}
+                    color="#ed7a08"
+                    strokeWidth={1.5}
+                    fill="#ffffff"
                   />
                 </div>
               </div>

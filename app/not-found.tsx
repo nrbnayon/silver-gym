@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { Heart } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -11,18 +11,19 @@ export default function NotFound() {
           <h1 className="text-4xl font-bold">404</h1>
           <h2 className="text-2xl font-semibold">Page Not Found</h2>
           <p className="text-muted-foreground">
-            The page you're looking for doesn't exist. Let's get you back to planning your perfect wedding.
+            The page you&apos;re looking for doesn&apos;t exist. Let&apos;s get
+            you back.
           </p>
         </div>
         <div className="flex gap-4 justify-center">
           <Button asChild>
             <Link href="/">Go home</Link>
           </Button>
-          <Button variant="outline" asChild>
+          <Button variant="outline" asChild className="rounded-xl">
             <Link href="/dashboard">Go to dashboard</Link>
           </Button>
         </div>
       </div>
     </div>
-  )
+  );
 }
