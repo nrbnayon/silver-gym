@@ -13,7 +13,7 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
   ];
 
   return (
-    <div className="flex items-center w-full gap-0">
+    <div className="flex items-center justify-center min-w-full gap-0  border-2 border-red-500 ">
       {steps.map((step, index) => (
         <div
           key={step.id}
@@ -22,7 +22,7 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
         >
           {/* Step Button */}
           <div
-            className={`flex items-center gap-3 px-3 py-3 rounded-2xl transition-all w-56 ${
+            className={`flex items-center gap-3 px-3 py-3 rounded-2xl transition-all w-full ${
               currentStep === step.id
                 ? "bg-white border border-[#F5F5F5]"
                 : currentStep > step.id

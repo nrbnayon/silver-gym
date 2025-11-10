@@ -114,152 +114,152 @@ export default function BusinessInfoForm() {
   };
 
   return (
-    <div className='flex items-center justify-center min-h-screen p-4 relative w-full overflow-hidden bg-white'>
+    <div className="flex items-center justify-center min-h-screen p-5 md:p-10 relative w-full overflow-hidden bg-white">
       {/* Background decoration */}
-      <div className='absolute top-[-65px] left-[1236px] w-[501px] h-[234px] bg-white rounded-[250.46px/117.05px] -rotate-45 blur-[234px]' />
+      <div className="absolute top-[-65px] left-[1236px] w-[501px] h-[234px] bg-white rounded-[250.46px/117.05px] -rotate-45 blur-[234px]" />
 
       {/* Partial border wrapper */}
-      <div className='relative w-full max-w-2xl bg-[#EEEEEE4D] rounded-4xl overflow-visible'>
+      <div className="relative w-full max-w-2xl bg-[#EEEEEE4D] rounded-4xl overflow-visible">
         {/* Top-right corner */}
-        <div className='absolute top-0 right-0 w-full h-full rounded-4xl p-px z-0 backdrop-blur-sm opacity-90 bg-[linear-gradient(225deg,rgba(103,56,41,0.25)_0%,rgba(255,255,255,0)_65%,rgba(103,56,41,0.25)_100%)]'>
-          <div className='w-full h-full rounded-4xl bg-[#EEEEEE4D]' />
+        <div className="absolute top-0 right-0 w-full h-full rounded-4xl p-px z-0 backdrop-blur-sm opacity-90 bg-[linear-gradient(225deg,rgba(103,56,41,0.25)_0%,rgba(255,255,255,0)_65%,rgba(103,56,41,0.25)_100%)]">
+          <div className="w-full h-full rounded-4xl bg-[#EEEEEE4D]" />
         </div>
 
         {/* Bottom-left corner */}
-        <div className='absolute bottom-0 left-0 w-full h-full rounded-4xl p-px z-0 backdrop-blur-sm opacity-90 bg-[linear-gradient(45deg,rgba(103,56,41,0.25)_0%,rgba(255,255,255,0)_65%,rgba(103,56,41,0.25)_100%)]'>
-          <div className='w-full h-full rounded-4xl bg-[#EEEEEE4D]' />
+        <div className="absolute bottom-0 left-0 w-full h-full rounded-4xl p-px z-0 backdrop-blur-sm opacity-90 bg-[linear-gradient(45deg,rgba(103,56,41,0.25)_0%,rgba(255,255,255,0)_65%,rgba(103,56,41,0.25)_100%)]">
+          <div className="w-full h-full rounded-4xl bg-[#EEEEEE4D]" />
         </div>
 
         {/* Main card */}
-        <Card className='relative z-20 bg-white rounded-2xl shadow-[-76px_59px_212px_#ff73001a,-305px_235px_250px_#ff730017,-687px_529px_250px_#ff73000d,-1221px_940px_250px_#ff730003,-1908px_1469px_250px_transparent] border-none m-4'>
-          <CardContent className='p-8'>
-            <div className='flex flex-col gap-6'>
+        <Card className="relative z-20 bg-white rounded-2xl shadow-[-76px_59px_212px_#ff73001a,-305px_235px_250px_#ff730017,-687px_529px_250px_#ff73000d,-1221px_940px_250px_#ff730003,-1908px_1469px_250px_transparent] border-none m-4">
+          <CardContent className="p-8">
+            <div className="flex flex-col gap-6">
               {/* Step Indicator */}
               <StepIndicator currentStep={1} />
 
               {/* Title and Step Counter */}
-              <div className='flex flex-col gap-6'>
-                <div className='flex justify-between items-start'>
-                  <div className='flex flex-col gap-1'>
-                    <h1 className='font-semibold text-[#505050] text-2xl leading-9'>
+              <div className="flex flex-col gap-6">
+                <div className="flex justify-between items-start">
+                  <div className="flex flex-col gap-1">
+                    <h1 className="font-semibold text-[#505050] text-2xl leading-9">
                       Business Information
                     </h1>
-                    <p className='font-normal text-[#505050] text-base leading-6'>
+                    <p className="font-normal text-[#505050] text-base leading-6">
                       Enter your gym or company details to get started.
                     </p>
                   </div>
-                  <span className='text-sm font-medium text-[#9CA3AF] bg-[#F3F4F6] px-3 py-1 rounded-full'>
+                  <span className="text-sm font-medium text-[#9CA3AF] bg-[#F3F4F6] px-3 py-1 rounded-full">
                     1/2
                   </span>
                 </div>
               </div>
 
-              <div className='flex flex-col gap-6'>
+              <div className="flex flex-col gap-6">
                 {/* Logo Upload */}
-                <div className='flex flex-col gap-2'>
-                  <Label className='text-sm font-medium text-[#505050]'>
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm font-medium text-[#505050]">
                     Logo
                   </Label>
                   <label
-                    htmlFor='logo-upload'
-                    className='border-2 border-dashed border-[#E5E7EB] rounded-lg p-4 text-center hover:border-[#D1D5DB] hover:bg-[#F9FAFB] transition-all cursor-pointer flex flex-col items-center gap-3'
+                    htmlFor="logo-upload"
+                    className="border-2 border-dashed border-[#E5E7EB] rounded-lg p-4 text-center hover:border-[#D1D5DB] hover:bg-[#F9FAFB] transition-all cursor-pointer flex flex-col items-center gap-3"
                   >
                     {logoPreview ? (
                       <Image
                         width={80}
                         height={80}
                         src={logoPreview}
-                        alt='Logo preview'
-                        className='object-cover rounded-lg'
+                        alt="Logo preview"
+                        className="object-cover rounded-lg"
                       />
                     ) : (
-                      <div className='w-12 h-12 rounded-full bg-[#F3F4F6] flex items-center justify-center'>
-                        <Upload className='w-6 h-6 text-[#6B7280]' />
+                      <div className="w-12 h-12 rounded-full bg-[#F3F4F6] flex items-center justify-center">
+                        <Upload className="w-6 h-6 text-[#6B7280]" />
                       </div>
                     )}
-                    <span className='text-sm font-medium text-[#505050]'>
+                    <span className="text-sm font-medium text-[#505050]">
                       {logo ? logo.name : "Upload"}
                     </span>
                     {!logo && (
-                      <span className='text-xs text-[#9CA3AF]'>
+                      <span className="text-xs text-[#9CA3AF]">
                         PNG, JPG or JPEG (Max 2MB)
                       </span>
                     )}
                     <input
-                      id='logo-upload'
-                      type='file'
-                      accept='image/png, image/jpeg, image/jpg'
+                      id="logo-upload"
+                      type="file"
+                      accept="image/png, image/jpeg, image/jpg"
                       onChange={handleLogoUpload}
-                      className='hidden'
+                      className="hidden"
                     />
                   </label>
                 </div>
 
                 {/* Business Name */}
-                <div className='flex flex-col gap-2'>
+                <div className="flex flex-col gap-2">
                   <Label
-                    htmlFor='businessName'
-                    className='text-sm font-medium text-[#505050]'
+                    htmlFor="businessName"
+                    className="text-sm font-medium text-[#505050]"
                   >
                     Business Name
                   </Label>
                   <Input
-                    id='businessName'
-                    type='text'
-                    placeholder='Type your business name'
-                    className='h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50'
+                    id="businessName"
+                    type="text"
+                    placeholder="Type your business name"
+                    className="h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
                     {...register("businessName")}
                   />
                   {errors.businessName && (
-                    <span className='text-sm text-[#FC5555]'>
+                    <span className="text-sm text-[#FC5555]">
                       {errors.businessName.message}
                     </span>
                   )}
                 </div>
 
                 {/* Business Type */}
-                <div className='flex flex-col gap-2'>
+                <div className="flex flex-col gap-2">
                   <Label
-                    htmlFor='businessType'
-                    className='text-sm font-medium text-[#505050]'
+                    htmlFor="businessType"
+                    className="text-sm font-medium text-[#505050]"
                   >
                     Business Type
                   </Label>
                   <select
-                    id='businessType'
-                    className='w-full h-14 px-4 py-3 rounded-lg border border-[#E1E1E1] bg-white focus-visible:border-[#F05B23] focus-visible:shadow-[0_0_0_3px_#FCF0ED] transition-all text-base text-[#505050]'
+                    id="businessType"
+                    className="w-full h-14 px-4 py-3 rounded-lg border border-[#E1E1E1] bg-white focus-visible:border-[#F05B23] focus-visible:shadow-[0_0_0_3px_#FCF0ED] transition-all text-base text-[#505050]"
                     {...register("businessType")}
                   >
-                    <option value=''>Select your business</option>
-                    <option value='gym'>Gym</option>
-                    <option value='fitness-center'>Fitness Center</option>
-                    <option value='yoga-studio'>Yoga Studio</option>
-                    <option value='crossfit'>CrossFit Box</option>
-                    <option value='sports-club'>Sports Club</option>
+                    <option value="">Select your business</option>
+                    <option value="gym">Gym</option>
+                    <option value="fitness-center">Fitness Center</option>
+                    <option value="yoga-studio">Yoga Studio</option>
+                    <option value="crossfit">CrossFit Box</option>
+                    <option value="sports-club">Sports Club</option>
                   </select>
                   {errors.businessType && (
-                    <span className='text-sm text-[#FC5555]'>
+                    <span className="text-sm text-[#FC5555]">
                       {errors.businessType.message}
                     </span>
                   )}
                 </div>
 
                 {/* Registration Number */}
-                <div className='flex flex-col gap-2'>
+                <div className="flex flex-col gap-2">
                   <Label
-                    htmlFor='registrationNumber'
-                    className='text-sm font-medium text-[#505050]'
+                    htmlFor="registrationNumber"
+                    className="text-sm font-medium text-[#505050]"
                   >
                     Registration Number{" "}
-                    <span className='text-[#9CA3AF] font-normal'>
+                    <span className="text-[#9CA3AF] font-normal">
                       (Optional)
                     </span>
                   </Label>
                   <Input
-                    id='registrationNumber'
-                    type='text'
-                    placeholder='Business registration number / Trade Licence'
-                    className='h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50'
+                    id="registrationNumber"
+                    type="text"
+                    placeholder="Business registration number / Trade Licence"
+                    className="h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
                     {...register("registrationNumber")}
                   />
                 </div>
