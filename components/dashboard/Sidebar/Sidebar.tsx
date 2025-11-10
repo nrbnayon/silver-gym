@@ -17,10 +17,10 @@ import { useUser } from "@/hooks/useUser";
 
 interface SidebarProps {
   isOpen: boolean;
-  onClose: () => void;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
@@ -32,9 +32,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const sidebarSections = getSidebarForRole(user.role);
 
   const handleNavClick = () => {
-    if (window.innerWidth < 768) {
-      onClose();
-    }
+    setIsOpen(false);
   };
 
   const handleLogoutClick = () => {
@@ -55,22 +53,24 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   return (
     <>
+      {/* Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
-          onClick={onClose}
+          onClick={() => setIsOpen(false)}
         />
       )}
 
+      {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-0 h-screen w-[280px] bg-white border-r border-gray-200 flex flex-col z-50 transition-transform duration-300 md:z-auto md:transition-none",
+          "fixed left-0 top-0 h-screen w-[280px] bg-white border-r border-gray-200 flex flex-col z-50 transition-transform duration-300 md:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
       >
         <div className="h-20 flex items-center justify-center border-b border-gray-200 px-6">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-linear-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-white text-xl font-bold">S</span>
             </div>
             <span className="text-xl font-semibold text-gray-800">
@@ -94,8 +94,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                       className={cn(
                         "flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 mb-1",
                         isActive
-                          ? "bg-linear-to-r from-orange-400 to-red-500 text-white shadow-md"
-                          : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                          ? "bg-linear-to-r bg-primary text-white shadow-md"
+                          : "text-gray-600 hover:bg-primary-200 hover:text-gray-900"
                       )}
                     >
                       <span
@@ -154,7 +154,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             onClick={handleLogoutClick}
             className="flex items-center gap-3 px-4 py-3 w-full rounded-lg text-[15px] font-medium text-red-600 hover:bg-red-50 transition-colors"
           >
-            <HugeiconsIcon icon={Logout01Icon} size={20} />
+            <HugeiconsIcon icon={Logout01Icon} size={24} />
             <span className="truncate">Logout</span>
           </button>
         </div>

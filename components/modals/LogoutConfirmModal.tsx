@@ -49,13 +49,13 @@ export default function LogoutConfirmModal({
             <Button
               onClick={onClose}
               variant="outline"
-              className="flex-1 h-11 text-base font-medium"
+              className="flex-1 text-base font-medium"
             >
               Cancel
             </Button>
             <Button
               onClick={onConfirm}
-              className="flex-1 h-11 text-base font-semibold bg-destructive hover:bg-destructive/90 text-destructive-foreground"
+              className="flex-1 text-base font-semibold text-white bg-red-500 hover:bg-destructive/90"
             >
               Logout
             </Button>
