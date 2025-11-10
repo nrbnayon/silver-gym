@@ -30,7 +30,7 @@ export default function SuccessPage() {
     localStorage.removeItem("verification_state");
 
     // Navigate to dashboard
-    router.push("/overview");
+    router.push("/dashboard");
   };
 
   return (

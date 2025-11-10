@@ -6,12 +6,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/dashboard/", "/overview/", "/onboarding/"],
+        disallow: ["/dashboard/", "/dashboard/", "/onboarding/"],
       },
       {
         userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/dashboard/", "/overview/", "/onboarding/"],
+        disallow: ["/dashboard/", "/dashboard/", "/onboarding/"],
       },
     ],
     sitemap: `http://localhost:3000/sitemap.xml`,

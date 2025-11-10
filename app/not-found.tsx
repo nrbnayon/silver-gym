@@ -20,7 +20,7 @@ export default function NotFound() {
             <Link href="/">Go home</Link>
           </Button>
           <Button variant="outline" asChild className="rounded-xl">
-            <Link href="/overview">Go to dashboard</Link>
+            <Link href="/dashboard">Go to dashboard</Link>
           </Button>
         </div>
       </div>
