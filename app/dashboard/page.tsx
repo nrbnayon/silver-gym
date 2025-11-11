@@ -1,12 +1,14 @@
 // app/dashboard/page.tsx
 "use client";
 
+import OverviewPage from "@/components/dashboard/Overview/OverviewPage";
 import { useUser } from "@/hooks/useUser";
 export default function DashboardPage() {
   const { user } = useUser();
 
   return (
     <div className="space-y-6">
+      <OverviewPage />
       <div className="bg-white rounded-lg shadow p-6">
         <h1 className="text-2xl font-bold text-gray-800 mb-2">
           Welcome back, {user?.name || "User"}!
