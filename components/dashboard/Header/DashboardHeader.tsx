@@ -155,7 +155,7 @@ export default function DashboardHeader({
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 md:left-[280px] h-20 bg-white border-b border-gray-200 z-30 px-4 md:px-6">
+      <header className="fixed top-0 right-0 left-0 md:left-[280px] h-20 bg-white z-30 px-4 md:px-6">
         <div className="h-full flex items-center justify-between">
           <h1 className="text-xl md:text-2xl font-semibold text-gray-800">
             {pageTitle}

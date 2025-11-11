@@ -13,14 +13,14 @@ export default function DashboardWrapper({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f5f5f5]">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div className="md:pl-[280px]">
         <DashboardHeader
           onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)}
           isSidebarOpen={isSidebarOpen}
         />
-        <main className="p-4 md:p-6 pt-24 md:pt-20">{children}</main>
+        <main className="p-4 md:px-6 pt-24 md:pt-28 ">{children}</main>
       </div>
     </div>
   );

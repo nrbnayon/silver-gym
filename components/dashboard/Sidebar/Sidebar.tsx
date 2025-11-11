@@ -64,11 +64,11 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed left-0 top-0 h-screen w-[280px] bg-white border-r border-gray-200 flex flex-col z-50 transition-transform duration-300 md:translate-x-0",
+          "fixed left-0 top-0 h-screen w-[280px] bg-white  flex flex-col z-50 transition-transform duration-300 md:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
       >
-        <div className="h-20 flex items-center justify-center border-b border-gray-200 px-6">
+        <div className="h-20 flex items-center justify-center px-6">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-white text-xl font-bold">S</span>
