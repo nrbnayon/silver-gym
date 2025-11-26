@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { FileText, Search, SlidersHorizontal } from "lucide-react";
 import { Transaction } from "@/data/transactionData";
 import { useRouter } from "next/navigation";
 import { ImageIcon } from "@/components/utils/ImageIcon";
@@ -238,16 +238,36 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             ) : (
               <tr>
                 <td colSpan={8} className="py-12">
-                  <div className="flex flex-col items-center justify-center gap-2 h-[30vh]">
-                    <ImageIcon activeImage="/icons/sleep.svg" size={56} />
-                    <div className="text-center">
-                      <p className="text-base">
-                        <span className="text-[#E16349]">Oops!</span>{" "}
-                        <span className="text-[#505050]">Nothing matches</span>
-                      </p>
-                      <p className="text-sm text-[#505050]">your search</p>
+                  {/* Check if original data is empty (no data at all) or just filtered results are empty */}
+                  {data.length === 0 ? (
+                    // No data at all - show document icon
+                    <div className="flex flex-col items-center justify-center gap-3 h-[30vh]">
+                        {/* <ImageIcon activeImage="/icons/document.svg" size={56} /> */}
+                        <FileText size={56}/>
+                      <div className="text-center">
+                        <p className="text-base font-medium text-[#252525] mb-1">
+                          No data available yet
+                        </p>
+                        <p className="text-sm text-[#878787] max-w-md">
+                          Once you start adding members, packages, or transactions,
+                          <br />
+                          everything will appear here.
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    // Search/filter returned no results - show sleep icon
+                    <div className="flex flex-col items-center justify-center gap-2 h-[30vh]">
+                      <ImageIcon activeImage="/icons/sleep.svg" size={56} />
+                      <div className="text-center">
+                        <p className="text-base">
+                          <span className="text-[#E16349]">Oops!</span>{" "}
+                          <span className="text-[#505050]">Nothing matches</span>
+                        </p>
+                        <p className="text-sm text-[#505050]">your search</p>
+                      </div>
+                    </div>
+                  )}
                 </td>
               </tr>
             )}
