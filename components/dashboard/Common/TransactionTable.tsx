@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { Transaction } from "@/data/transactionData";
 import { useRouter } from "next/navigation";
+import { ImageIcon } from "@/components/utils/ImageIcon";
 
 interface TransactionTableProps {
   title?: string;
@@ -56,6 +57,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
     setCategoryFilter("All");
     setPaymentFilter("All");
   };
+
+  // Calculate total balance from filtered data
+  const totalBalance = filteredData.reduce((acc, transaction) => {
+    if (transaction.category === "Expanse") {
+      return acc - transaction.amount;
+    }
+    return acc + transaction.amount;
+  }, 0);
 
   return (
     <div className="w-full bg-white rounded-[20px] p-6">
@@ -176,9 +185,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   onClick={() => handleRowClick(transaction.id)}
                   className={`cursor-pointer transition-colors ${
                     index % 2 === 0 ? "bg-white" : "bg-[#F9F9F9]"
-                  } hover:bg-[#F2EEFF] hover:border hover:border-[#E16349] rounded-[8px]`}
+                  } hover:bg-[#F2EEFF]  rounded-sm`}
                 >
-                  <td className="py-4 px-4 text-sm text-[#505050] rounded-l-[8px]">
+                  <td className="py-4 px-4 text-sm text-[#505050] rounded-l-sm">
                     {transaction.id}
                   </td>
                   <td className="py-4 px-4 text-sm text-[#505050]">
@@ -218,7 +227,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                       })}
                     </span>
                   </td>
-                  <td className="py-4 px-4 text-sm text-[#505050] rounded-r-[8px]">
+                  <td className="py-4 px-4 text-sm text-[#505050] rounded-r-sm">
                     {transaction.balance.toLocaleString("en-US", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
@@ -228,16 +237,34 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
               ))
             ) : (
               <tr>
-                <td
-                  colSpan={8}
-                  className="py-8 text-center text-sm text-[#878787]"
-                >
-                  No transactions found
+                <td colSpan={8} className="py-12">
+                  <div className="flex flex-col items-center justify-center gap-2 h-[30vh]">
+                    <ImageIcon activeImage="/icons/sleep.svg" size={56} />
+                    <div className="text-center">
+                      <p className="text-base">
+                        <span className="text-[#E16349]">Oops!</span>{" "}
+                        <span className="text-[#505050]">Nothing matches</span>
+                      </p>
+                      <p className="text-sm text-[#505050]">your search</p>
+                    </div>
+                  </div>
                 </td>
               </tr>
             )}
           </tbody>
         </table>
+      </div>
+
+      <div className="flex justify-between items-center mt-4 bg-[#F9F9F9] p-4 md:pr-20 rounded-lg">
+        <p className="text-xl font-semibold text-primary">Balance</p>
+        <p className={`text-xl font-semibold  ${
+          totalBalance >= 0 ? "text-primary" : "text-[#E16349]"
+        }`}>
+          {totalBalance.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </p>
       </div>
     </div>
   );

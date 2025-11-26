@@ -26,6 +26,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 
   /* Base Colors (light by default) */
   --color-background: oklch(1 0 0);
@@ -155,6 +156,10 @@
 
   .shadow-primary-lg {
     box-shadow: 0 10px 40px rgba(225, 99, 73, 0.2);
+  }
+
+  .text-primary {
+    color: #252525;
   }
 
   .text-secondary {

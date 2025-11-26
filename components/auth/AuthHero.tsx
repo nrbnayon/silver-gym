@@ -43,7 +43,7 @@ export default function AuthHero() {
           </div>
         </div>
       </div>
-      <section className='relative w-full'>
+      <section className='relative w-full mb-4'>
         {/* Track - Duplicate content for seamless loop */}
         <div className='flex animate-marquee gap-8 w-max'>
           {/* First set */}
