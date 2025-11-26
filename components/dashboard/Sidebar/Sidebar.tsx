@@ -70,12 +70,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       >
         <div className="h-20 flex items-center justify-center px-6">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white text-xl font-bold">S</span>
-            </div>
-            <span className="text-xl font-semibold text-gray-800">
-              Silver Gym
-            </span>
+           <Image src="/silver-gym.png" alt="Logo" width={200} height={200} />
           </div>
         </div>
 
