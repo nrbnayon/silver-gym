@@ -153,7 +153,7 @@ export default function ContactInfoForm() {
                   </Label>
                   <select
                     id="country"
-                    className="w-full h-14 px-4 py-3 rounded-lg border-2 border-[#E1E1E1] bg-white focus:outline-none focus:ring-2 focus:ring-[#E97451] focus:ring-opacity-50 focus:border-[#E97451] transition-all text-base text-[#505050]"
+                    className="w-full h-14 px-4 py-3 rounded-lg border-2 border-border-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#E97451] focus:ring-opacity-50 focus:border-[#E97451] transition-all text-base text-[#505050]"
                     {...register("country")}
                   >
                     <option value="">Select Your Country</option>
@@ -184,7 +184,7 @@ export default function ContactInfoForm() {
                     id="businessAddress"
                     type="text"
                     placeholder="Enter your business address"
-                    className="h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
+                    className="h-14 rounded-lg text-base border-border-2 focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
                     {...register("businessAddress")}
                   />
                   {errors.businessAddress && (
@@ -206,7 +206,7 @@ export default function ContactInfoForm() {
                     id="businessPhone"
                     type="tel"
                     placeholder="Enter your business phone number"
-                    className="h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
+                    className="h-14 rounded-lg text-base border-border-2 focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
                     {...register("businessPhone")}
                   />
                   {errors.businessPhone && (
@@ -228,7 +228,7 @@ export default function ContactInfoForm() {
                     id="businessEmail"
                     type="email"
                     placeholder="Enter your business email address"
-                    className="h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
+                    className="h-14 rounded-lg text-base border-border-2 focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
                     {...register("businessEmail")}
                   />
                   {errors.businessEmail && (

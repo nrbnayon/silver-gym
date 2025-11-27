@@ -126,8 +126,8 @@ const UserAccessTable: React.FC<UserAccessTableProps> = ({
   const selectedUser = users.find((user) => user.id === selectedUserId);
 
   return (
-    <div className="bg-white rounded-2xl p-5 border-4 border-[#F9F9F9]">
-      <div className="pb-5 border-b flex items-center justify-between">
+    <div className="bg-white rounded-2xl p-5 border-8 border-gray-secondary">
+      <div className="pb-5 flex items-center justify-between">
         <h2 className="text-xl font-semibold text-gray-900">
           User Access List
         </h2>
@@ -143,33 +143,35 @@ const UserAccessTable: React.FC<UserAccessTableProps> = ({
       <RoleTabButtons activeTab={activeTab} onTabChange={setActiveTab} />
 
       <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-gray-50 border-b">
+        <table className="w-full border-separate border-spacing-y-2 border border-border-2 rounded-lg p-2">
+          <thead>
             <tr>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">
+              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
                 Assign Date
-              </th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">
+              </th>       
+              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
                 Serial NO
               </th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">
+              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
                 Name
               </th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">
+              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
                 Role Title
               </th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">
+              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
                 Permission List
               </th>
-              <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">
+              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
                 Edit
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
-            {filteredUsers.map((user) => (
-              <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 text-sm text-gray-600">
+          <tbody>
+            {filteredUsers.map((user, index) => (
+              <tr key={user.id || index} className={`cursor-pointer transition-colors ${
+                    index % 2 === 0 ? "bg-white" : "bg-gray-primary"
+                  } hover:bg-[#F2EEFF] rounded-md`}>
+                <td className="px-6 py-4 text-sm text-gray-600 rounded-l-md">
                   {user.assignDate}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-900 font-medium">
@@ -182,7 +184,7 @@ const UserAccessTable: React.FC<UserAccessTableProps> = ({
                 <td className="px-6 py-4 text-sm text-gray-600">
                   {user.permissionList}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 rounded-r-md">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button className="p-1 hover:bg-gray-100 rounded transition-colors">

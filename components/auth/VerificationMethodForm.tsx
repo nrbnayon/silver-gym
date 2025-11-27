@@ -33,7 +33,7 @@ function SelectionCard({
       className={`w-full p-5 rounded-lg border-2 transition-all text-left flex items-center gap-4 outline-none ${
         selected
           ? "border-[#E97451]  shadow-[0_0_0_3px_#FCF0ED]"
-          : "border-[#E1E1E1] hover:border-[#d1d1d1] hover:bg-gray-50/50"
+          : "border-border-2 hover:border-[#d1d1d1] hover:bg-gray-50/50"
       } focus-visible:border-[#E97451] focus-visible:shadow-[0_0_0_3px_#FCF0ED]`}
     >
       <div>

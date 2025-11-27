@@ -46,7 +46,7 @@ const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
         <p className="text-sm font-semibold text-[#505050]">
           {payload[0].payload.month}
         </p>
-        <p className="text-sm text-[#878787]">
+        <p className="text-sm text-text-secondary">
           ${Number(payload[0].value).toLocaleString()}
         </p>
       </div>
@@ -84,7 +84,7 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
   };
 
   return (
-    <div className="w-full bg-white rounded-[20px] p-6 md:p-8 flex flex-col border-4 border-[#F9F9F9]">
+    <div className="w-full bg-white rounded-[20px] p-6 md:p-8 flex flex-col border-8 border-gray-secondary">
       <div className="flex justify-between items-center mb-3 flex-wrap gap-4">
         <h2 className="text-lg md:text-xl font-semibold text-[#505050]">
           {title}
@@ -102,20 +102,20 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
               <div className="absolute top-full mt-2 right-0 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[120px] z-10">
                 <button
                   onClick={() => handleToggle("Yearly")}
-                  className={`w-full px-4 py-2 text-left text-sm hover:bg-[#F5F5F5] transition-colors ${
+                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-primary transition-colors ${
                     viewMode === "Yearly"
                       ? "text-[#505050] font-semibold"
-                      : "text-[#878787]"
+                      : "text-text-secondary"
                   }`}
                 >
                   Yearly
                 </button>
                 <button
                   onClick={() => handleToggle("Monthly")}
-                  className={`w-full px-4 py-2 text-left text-sm hover:bg-[#F5F5F5] transition-colors ${
+                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-primary transition-colors ${
                     viewMode === "Monthly"
                       ? "text-[#505050] font-semibold"
-                      : "text-[#878787]"
+                      : "text-text-secondary"
                   }`}
                 >
                   Monthly
@@ -132,11 +132,11 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
             {totalValue}
           </h3>
           {subtitle && (
-            <p className="text-sm text-[#878787] mt-2">{subtitle}</p>
+            <p className="text-sm text-text-secondary mt-2">{subtitle}</p>
           )}
         </div>
 
-        <div className="flex flex-col items-center gap-4 mb-4 text-xs text-[#878787]">
+        <div className="flex flex-col items-center gap-4 mb-4 text-xs text-text-secondary">
           <div className="flex items-center gap-2">
             <span>Lowest</span>
             <div

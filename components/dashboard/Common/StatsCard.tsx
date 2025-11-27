@@ -23,7 +23,7 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, date, stats }) => {
           {title}
         </h2>
         {date && (
-          <div className="px-3 py-1 bg-[#F5F5F5] text-[#505050] text-sm rounded-sm">
+          <div className="px-3 py-1 bg-gray-primary text-[#505050] text-sm rounded-sm">
             {date}
           </div>
         )}
@@ -39,11 +39,11 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, date, stats }) => {
             <p className="font-semibold text-[#505050] text-base md:text-lg">
               {item.label}
             </p>
-            <p className="text-sm text-[#878787] mb-2">{item.description}</p>
+            <p className="text-sm text-text-secondary mb-2">{item.description}</p>
             <p className="text-2xl md:text-3xl font-semibold text-[#505050]">
               {item.value}
               {item.unit && (
-                <span className="text-sm font-normal text-[#878787] ml-1">
+                <span className="text-sm font-normal text-text-secondary ml-1">
                   {item.unit}
                 </span>
               )}

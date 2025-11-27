@@ -146,10 +146,10 @@ export default function ResetPasswordForm() {
 
                 {/* Title */}
                 <div className="flex flex-col items-center justify-center gap-2 mb-4">
-                  <h1 className="font-semibold text-[#252525] text-2xl text-center leading-9">
+                  <h1 className="font-semibold text-text-primary text-2xl text-center leading-9">
                     Reset Password
                   </h1>
-                  <p className="text-[#878787] text-base text-center">
+                  <p className="text-text-secondary text-base text-center">
                     Reset your account password and access your personal account
                     again
                   </p>
@@ -166,7 +166,7 @@ export default function ResetPasswordForm() {
                       <Input
                         type="password"
                         placeholder="Enter new password"
-                        className="w-full px-3 pr-10 h-14 rounded-lg border border-solid border-[#E1E1E1] font-normal text-[#505050] text-base leading-5"
+                        className="w-full px-3 pr-10 h-14 rounded-lg border border-border-2 font-normal text-[#505050] text-base leading-5"
                         value={newPassword}
                         onChange={(e) =>
                           handleNewPasswordChange(e.target.value)
@@ -184,7 +184,7 @@ export default function ResetPasswordForm() {
                       <Input
                         type="password"
                         placeholder="Confirm new password"
-                        className="w-full px-3 pr-10 h-14 rounded-lg border border-solid border-[#E1E1E1] font-normal text-[#505050] text-base leading-5"
+                        className="w-full px-3 pr-10 h-14 rounded-lg border border-border-2 font-normal text-[#505050] text-base leading-5"
                         value={confirmPassword}
                         onChange={(e) => {
                           setConfirmPassword(e.target.value);
@@ -195,7 +195,7 @@ export default function ResetPasswordForm() {
                   </div>
 
                   {/* Password Requirements */}
-                  <div className="text-[#878787] text-sm">
+                  <div className="text-text-secondary text-sm">
                     At least 8 characters with 1 uppercase, 1 number, and 1
                     special character.
                   </div>
@@ -209,7 +209,7 @@ export default function ResetPasswordForm() {
                     ${
                       isFormValid && !showMatchError
                         ? "bg-[#E97451] hover:bg-[#d66542] text-white"
-                        : "bg-[#D9D9D9] text-[#878787] cursor-not-allowed hover:bg-[#D9D9D9]"
+                        : "bg-[#D9D9D9] text-text-secondary cursor-not-allowed hover:bg-[#D9D9D9]"
                     }`}
                 >
                   Next

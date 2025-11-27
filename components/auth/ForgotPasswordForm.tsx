@@ -84,7 +84,7 @@ export default function ForgotPasswordForm() {
                 <div className="flex flex-col items-start gap-1 w-full">
                   <Input
                     placeholder="Enter your email or phone number"
-                    className="w-full px-3 h-14 rounded-lg border border-solid border-[#E1E1E1] font-normal text-[#505050] text-base leading-5"
+                    className="w-full px-3 h-14 rounded-lg border border-border-2 font-normal text-[#505050] text-base leading-5"
                     value={emailOrPhone}
                     onChange={(e) => {
                       setEmailOrPhone(e.target.value);

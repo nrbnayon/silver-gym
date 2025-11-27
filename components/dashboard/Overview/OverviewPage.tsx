@@ -44,7 +44,7 @@ export default function OverviewPage() {
         </div>
 
         {/* Pie Chart and Line Chart Container */}
-        <div className="space-y-4 border-4 border-[#F9F9F9]  rounded-[20px] p-3 bg-white">
+        <div className="space-y-4 border-border  rounded-[20px] p-3 bg-white">
           {/* Pie Chart - This Month */}
           <PieChartCard
             title="This Month"

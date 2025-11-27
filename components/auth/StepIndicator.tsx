@@ -24,10 +24,10 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
           <div
             className={`flex items-center gap-3 px-3 py-3 rounded-2xl transition-all w-full ${
               currentStep === step.id
-                ? "bg-white border border-[#F5F5F5]"
+                ? "bg-white border border-gray-primary"
                 : currentStep > step.id
                 ? "bg-white border-2 border-[#7738F8]"
-                : "bg-white border-2 border-[#E1E1E1]"
+                : "bg-white border-2 border-border-2"
             }`}
             style={
               currentStep === step.id
@@ -44,7 +44,7 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
                 currentStep > step.id
                   ? "bg-[#7738F8] border-2 border-[#7738F8]"
                   : currentStep === step.id
-                  ? "bg-[#F5F5F5]"
+                  ? "bg-gray-primary"
                   : "bg-white border-2 border-[#E5E7EB]"
               }`}
               style={

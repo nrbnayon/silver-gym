@@ -77,13 +77,13 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         <div className="flex items-center gap-3">
           {/* Search Input */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#878787]" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-text-secondary" />
             <input
               type="text"
               placeholder="Search ID/Name/Title..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm text-[#505050] placeholder:text-[#878787] focus:outline-none focus:border-[#AA81FE] transition-colors w-[250px]"
+              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm text-[#505050] placeholder:text-text-secondary focus:outline-none focus:border-[#AA81FE] transition-colors w-[250px]"
             />
           </div>
 
@@ -100,7 +100,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
       {/* Filter Panel */}
       {isFilterOpen && (
-        <div className="mb-6 p-4 bg-[#F9F9F9] rounded-lg">
+        <div className="mb-6 p-4 bg-gray-primary rounded-lg">
           <div className="flex flex-wrap gap-4 items-end">
             <div className="flex-1 min-w-[200px]">
               <label className="block text-sm font-medium text-[#505050] mb-2">
@@ -138,7 +138,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
             <button
               onClick={resetFilters}
-              className="px-4 py-2 text-sm text-[#878787] hover:text-[#505050] transition-colors"
+              className="px-4 py-2 text-sm text-text-secondary hover:text-[#505050] transition-colors"
             >
               Reset
             </button>
@@ -147,32 +147,32 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto border border-[#E1E1E1] px-1 pt-2 rounded-3xl">
+      <div className="overflow-x-auto border border-border-2 px-1 pt-2 rounded-3xl">
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-200">
-              <th className="text-left py-3 px-4 text-base font-semibold text-[#252525]">
+              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
                 INV. NO:
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-[#252525]">
+              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
                 Date
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-[#252525]">
+              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
                 Category / Name
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-[#252525]">
+              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
                 Member ID
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-[#252525]">
+              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
                 Category
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-[#252525]">
+              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
                 Payment
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-[#252525]">
+              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
                 Amount
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-[#252525]">
+              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
                 Balance
               </th>
             </tr>
@@ -184,7 +184,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   key={index}
                   onClick={() => handleRowClick(transaction.id)}
                   className={`cursor-pointer transition-colors ${
-                    index % 2 === 0 ? "bg-white" : "bg-[#F9F9F9]"
+                    index % 2 === 0 ? "bg-white" : "bg-gray-primary"
                   } hover:bg-[#F2EEFF]  rounded-sm`}
                 >
                   <td className="py-4 px-4 text-sm text-[#505050] rounded-l-sm">
@@ -196,7 +196,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   <td className="py-4 px-4 text-sm text-[#505050]">
                     {transaction.categoryName}
                   </td>
-                  <td className="py-4 px-4 text-sm text-[#878787]">
+                  <td className="py-4 px-4 text-sm text-text-secondary">
                     {transaction.memberId || "———"}
                   </td>
                   <td className="py-4 px-4">
@@ -245,10 +245,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         {/* <ImageIcon activeImage="/icons/document.svg" size={56} /> */}
                         <FileText size={56}/>
                       <div className="text-center">
-                        <p className="text-base font-medium text-[#252525] mb-1">
+                        <p className="text-base font-medium text-text-primary mb-1">
                           No data available yet
                         </p>
-                        <p className="text-sm text-[#878787] max-w-md">
+                        <p className="text-sm text-text-secondary max-w-md">
                           Once you start adding members, packages, or transactions,
                           <br />
                           everything will appear here.
@@ -275,7 +275,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         </table>
       </div>
 
-      <div className="flex justify-between items-center mt-4 bg-[#F9F9F9] p-4 md:pr-20 rounded-lg">
+      <div className="flex justify-between items-center mt-4 bg-gray-primary p-4 md:pr-20 rounded-lg">
         <p className="text-xl font-semibold text-primary">Balance</p>
         <p className={`text-xl font-semibold  ${
           totalBalance >= 0 ? "text-primary" : "text-[#E16349]"

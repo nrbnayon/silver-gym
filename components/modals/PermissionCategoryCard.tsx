@@ -42,7 +42,7 @@ const PermissionCategoryCard: React.FC<PermissionCategoryCardProps> = ({
   };
 
   return (
-    <Card className="bg-[#F5F5F5]">
+    <Card className="bg-gray-primary">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-medium">

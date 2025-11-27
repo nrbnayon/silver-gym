@@ -46,7 +46,7 @@ const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
   if (active && Array.isArray(payload) && payload.length) {
     return (
       <div className="bg-white px-4 py-3 rounded-lg shadow-lg border border-gray-200">
-        <p className="text-xs text-[#878787] mb-2">
+        <p className="text-xs text-text-secondary mb-2">
           {payload && payload[0] && payload[0].payload
             ? payload[0].payload.period
             : ""}
@@ -90,14 +90,14 @@ const CustomLegend: React.FC<CustomLegendProps> = ({
   <div className="flex flex-wrap gap-1 justify-end mb-4">
     <div className="flex items-center">
       <div
-        className="w-4 h-4 rounded-[6px] border-3 border-[#F9F9F9] "
+        className="w-4 h-4 rounded-[6px] border-3 border-gray-secondary "
         style={{ backgroundColor: incomeColor }}
       />
-      <span className="text-sm text-[#F9F9F9]">|</span>
+      <span className="text-sm text-gray-secondary">|</span>
     </div>
     <div className="flex items-center">
       <div
-        className="w-4 h-4 rounded-[6px] border-3 border-[#F9F9F9] "
+        className="w-4 h-4 rounded-[6px] border-3 border-gray-secondary"
         style={{ backgroundColor: expenseColor }}
       />
     </div>
@@ -113,7 +113,7 @@ const LineChartCard: React.FC<LineChartCardProps> = ({
   expenseColor = "#EEF674",
 }) => {
   return (
-    <div className="w-full bg-white rounded-[20px] p-3 flex flex-col border-4 border-[#F9F9F9] ">
+    <div className="w-full bg-white rounded-[20px] p-3 flex flex-col border-8 border-gray-secondary">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold text-[#505050] mb-3">{title}</h2>
         <CustomLegend incomeColor={incomeColor} expenseColor={expenseColor} />
@@ -122,16 +122,16 @@ const LineChartCard: React.FC<LineChartCardProps> = ({
       {/* <div className="mb-4">
         {percentage && (
           <div className="flex items-baseline gap-2 mb-2 flex-wrap">
-            <span className="text-sm text-[#878787]">
+            <span className="text-sm text-text-secondary">
               Your expenses are only
             </span>
             <span className="text-2xl font-bold text-[#505050]">
               {percentage}
             </span>
-            <span className="text-sm text-[#878787]">of your income</span>
+            <span className="text-sm text-text-secondary">of your income</span>
           </div>
         )}
-        {description && <p className="text-sm text-[#878787]">{description}</p>}
+        {description && <p className="text-sm text-text-secondary">{description}</p>}
       </div> */}
 
       <div className="w-full h-[300px]">

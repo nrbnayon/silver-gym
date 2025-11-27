@@ -123,7 +123,7 @@ const CreateCustomRoleModal: React.FC<CreateCustomRoleModalProps> = ({
 
         <div className="space-y-6 py-4">
           <div className="space-y-2">
-            <Label htmlFor="roleName">Role Name</Label>
+            <Label htmlFor="roleName">Role Name <span className="text-red-500">*</span></Label>
             <Input
               id="roleName"
               value={roleName}

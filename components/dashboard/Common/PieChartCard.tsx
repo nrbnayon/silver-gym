@@ -65,7 +65,7 @@ const CustomTooltip = ({
         <p className="text-sm font-semibold text-[#505050]">
           {payload[0].name}
         </p>
-        <p className="text-sm text-[#878787]">
+        <p className="text-sm text-text-secondary">
           ${Number(payload[0].value).toLocaleString()}
         </p>
       </div>
@@ -83,7 +83,7 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ data }) => (
     {data.map((entry, index) => (
       <div key={index} className="flex items-center gap-2">
         <div
-          className="w-4 h-4 rounded-[6px] border-3 border-[#F9F9F9] "
+          className="w-4 h-4 rounded-[6px] border-border "
           style={{ backgroundColor: entry.color }}
         />
         <span className="text-sm text-[#505050]">{entry.name}</span>
@@ -144,7 +144,7 @@ const PieChartCard: React.FC<PieChartCardProps> = ({
         <CustomLegend data={data} />
 
         {description && (
-          <p className="text-md text-[#505050] bg-[#F9F9F9] text-center mt-3 rounded-lg p-2">
+          <p className="text-md text-[#505050] bg-gray-primary text-center mt-3 rounded-lg p-2">
             {description}
           </p>
         )}

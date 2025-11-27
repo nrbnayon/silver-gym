@@ -207,7 +207,7 @@ export default function BusinessInfoForm() {
                     id="businessName"
                     type="text"
                     placeholder="Type your business name"
-                    className="h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
+                    className="h-14 rounded-lg text-base border-border-2 focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
                     {...register("businessName")}
                   />
                   {errors.businessName && (
@@ -227,7 +227,7 @@ export default function BusinessInfoForm() {
                   </Label>
                   <select
                     id="businessType"
-                    className="w-full h-14 px-4 py-3 rounded-lg border border-[#E1E1E1] bg-white focus-visible:border-[#F05B23] focus-visible:shadow-[0_0_0_3px_#FCF0ED] transition-all text-base text-[#505050]"
+                    className="w-full h-14 px-4 py-3 rounded-lg border border-border-2 bg-white focus-visible:border-[#F05B23] focus-visible:shadow-[0_0_0_3px_#FCF0ED] transition-all text-base text-[#505050]"
                     {...register("businessType")}
                   >
                     <option value="">Select your business</option>
@@ -259,7 +259,7 @@ export default function BusinessInfoForm() {
                     id="registrationNumber"
                     type="text"
                     placeholder="Business registration number / Trade Licence"
-                    className="h-14 rounded-lg text-base border-[#E1E1E1] focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
+                    className="h-14 rounded-lg text-base border-border-2 focus:border-[#E97451] focus:ring-[#E97451] focus:ring-2 focus:ring-opacity-50"
                     {...register("registrationNumber")}
                   />
                 </div>
