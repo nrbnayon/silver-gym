@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Plus, Edit2 } from "lucide-react";
 import { CreateCategoryModal } from "../modals/CreateCategoryModal";
 import { AddSubcategoryModal } from "../modals/AddSubcategoryModal";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { PlusSignSquareIcon } from "@hugeicons/core-free-icons";
 
 interface ExpenseSubcategory {
   id: string;
@@ -126,9 +128,9 @@ export const ExpanseTab = () => {
 
         <Button
           onClick={() => setIsCreateModalOpen(true)}
-          className="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 gap-2"
+          className="w-full bg-[#E1E1E1] hover:bg-gray-200 text-text-primary rounded-sm mt-5"
         >
-          <Plus className="w-4 h-4" />
+          <HugeiconsIcon icon={PlusSignSquareIcon} size={20} />
           Add New Category
         </Button>
       </div>
@@ -169,9 +171,9 @@ export const ExpanseTab = () => {
 
               <Button
                 onClick={() => setIsSubcategoryModalOpen(true)}
-                className="w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white gap-2"
+                className="w-full bg-[#E1E1E1] hover:bg-gray-200 text-text-primary rounded-sm mt-5"
               >
-                <Plus className="w-4 h-4" />
+                <HugeiconsIcon icon={PlusSignSquareIcon} size={20} />
                 Add New Subcategory
               </Button>
             </div>

@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
+import { colorPalette } from "@/lib/utils";
 
 interface Package {
   id: string;
@@ -55,54 +56,6 @@ const durationOptions = [
   { label: "5 Month", value: 5, type: "Months" },
   { label: "Yearly", value: 12, type: "Months" },
   { label: "Life Time", value: 99999, type: "Days" },
-];
-
-const colorPalette = [
-  "#FF6B9D",
-  "#A3D5FF",
-  "#FFD4A3",
-  "#A8D5BA",
-  "#4CB8FF",
-  "#66D9A3",
-  "#003D5C",
-  "#5F9EA0",
-  "#C84B4B",
-  "#FFE66D",
-  "#A8E10C",
-  "#FFB6D9",
-  "#FFB84D",
-  "#6B8E23",
-  "#8B0000",
-  "#FF8C42",
-  "#F5E6D3",
-  "#5F9B9F",
-  "#7B68EE",
-  "#00CED1",
-  "#FF9A76",
-  "#9370DB",
-  "#FF69B4",
-  "#654321",
-  "#CC7722",
-  "#1A1A2E",
-  "#B5EAD7",
-  "#FFD6A5",
-  "#90EE90",
-  "#87CEEB",
-  "#4682B4",
-  "#FFD700",
-  "#66CDAA",
-  "#A9A9A9",
-  "#B0C4DE",
-  "#008B8B",
-  "#FF7F50",
-  "#C1FFC1",
-  "#DA70D6",
-  "#40E0D0",
-  "#98FB98",
-  "#E0E0E0",
-  "#C4D600",
-  "#A0522D",
-  "#FF6347",
 ];
 
 export const PackageModal = ({
