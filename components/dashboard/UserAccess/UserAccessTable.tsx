@@ -146,29 +146,29 @@ const UserAccessTable: React.FC<UserAccessTableProps> = ({
         <table className="w-full border-separate border-spacing-y-2 border border-border-2 rounded-lg p-2">
           <thead>
             <tr>
-              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
+              <th className="px-6 pt-3 pb-5 text-left text-base font-semibold text-text-primary border-b">
                 Assign Date
               </th>       
-              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
+              <th className="px-6 pt-3 pb-5 text-left text-base font-semibold text-text-primary border-b">
                 Serial NO
               </th>
-              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
+              <th className="px-6 pt-3 pb-5 text-left text-base font-semibold text-text-primary border-b">
                 Name
               </th>
-              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
+              <th className="px-6 pt-3 pb-5 text-left text-base font-semibold text-text-primary border-b">
                 Role Title
               </th>
-              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
+              <th className="px-6 pt-3 pb-5 text-left text-base font-semibold text-text-primary border-b">
                 Permission List
               </th>
-              <th className="px-6 py-5 text-left text-sm font-medium text-gray-900 border-b">
-                Edit
+              <th className="px-6 pt-3 pb-5 text-left text-base font-semibold text-text-primary border-b">
+                Action
               </th>
             </tr>
           </thead>
           <tbody>
             {filteredUsers.map((user, index) => (
-              <tr key={user.id || index} className={`cursor-pointer transition-colors ${
+              <tr key={user.id || index} className={`transition-colors ${
                     index % 2 === 0 ? "bg-white" : "bg-gray-primary"
                   } hover:bg-[#F2EEFF] rounded-md`}>
                 <td className="px-6 py-4 text-sm text-gray-600 rounded-l-md">
@@ -187,7 +187,7 @@ const UserAccessTable: React.FC<UserAccessTableProps> = ({
                 <td className="px-6 py-4 rounded-r-md">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <button className="p-1 hover:bg-gray-100 rounded transition-colors">
+                      <button className="p-1 hover:bg-gray-100 rounded transition-colors cursor-pointer">
                         <MoreVertical className="w-5 h-5 text-gray-600" />
                       </button>
                     </DropdownMenuTrigger>

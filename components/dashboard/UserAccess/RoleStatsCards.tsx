@@ -29,7 +29,7 @@ const RoleStatsCards: React.FC<RoleStatsCardsProps> = ({ onCreateRole }) => {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {roleStats.map((stat, index) => (
         <Card key={index} className="bg-white border-none hover:shadow-md">
-          <CardContent className="p-6">
+          <CardContent className="px-6">
             <h3 className="text-gray-900 font-semibold text-base mb-1">
               {stat.title}
             </h3>
@@ -45,7 +45,7 @@ const RoleStatsCards: React.FC<RoleStatsCardsProps> = ({ onCreateRole }) => {
       ))}
 
       <Card className="bg-white border-2 border-dashed border-gray-200 hover:border-[#7738F8] transition-colors cursor-pointer">
-        <CardContent className="p-6">
+        <CardContent className="px-6">
           <h3 className="text-gray-900 font-semibold text-base mb-1">
             Create Custom Role
           </h3>

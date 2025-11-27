@@ -147,32 +147,32 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto border border-border-2 px-1 pt-2 rounded-3xl">
-        <table className="w-full">
+      <div className="overflow-x-auto">
+        <table className="w-full border-separate border-spacing-y-2 border border-border-2 rounded-3xl p-2">
           <thead>
-            <tr className="border-b border-gray-200">
-              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
+            <tr>
+              <th className="text-left pt-3 pb-5 px-6 text-base font-semibold text-text-primary border-b">
                 INV. NO:
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
+              <th className="text-left pt-3 pb-5 px-6 text-base font-semibold text-text-primary border-b">
                 Date
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
+              <th className="text-left pt-3 pb-5 px-6 text-base font-semibold text-text-primary border-b">
                 Category / Name
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
+              <th className="text-left pt-3 pb-5 px-6 text-base font-semibold text-text-primary border-b">
                 Member ID
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
+              <th className="text-left pt-3 pb-5 px-6 text-base font-semibold text-text-primary border-b">
                 Category
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
+              <th className="text-left pt-3 pb-5 px-6 text-base font-semibold text-text-primary border-b">
                 Payment
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
+              <th className="text-left pt-3 pb-5 px-6 text-base font-semibold text-text-primary border-b">
                 Amount
               </th>
-              <th className="text-left py-3 px-4 text-base font-semibold text-text-primary">
+              <th className="text-left pt-3 pb-5 px-6 text-base font-semibold text-text-primary border-b">
                 Balance
               </th>
             </tr>
