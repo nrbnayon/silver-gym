@@ -5,9 +5,11 @@ import RoleStatsCards from "@/components/dashboard/UserAccess/RoleStatsCards";
 import UserAccessTable from "@/components/dashboard/UserAccess/UserAccessTable";
 import CreateCustomRoleModal from "@/components/modals/CreateCustomRoleModal";
 import { User, RoleData } from "@/types/user-access";
+import { toast } from "sonner";
 
 const UserAccessPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [customRoles, setCustomRoles] = useState<RoleData[]>([]);
   const [users, setUsers] = useState<User[]>([
     {
       id: "1",
@@ -67,8 +69,9 @@ const UserAccessPage = () => {
 
   const handleCreateRole = (roleData: RoleData) => {
     console.log("New role created:", roleData);
+    setCustomRoles([...customRoles, roleData]);
     setIsModalOpen(false);
-    // Handle role creation logic here
+    toast.success(`Custom role "${roleData.roleName}" created successfully!`);
   };
 
   const handleDeleteUser = (userId: string) => {
@@ -98,6 +101,7 @@ const UserAccessPage = () => {
           : user
       )
     );
+    toast.success("User updated successfully!");
   };
 
   const handleAddUser = (data: {
@@ -122,6 +126,7 @@ const UserAccessPage = () => {
       role: data.role as "admin" | "manager",
     };
     setUsers([...users, newUser]);
+    toast.success("User added successfully!");
   };
 
   return (
@@ -133,6 +138,7 @@ const UserAccessPage = () => {
           onDeleteUser={handleDeleteUser}
           onEditUser={handleEditUser}
           onAddUser={handleAddUser}
+          customRoles={customRoles}
         />
       </div>
       <CreateCustomRoleModal

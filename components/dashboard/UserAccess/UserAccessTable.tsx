@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import RoleTabButtons from "./RoleTabButtons";
-import { User } from "@/types/user-access";
+import { User, RoleData } from "@/types/user-access";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Navigation03Icon,
@@ -39,6 +39,7 @@ interface UserAccessTableProps {
     sendByEmail: boolean;
     sendByPhone: boolean;
   }) => void;
+  customRoles: RoleData[];
 }
 
 const UserAccessTable: React.FC<UserAccessTableProps> = ({
@@ -46,6 +47,7 @@ const UserAccessTable: React.FC<UserAccessTableProps> = ({
   onDeleteUser,
   onEditUser,
   onAddUser,
+  customRoles,
 }) => {
   const [activeTab, setActiveTab] = useState<"admin" | "manager">("admin");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -238,6 +240,7 @@ const UserAccessTable: React.FC<UserAccessTableProps> = ({
         mode={userFormMode}
         initialData={editUserData ?? undefined}
         onSubmit={handleUserFormSubmit}
+        customRoles={customRoles}
       />
     </div>
   );

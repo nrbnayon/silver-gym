@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RoleData } from "@/types/user-access";
 
 interface UserFormData {
   userName: string;
@@ -35,6 +36,7 @@ interface UserFormModalProps {
   mode: "add" | "edit";
   initialData?: Partial<UserFormData>;
   onSubmit: (data: UserFormData) => void;
+  customRoles: RoleData[];
 }
 
 const UserFormModal: React.FC<UserFormModalProps> = ({
@@ -43,6 +45,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
   mode,
   initialData,
   onSubmit,
+  customRoles,
 }) => {
   const [formData, setFormData] = useState<UserFormData>({
     userName: "",
@@ -212,6 +215,11 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
                 <SelectItem value="manager">Manager</SelectItem>
                 <SelectItem value="sales">Sales</SelectItem>
                 <SelectItem value="support">Support</SelectItem>
+                {customRoles.map((role) => (
+                  <SelectItem key={role.roleName} value={role.roleName.toLowerCase()}>
+                    {role.roleName}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             {errors.role && (
