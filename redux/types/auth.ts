@@ -8,6 +8,9 @@ export interface User {
   avatar?: string;
   rememberMe?: boolean;
   loginTime: string;
+  // Dynamic role support
+  customRoleId?: string;
+  permissions?: string[];
 }
 
 export interface AuthState {
@@ -18,6 +21,9 @@ export interface AuthState {
   role?: string;
   isLoading: boolean;
   error: string | null;
+  // Dynamic role support
+  permissions: string[];
+  customRoleId?: string;
 }
 
 export interface LoginCredentials {

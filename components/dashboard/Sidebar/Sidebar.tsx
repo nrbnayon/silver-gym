@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import LogoutConfirmModal from "@/components/modals/LogoutConfirmModal";
 import Link from "next/link";
 import Image from "next/image";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logoutUser } from "@/redux/features/auth/authSlice";
 import { toast } from "sonner";
 import { useUser } from "@/hooks/useUser";
@@ -25,11 +25,13 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { user } = useUser();
+  const permissions = useAppSelector((state) => state.auth.permissions);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   if (!user) return null;
 
-  const sidebarSections = getSidebarForRole(user.role);
+  // Get sidebar sections with permission filtering
+  const sidebarSections = getSidebarForRole(user.role, permissions);
 
   const handleNavClick = () => {
     setIsOpen(false);
@@ -70,7 +72,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       >
         <div className="h-20 flex items-center justify-center px-6">
           <div className="flex items-center gap-2">
-           <Image src="/silver-gym.png" alt="Logo" width={200} height={200} />
+            <Image src="/silver-gym.png" alt="Logo" width={200} height={200} />
           </div>
         </div>
 

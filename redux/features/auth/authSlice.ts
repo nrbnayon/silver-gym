@@ -17,6 +17,8 @@ const initialState: AuthState = {
   isAuthenticated: false,
   isLoading: false,
   error: null,
+  permissions: [],
+  customRoleId: undefined,
 };
 
 // Async thunks
@@ -108,7 +110,7 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-export const checkAuthStatus = createAsyncThunk(
+export const checkAuthStatus = createAsyncThunk<LoginResponse>(
   "auth/checkAuthStatus",
   async (_, { rejectWithValue }) => {
     try {
@@ -118,7 +120,7 @@ export const checkAuthStatus = createAsyncThunk(
 
       if (accessToken && userData && refreshToken) {
         return {
-          user: userData,
+          user: userData as unknown as User,
           accessToken,
           refreshToken,
         };
@@ -159,6 +161,9 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refreshToken;
         state.isAuthenticated = true;
         state.error = null;
+        // Set permissions from user
+        state.permissions = action.payload.user.permissions || [];
+        state.customRoleId = action.payload.user.customRoleId;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -172,6 +177,8 @@ const authSlice = createSlice({
         state.refreshToken = null;
         state.isAuthenticated = false;
         state.error = null;
+        state.permissions = [];
+        state.customRoleId = undefined;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.error = action.payload as string;
@@ -182,11 +189,14 @@ const authSlice = createSlice({
       })
       .addCase(checkAuthStatus.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.user as unknown as User;
+        state.user = action.payload.user;
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
         state.isAuthenticated = true;
         state.error = null;
+        // Set permissions from user
+        state.permissions = action.payload.user.permissions || [];
+        state.customRoleId = action.payload.user.customRoleId;
       })
       .addCase(checkAuthStatus.rejected, (state, action) => {
         state.isLoading = false;
@@ -195,6 +205,8 @@ const authSlice = createSlice({
         state.refreshToken = null;
         state.isAuthenticated = false;
         state.error = action.payload as string;
+        state.permissions = [];
+        state.customRoleId = undefined;
       });
   },
 });
