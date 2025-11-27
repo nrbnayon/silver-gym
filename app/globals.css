@@ -28,6 +28,8 @@
   --color-text-primary: #252525;
   --color-text-secondary: #878787;
 
+  --color-purple: #7738F8;
+
   /* Radii */
   --radius: 0.75rem;
   --radius-sm: calc(var(--radius) - 4px);

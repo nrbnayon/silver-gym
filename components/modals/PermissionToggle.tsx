@@ -32,7 +32,7 @@ const PermissionToggle: React.FC<PermissionToggleProps> = ({
       type="button"
       onClick={onToggle}
       className={`relative inline-flex ${sizeClasses} items-center rounded-full transition-colors ${
-        checked ? "bg-[#7738F8]" : "bg-gray-200"
+        checked ? "bg-purple" : "bg-gray-200"
       }`}
     >
       <span

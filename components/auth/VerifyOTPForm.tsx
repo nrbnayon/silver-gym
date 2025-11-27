@@ -194,7 +194,7 @@ export default function VerifyOTPForm() {
                         error && !isVerified
                           ? "border-[#FC5555] text-[#FC5555] focus:border-[#FC5555] focus:ring-[#FC5555]"
                           : isVerified
-                          ? "border-[#7738F8] text-[#7738F8] focus:border-[#7738F8] focus:ring-[#7738F8]"
+                          ? "border-purple text-purple focus:border-purple focus:ring-purple"
                           : "border-border-2 text-[#505050] focus:border-[#E97451] focus:ring-[#E97451]"
                       }
                       focus:outline-none focus:ring-2 focus:ring-opacity-50`}
@@ -208,7 +208,7 @@ export default function VerifyOTPForm() {
                   Don&apos;t received the code?{" "}
                   <button
                     onClick={handleResend}
-                    className="text-[#7738F8] hover:underline font-medium"
+                    className="text-purple hover:underline font-medium"
                   >
                     Resend
                   </button>

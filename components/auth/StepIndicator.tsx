@@ -26,7 +26,7 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
               currentStep === step.id
                 ? "bg-white border border-gray-primary"
                 : currentStep > step.id
-                ? "bg-white border-2 border-[#7738F8]"
+                ? "bg-white border-2 border-purple"
                 : "bg-white border-2 border-border-2"
             }`}
             style={
@@ -42,10 +42,10 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
             <div
               className={`w-6 h-6 rounded-full flex items-center justify-center transition-all shrink-0 ${
                 currentStep > step.id
-                  ? "bg-[#7738F8] border-2 border-[#7738F8]"
+                  ? "bg-purple border-2 border-purple"
                   : currentStep === step.id
                   ? "bg-gray-primary"
-                  : "bg-white border-2 border-[#E5E7EB]"
+                  : "bg-white border-2 border-border-2"
               }`}
               style={
                 currentStep === step.id
@@ -70,9 +70,9 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
             <span
               className={`font-medium text-sm whitespace-nowrap ${
                 currentStep > step.id
-                  ? "text-[#7738F8]"
+                  ? "text-purple"
                   : currentStep === step.id
-                  ? "text-[#505050]"
+                  ? "text-gray-primary"
                   : "text-[#9CA3AF]"
               }`}
             >
@@ -84,7 +84,7 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
           {index < steps.length - 1 && (
             <div
               className={`h-[2px] w-16 transition-all shrink-0 ${
-                currentStep > step.id ? "bg-[#7738F8]" : "bg-[#E5E7EB]"
+                currentStep > step.id ? "bg-purple" : "bg-[#E5E7EB]"
               }`}
             />
           )}

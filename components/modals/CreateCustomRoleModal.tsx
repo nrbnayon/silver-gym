@@ -129,7 +129,7 @@ const CreateCustomRoleModal: React.FC<CreateCustomRoleModalProps> = ({
               value={roleName}
               onChange={(e) => setRoleName(e.target.value)}
               placeholder="Type category name"
-              className="focus:ring-[#7738F8] focus:border-[#7738F8]"
+              className="focus:ring-purple focus:border-purple"
             />
           </div>
 
@@ -141,7 +141,7 @@ const CreateCustomRoleModal: React.FC<CreateCustomRoleModalProps> = ({
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Type about your expanse as description..."
               rows={4}
-              className="focus:ring-[#7738F8] focus:border-[#7738F8] resize-x-none border"
+              className="focus:ring-purple focus:border-purple resize-x-none border"
             />
           </div>
 
@@ -162,7 +162,7 @@ const CreateCustomRoleModal: React.FC<CreateCustomRoleModalProps> = ({
           <Button
             onClick={handleSave}
             disabled={!roleName.trim()}
-            className="bg-[#7738F8] hover:bg-[#6527e0] text-white"
+            className="bg-purple hover:bg-[#6527e0] text-white"
           >
             Next Step →
           </Button>

@@ -135,7 +135,7 @@ const UserAccessTable: React.FC<UserAccessTableProps> = ({
         </h2>
         <Button
           onClick={handleAssignRole}
-          className="bg-[#7738F8] hover:bg-[#6527e0] text-white"
+          className="bg-purple hover:bg-[#6527e0] text-white"
         >
           <HugeiconsIcon icon={Navigation03Icon} size={24} />
           Assign Role

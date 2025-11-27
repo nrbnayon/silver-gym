@@ -258,7 +258,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
           <div className="pt-4">
             <Button
               onClick={handleSubmit}
-              className="w-full h-11 bg-[#7738F8] hover:bg-[#6527e0] text-white"
+              className="w-full h-11 bg-purple hover:bg-[#6527e0] text-white"
             >
               Next Step
               <ArrowRight className="w-4 h-4 ml-2" />
