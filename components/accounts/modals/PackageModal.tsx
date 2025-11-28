@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogOverlay,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -229,6 +230,7 @@ export const PackageModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogOverlay className="bg-white/30 backdrop-blur-sm" />
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="text-lg font-semibold">

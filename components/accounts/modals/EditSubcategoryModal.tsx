@@ -1,6 +1,7 @@
-// components/accounts/modals/AddSubcategoryModal.tsx
+// components/accounts/modals/EditSubcategoryModal.tsx
 "use client";
 
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   Dialog,
@@ -15,24 +16,39 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
-interface AddSubcategoryModalProps {
+interface ExpenseSubcategory {
+  id: string;
+  title: string;
+}
+
+interface EditSubcategoryModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: { title: string }) => void;
+  subcategory: ExpenseSubcategory;
   categoryTitle: string;
 }
 
-export const AddSubcategoryModal = ({
+export const EditSubcategoryModal = ({
   isOpen,
   onClose,
   onSubmit,
+  subcategory,
   categoryTitle,
-}: AddSubcategoryModalProps) => {
+}: EditSubcategoryModalProps) => {
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
-      title: "",
+      title: subcategory.title,
     },
   });
+
+  useEffect(() => {
+    if (isOpen) {
+      reset({
+        title: subcategory.title,
+      });
+    }
+  }, [isOpen, subcategory, reset]);
 
   const handleFormSubmit = (formData: Record<string, unknown>) => {
     const title = formData.title as string;
@@ -46,22 +62,21 @@ export const AddSubcategoryModal = ({
       title,
     });
 
-    reset();
     onClose();
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+      <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogOverlay className="bg-white/30 backdrop-blur-sm" />
       <DialogContent className="max-w-md">
         <div className="flex items-center justify-between">
           <DialogHeader>
-            <DialogTitle>Add Expanse Subcategory</DialogTitle>
+            <DialogTitle>Edit Expanse Subcategory</DialogTitle>
           </DialogHeader>
         </div>
 
         <p className="text-sm text-gray-600">
-          Add a new subcategory to <strong>{categoryTitle}</strong>
+          Update subcategory in <strong>{categoryTitle}</strong>
         </p>
 
         <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
@@ -72,7 +87,7 @@ export const AddSubcategoryModal = ({
             </Label>
             <Input
               id="title"
-              placeholder="Type package name"
+              placeholder="Type subcategory name"
               {...register("title")}
               className="mt-2"
             />
@@ -91,7 +106,7 @@ export const AddSubcategoryModal = ({
               type="submit"
               className="bg-purple-600 hover:bg-purple-700 text-white"
             >
-              Create Subcategory
+              Update Subcategory
             </Button>
           </DialogFooter>
         </form>

@@ -1,7 +1,7 @@
-// components/accounts/modals/CreateCategoryModal.tsx
+// components/accounts/modals/EditCategoryModal.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   Dialog,
@@ -15,17 +15,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { toast } from "sonner";
 import { colorPalette } from "@/lib/utils";
 
-interface CreateCategoryModalProps {
+interface ExpenseCategory {
+  id: string;
+  title: string;
+  description?: string;
+  color?: string;
+  subcategories: Array<{ id: string; title: string }>;
+}
+
+interface EditCategoryModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: {
@@ -33,23 +34,36 @@ interface CreateCategoryModalProps {
     description: string;
     color: string;
   }) => void;
+  category: ExpenseCategory;
 }
 
-export const CreateCategoryModal = ({
+export const EditCategoryModal = ({
   isOpen,
   onClose,
   onSubmit,
-}: CreateCategoryModalProps) => {
+  category,
+}: EditCategoryModalProps) => {
   const { register, handleSubmit, reset, setValue } = useForm({
     defaultValues: {
-      title: "",
-      description: "",
-      color: "#7C3AED",
+      title: category.title,
+      description: category.description || "",
+      color: category.color || "#7C3AED",
     },
   });
 
-  const [selectedColor, setSelectedColor] = useState("#7C3AED");
+  const [selectedColor, setSelectedColor] = useState(category.color || "#7C3AED");
   const [isColorSelectOpen, setIsColorSelectOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      reset({
+        title: category.title,
+        description: category.description || "",
+        color: category.color || "#7C3AED",
+      });
+      setSelectedColor(category.color || "#7C3AED");
+    }
+  }, [isOpen, category, reset]);
 
   const handleFormSubmit = (formData: Record<string, unknown>) => {
     const title = formData.title as string;
@@ -66,9 +80,6 @@ export const CreateCategoryModal = ({
       color: selectedColor,
     });
 
-    reset();
-    setSelectedColor("#7C3AED");
-    setValue("color", "#7C3AED");
     onClose();
   };
 
@@ -80,19 +91,18 @@ export const CreateCategoryModal = ({
 
   const handleClose = () => {
     reset();
-    setSelectedColor("#7C3AED");
-    setValue("color", "#7C3AED");
+    setSelectedColor(category.color || "#7C3AED");
     onClose();
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogOverlay className="bg-white/30 backdrop-blur-sm" />
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-lg font-semibold">Add Expense Category</DialogTitle>
+          <DialogTitle className="text-lg font-semibold">Edit Expense Category</DialogTitle>
           <p className="text-sm text-gray-500 mt-1">
-            Add a new expense transaction
+            Update the expense transaction details
           </p>
         </DialogHeader>
 
@@ -188,7 +198,7 @@ export const CreateCategoryModal = ({
               type="submit"
               className="bg-purple hover:bg-[#6D28D9] text-white"
             >
-              Create Category
+              Update Category
             </Button>
           </DialogFooter>
         </form>
