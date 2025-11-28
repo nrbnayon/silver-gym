@@ -2,8 +2,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, Users, UserPlus, TrendingUp, TrendingDown, BarChart3 } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Users, UserPlus, TrendingUp, TrendingDown, BarChart3 } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogOverlay, DialogTitle } from "@/components/ui/dialog";
 import { comparisonOptions } from "@/data/analyticsData";
 
 interface CompareAnalyticsModalProps {
@@ -46,7 +46,8 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl">
+      <DialogOverlay className="bg-white/30 backdrop-blur-sm" />
+      <DialogContent className="w-full md:min-w-3xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold text-gray-medium">
             Compare Analytics

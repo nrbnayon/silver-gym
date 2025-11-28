@@ -7,6 +7,8 @@ import CostAnalytics from "@/components/dashboard/Analytics/CostAnalytics";
 import PackagesAnalytics from "@/components/dashboard/Analytics/PackagesAnalytics";
 import CompareAnalyticsModal from "@/components/dashboard/Analytics/CompareAnalyticsModal";
 import FinancialsCompare from "@/components/dashboard/Analytics/FinancialsCompare";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { AnalyticsDownIcon } from "@hugeicons/core-free-icons";
 
 export default function AnalyticsPage() {
   const [showCompareModal, setShowCompareModal] = useState(false);
@@ -34,9 +36,9 @@ export default function AnalyticsPage() {
           {!showCompareView && (
             <button
               onClick={() => setShowCompareModal(true)}
-              className="px-6 py-2.5 bg-[#7C4DFF] text-white text-sm rounded-md hover:bg-[#6A3FE0] transition-colors flex items-center gap-2"
+              className="px-4 py-2.5 bg-purple text-white text-sm rounded-md hover:bg-[#6A3FE0] transition-colors flex items-center gap-2 cursor-pointer"
             >
-              <span>📊</span>
+             <HugeiconsIcon icon={AnalyticsDownIcon} />
               Compare Analytics
             </button>
           )}

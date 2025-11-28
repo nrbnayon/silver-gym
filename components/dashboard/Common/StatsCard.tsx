@@ -16,7 +16,7 @@ interface StatsCardProps {
 
 const StatsCard: React.FC<StatsCardProps> = ({ title, date, stats }) => {
   return (
-    <div className="w-full bg-white rounded-[20px] p-6 md:p-8 flex flex-col gap-6">
+    <div className="w-full bg-white rounded-2xl p-6 md:p-8 flex flex-col gap-6">
       {/* Header */}
       <div className="flex justify-between items-center flex-wrap gap-2">
         <h2 className="text-lg md:text-xl font-semibold text-gray-medium">
