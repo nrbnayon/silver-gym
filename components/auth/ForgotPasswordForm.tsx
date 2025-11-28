@@ -69,14 +69,14 @@ export default function ForgotPasswordForm() {
             <div className="flex flex-col gap-6">
               {/* Title */}
               <div className="flex flex-col items-center justify-center gap-1">
-                <h1 className="font-semibold text-[#505050] text-2xl text-center leading-9">
+                <h1 className="font-semibold text-gray-medium text-2xl text-center leading-9">
                   Find Your Account
                 </h1>
               </div>
 
               {/* Description + Input */}
               <div className="flex flex-col items-center justify-center gap-6">
-                <p className="w-full max-w-lg font-normal text-[#505050] text-xl text-center leading-7">
+                <p className="w-full max-w-lg font-normal text-gray-medium text-xl text-center leading-7">
                   Please enter your email address or mobile number to search for
                   your account.
                 </p>
@@ -84,7 +84,7 @@ export default function ForgotPasswordForm() {
                 <div className="flex flex-col items-start gap-1 w-full">
                   <Input
                     placeholder="Enter your email or phone number"
-                    className="w-full px-3 h-14 rounded-lg border border-border-2 font-normal text-[#505050] text-base leading-5"
+                    className="w-full px-3 h-14 rounded-lg border border-border-2 font-normal text-gray-medium text-base leading-5"
                     value={emailOrPhone}
                     onChange={(e) => {
                       setEmailOrPhone(e.target.value);

@@ -59,11 +59,11 @@ const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
                 className="w-2 h-2 rounded-full"
                 style={{ backgroundColor: entry.color }}
               />
-              <span className="text-sm text-[#505050] capitalize">
+              <span className="text-sm text-gray-medium capitalize">
                 {entry.name}
               </span>
             </div>
-            <span className="text-sm font-semibold text-[#505050]">
+            <span className="text-sm font-semibold text-gray-medium">
               {Number(entry.value).toLocaleString()} TK
             </span>
           </div>
@@ -84,13 +84,13 @@ const FinancialAnalytics = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-[#505050]">
+        <h2 className="text-xl font-semibold text-gray-medium">
           Financial analytics
         </h2>
         <div className="relative">
           <button
             onClick={() => setIsYearOpen(!isYearOpen)}
-            className="px-4 py-2 bg-gray-100 text-[#505050] text-sm rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors min-w-[100px] justify-between"
+            className="px-4 py-2 bg-gray-100 text-gray-medium text-sm rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors min-w-[100px] justify-between"
           >
             {selectedYear}
             <ChevronDown className="w-4 h-4" />
@@ -106,7 +106,7 @@ const FinancialAnalytics = () => {
                   }}
                   className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors ${
                     selectedYear === year
-                      ? "text-[#505050] font-semibold"
+                      ? "text-gray-medium font-semibold"
                       : "text-[#878787]"
                   }`}
                 >
@@ -127,7 +127,7 @@ const FinancialAnalytics = () => {
               onClick={() => setSelectedMonth(month)}
               className={`px-4 py-2 text-sm rounded-md whitespace-nowrap transition-colors ${
                 selectedMonth === month
-                  ? "bg-[#505050] text-white"
+                  ? "bg-gray-medium text-white"
                   : "text-[#878787] hover:bg-gray-100"
               }`}
             >
@@ -203,7 +203,7 @@ const FinancialAnalytics = () => {
           {/* Total Income */}
           <div className="border border-gray-200 rounded-lg p-4">
             <p className="text-sm text-[#878787] mb-1">Total Income</p>
-            <p className="text-2xl font-bold text-[#505050]">
+            <p className="text-2xl font-bold text-gray-medium">
               {currentData.metrics.totalIncome}
             </p>
             <p className="text-sm text-green-500 mt-1">
@@ -214,7 +214,7 @@ const FinancialAnalytics = () => {
           {/* Total Expense */}
           <div className="border border-gray-200 rounded-lg p-4">
             <p className="text-sm text-[#878787] mb-1">Total Expense</p>
-            <p className="text-2xl font-bold text-[#505050]">
+            <p className="text-2xl font-bold text-gray-medium">
               {currentData.metrics.totalExpense}
             </p>
             <p className="text-sm text-red-500 mt-1">
@@ -225,7 +225,7 @@ const FinancialAnalytics = () => {
           {/* Total Net Income */}
           <div className="border border-gray-200 rounded-lg p-4">
             <p className="text-sm text-[#878787] mb-1">Total Net Income</p>
-            <p className="text-2xl font-bold text-[#505050]">
+            <p className="text-2xl font-bold text-gray-medium">
               {currentData.metrics.totalNetIncome}
             </p>
             <p className="text-sm text-green-500 mt-1">

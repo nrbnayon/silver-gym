@@ -141,10 +141,10 @@ export default function BusinessInfoForm() {
               <div className="flex flex-col gap-6">
                 <div className="flex justify-between items-start">
                   <div className="flex flex-col gap-1">
-                    <h1 className="font-semibold text-[#505050] text-2xl leading-9">
+                    <h1 className="font-semibold text-gray-medium text-2xl leading-9">
                       Business Information
                     </h1>
-                    <p className="font-normal text-[#505050] text-base leading-6">
+                    <p className="font-normal text-gray-medium text-base leading-6">
                       Enter your gym or company details to get started.
                     </p>
                   </div>
@@ -157,7 +157,7 @@ export default function BusinessInfoForm() {
               <div className="flex flex-col gap-6">
                 {/* Logo Upload */}
                 <div className="flex flex-col gap-2">
-                  <Label className="text-sm font-medium text-[#505050]">
+                  <Label className="text-sm font-medium text-gray-medium">
                     Logo
                   </Label>
                   <label
@@ -177,7 +177,7 @@ export default function BusinessInfoForm() {
                         <Upload className="w-6 h-6 text-[#6B7280]" />
                       </div>
                     )}
-                    <span className="text-sm font-medium text-[#505050]">
+                    <span className="text-sm font-medium text-gray-medium">
                       {logo ? logo.name : "Upload"}
                     </span>
                     {!logo && (
@@ -199,7 +199,7 @@ export default function BusinessInfoForm() {
                 <div className="flex flex-col gap-2">
                   <Label
                     htmlFor="businessName"
-                    className="text-sm font-medium text-[#505050]"
+                    className="text-sm font-medium text-gray-medium"
                   >
                     Business Name
                   </Label>
@@ -221,13 +221,13 @@ export default function BusinessInfoForm() {
                 <div className="flex flex-col gap-2">
                   <Label
                     htmlFor="businessType"
-                    className="text-sm font-medium text-[#505050]"
+                    className="text-sm font-medium text-gray-medium"
                   >
                     Business Type
                   </Label>
                   <select
                     id="businessType"
-                    className="w-full h-14 px-4 py-3 rounded-lg border border-border-2 bg-white focus-visible:border-[#F05B23] focus-visible:shadow-[0_0_0_3px_#FCF0ED] transition-all text-base text-[#505050]"
+                    className="w-full h-14 px-4 py-3 rounded-lg border border-border-2 bg-white focus-visible:border-[#F05B23] focus-visible:shadow-[0_0_0_3px_#FCF0ED] transition-all text-base text-gray-medium"
                     {...register("businessType")}
                   >
                     <option value="">Select your business</option>
@@ -248,7 +248,7 @@ export default function BusinessInfoForm() {
                 <div className="flex flex-col gap-2">
                   <Label
                     htmlFor="registrationNumber"
-                    className="text-sm font-medium text-[#505050]"
+                    className="text-sm font-medium text-gray-medium"
                   >
                     Registration Number{" "}
                     <span className="text-[#9CA3AF] font-normal">

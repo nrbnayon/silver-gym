@@ -70,7 +70,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
     <div className="w-full bg-white rounded-[20px] p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
-        <h2 className="text-lg md:text-xl font-semibold text-[#505050]">
+        <h2 className="text-lg md:text-xl font-semibold text-gray-medium">
           {title}
         </h2>
 
@@ -83,14 +83,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
               placeholder="Search ID/Name/Title..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm text-[#505050] placeholder:text-text-secondary focus:outline-none focus:border-[#AA81FE] transition-colors w-[250px]"
+              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-medium placeholder:text-text-secondary focus:outline-none focus:border-[#AA81FE] transition-colors w-[250px]"
             />
           </div>
 
           {/* Filter Button */}
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm text-[#505050] hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-medium hover:bg-gray-50 transition-colors"
           >
             <SlidersHorizontal className="w-4 h-4" />
             Filter
@@ -103,13 +103,13 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         <div className="mb-6 p-4 bg-gray-primary rounded-lg">
           <div className="flex flex-wrap gap-4 items-end">
             <div className="flex-1 min-w-[200px]">
-              <label className="block text-sm font-medium text-[#505050] mb-2">
+              <label className="block text-sm font-medium text-gray-medium mb-2">
                 Category
               </label>
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-[#505050] focus:outline-none focus:border-[#AA81FE] transition-colors"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-medium focus:outline-none focus:border-[#AA81FE] transition-colors"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
@@ -120,13 +120,13 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             </div>
 
             <div className="flex-1 min-w-[200px]">
-              <label className="block text-sm font-medium text-[#505050] mb-2">
+              <label className="block text-sm font-medium text-gray-medium mb-2">
                 Payment Method
               </label>
               <select
                 value={paymentFilter}
                 onChange={(e) => setPaymentFilter(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-[#505050] focus:outline-none focus:border-[#AA81FE] transition-colors"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-medium focus:outline-none focus:border-[#AA81FE] transition-colors"
               >
                 {payments.map((pay) => (
                   <option key={pay} value={pay}>
@@ -138,7 +138,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
             <button
               onClick={resetFilters}
-              className="px-4 py-2 text-sm text-text-secondary hover:text-[#505050] transition-colors"
+              className="px-4 py-2 text-sm text-text-secondary hover:text-gray-medium transition-colors"
             >
               Reset
             </button>
@@ -187,13 +187,13 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                     index % 2 === 0 ? "bg-white" : "bg-gray-primary"
                   } hover:bg-[#F2EEFF]  rounded-sm`}
                 >
-                  <td className="py-4 px-4 text-sm text-[#505050] rounded-l-sm">
+                  <td className="py-4 px-4 text-sm text-gray-medium rounded-l-sm">
                     {transaction.id}
                   </td>
-                  <td className="py-4 px-4 text-sm text-[#505050]">
+                  <td className="py-4 px-4 text-sm text-gray-medium">
                     {transaction.date}
                   </td>
-                  <td className="py-4 px-4 text-sm text-[#505050]">
+                  <td className="py-4 px-4 text-sm text-gray-medium">
                     {transaction.categoryName}
                   </td>
                   <td className="py-4 px-4 text-sm text-text-secondary">
@@ -204,13 +204,13 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                       className={`text-sm ${
                         transaction.category === "Expanse"
                           ? "text-[#E16349]"
-                          : "text-[#505050]"
+                          : "text-gray-medium"
                       }`}
                     >
                       {transaction.category}
                     </span>
                   </td>
-                  <td className="py-4 px-4 text-sm text-[#505050]">
+                  <td className="py-4 px-4 text-sm text-gray-medium">
                     {transaction.payment}
                   </td>
                   <td className="py-4 px-4">
@@ -227,7 +227,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                       })}
                     </span>
                   </td>
-                  <td className="py-4 px-4 text-sm text-[#505050] rounded-r-sm">
+                  <td className="py-4 px-4 text-sm text-gray-medium rounded-r-sm">
                     {transaction.balance.toLocaleString("en-US", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
@@ -262,9 +262,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                       <div className="text-center">
                         <p className="text-base">
                           <span className="text-[#E16349]">Oops!</span>{" "}
-                          <span className="text-[#505050]">Nothing matches</span>
+                          <span className="text-gray-medium">Nothing matches</span>
                         </p>
-                        <p className="text-sm text-[#505050]">your search</p>
+                        <p className="text-sm text-gray-medium">your search</p>
                       </div>
                     </div>
                   )}

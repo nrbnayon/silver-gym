@@ -13,11 +13,11 @@ interface CompareAnalyticsModalProps {
 }
 
 const iconMap: Record<string, React.ReactNode> = {
-  users: <Users className="w-8 h-8 text-[#505050]" />,
-  "user-add": <UserPlus className="w-8 h-8 text-[#505050]" />,
-  "money-receive": <TrendingUp className="w-8 h-8 text-[#505050]" />,
-  "money-send": <TrendingDown className="w-8 h-8 text-[#505050]" />,
-  chart: <BarChart3 className="w-8 h-8 text-[#505050]" />,
+  users: <Users className="w-8 h-8 text-gray-medium" />,
+  "user-add": <UserPlus className="w-8 h-8 text-gray-medium" />,
+  "money-receive": <TrendingUp className="w-8 h-8 text-gray-medium" />,
+  "money-send": <TrendingDown className="w-8 h-8 text-gray-medium" />,
+  chart: <BarChart3 className="w-8 h-8 text-gray-medium" />,
 };
 
 const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
@@ -48,7 +48,7 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-[#505050]">
+          <DialogTitle className="text-xl font-semibold text-gray-medium">
             Compare Analytics
           </DialogTitle>
         </DialogHeader>
@@ -79,7 +79,7 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
                     />
                     <div className="flex-1">
                       <div className="mb-2">{iconMap[option.icon]}</div>
-                      <p className="font-semibold text-[#505050] text-sm mb-1">
+                      <p className="font-semibold text-gray-medium text-sm mb-1">
                         {option.label}
                       </p>
                       <p className="text-xs text-[#878787] leading-relaxed">
@@ -100,13 +100,13 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
             <div className="grid grid-cols-2 gap-4">
               {/* Start Year */}
               <div>
-                <label className="block text-sm font-medium text-[#505050] mb-2">
+                <label className="block text-sm font-medium text-gray-medium mb-2">
                   Start Year
                 </label>
                 <select
                   value={startYear}
                   onChange={(e) => setStartYear(Number(e.target.value))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md text-[#505050] focus:outline-none focus:ring-2 focus:ring-[#7C4DFF] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-medium focus:outline-none focus:ring-2 focus:ring-[#7C4DFF] focus:border-transparent"
                 >
                   <option value="">Select year</option>
                   {years.map((year) => (
@@ -119,13 +119,13 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
 
               {/* End Year */}
               <div>
-                <label className="block text-sm font-medium text-[#505050] mb-2">
+                <label className="block text-sm font-medium text-gray-medium mb-2">
                   End Year
                 </label>
                 <select
                   value={endYear}
                   onChange={(e) => setEndYear(Number(e.target.value))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md text-[#505050] focus:outline-none focus:ring-2 focus:ring-[#7C4DFF] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-medium focus:outline-none focus:ring-2 focus:ring-[#7C4DFF] focus:border-transparent"
                 >
                   <option value="">Select year</option>
                   {years.map((year) => (
@@ -141,7 +141,7 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
           <div className="flex justify-end gap-3 pt-4">
             <button
               onClick={onClose}
-              className="px-6 py-2 text-[#505050] border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              className="px-6 py-2 text-gray-medium border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>

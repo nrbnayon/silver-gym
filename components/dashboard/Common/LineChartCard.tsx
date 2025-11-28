@@ -63,11 +63,11 @@ const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
                   className="w-2 h-2 rounded-full"
                   style={{ backgroundColor: entry.color }}
                 />
-                <span className="text-sm text-[#505050] capitalize">
+                <span className="text-sm text-gray-medium capitalize">
                   {entry.name}
                 </span>
               </div>
-              <span className="text-sm font-semibold text-[#505050]">
+              <span className="text-sm font-semibold text-gray-medium">
                 ${Number(entry.value).toLocaleString()}
               </span>
             </div>
@@ -115,7 +115,7 @@ const LineChartCard: React.FC<LineChartCardProps> = ({
   return (
     <div className="w-full bg-white rounded-[20px] p-3 flex flex-col border-8 border-gray-secondary">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg font-semibold text-[#505050] mb-3">{title}</h2>
+        <h2 className="text-lg font-semibold text-gray-medium mb-3">{title}</h2>
         <CustomLegend incomeColor={incomeColor} expenseColor={expenseColor} />
       </div>
 
@@ -125,7 +125,7 @@ const LineChartCard: React.FC<LineChartCardProps> = ({
             <span className="text-sm text-text-secondary">
               Your expenses are only
             </span>
-            <span className="text-2xl font-bold text-[#505050]">
+            <span className="text-2xl font-bold text-gray-medium">
               {percentage}
             </span>
             <span className="text-sm text-text-secondary">of your income</span>

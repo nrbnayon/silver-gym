@@ -62,7 +62,7 @@ const CustomTooltip = ({
   ) {
     return (
       <div className="bg-white px-4 py-2 rounded-lg shadow-lg border border-gray-200">
-        <p className="text-sm font-semibold text-[#505050]">
+        <p className="text-sm font-semibold text-gray-medium">
           {payload[0].name}
         </p>
         <p className="text-sm text-text-secondary">
@@ -86,7 +86,7 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ data }) => (
           className="w-4 h-4 rounded-[6px] border-border "
           style={{ backgroundColor: entry.color }}
         />
-        <span className="text-sm text-[#505050]">{entry.name}</span>
+        <span className="text-sm text-gray-medium">{entry.name}</span>
       </div>
     ))}
   </div>
@@ -102,7 +102,7 @@ const PieChartCard: React.FC<PieChartCardProps> = ({
 
   return (
     <div className="w-full bg-white rounded-[20px] p-2 flex flex-col">
-      <h2 className="text-lg md:text-xl font-semibold text-[#505050] mb-6">
+      <h2 className="text-lg md:text-xl font-semibold text-gray-medium mb-6">
         {title}
       </h2>
 
@@ -135,7 +135,7 @@ const PieChartCard: React.FC<PieChartCardProps> = ({
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span className="text-2xl md:text-3xl font-bold text-[#505050]">
+            <span className="text-2xl md:text-3xl font-bold text-gray-medium">
               {centerValue}
             </span>
           </div>
@@ -144,7 +144,7 @@ const PieChartCard: React.FC<PieChartCardProps> = ({
         <CustomLegend data={data} />
 
         {description && (
-          <p className="text-md text-[#505050] bg-gray-primary text-center mt-3 rounded-lg p-2">
+          <p className="text-md text-gray-medium bg-gray-primary text-center mt-3 rounded-lg p-2">
             {description}
           </p>
         )}

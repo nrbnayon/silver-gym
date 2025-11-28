@@ -46,7 +46,7 @@ function SelectionCard({
         />
       </div>
       <div className="flex-1">
-        <div className="font-semibold text-[#505050] text-base mb-0.5">
+        <div className="font-semibold text-gray-medium text-base mb-0.5">
           {title}
         </div>
         <div className="text-sm text-[#9CA3AF]">{subtitle}</div>
@@ -131,14 +131,14 @@ export default function VerificationMethodForm() {
             <div className="flex flex-col gap-6">
               {/* Title */}
               <div className="flex flex-col items-center justify-center gap-1">
-                <h1 className="font-semibold text-[#505050] text-2xl text-center leading-9">
+                <h1 className="font-semibold text-gray-medium text-2xl text-center leading-9">
                   Verification Method
                 </h1>
               </div>
 
               {/* Description */}
               <div className="flex flex-col items-center justify-center">
-                <p className="w-full max-w-lg font-normal text-[#505050] text-xl text-center leading-7">
+                <p className="w-full max-w-lg font-normal text-gray-medium text-xl text-center leading-7">
                   We found your account. Choose how you&apos;d like to receive
                   your reset code.
                 </p>

@@ -160,14 +160,14 @@ export default function VerifyOTPForm() {
             <div className="flex flex-col gap-6">
               {/* Title */}
               <div className="flex flex-col items-center justify-center gap-1">
-                <h1 className="font-semibold text-[#505050] text-2xl text-center leading-9">
+                <h1 className="font-semibold text-gray-medium text-2xl text-center leading-9">
                   Enter Verification Code
                 </h1>
               </div>
 
               {/* Description */}
               <div className="flex flex-col items-center justify-center">
-                <p className="w-full max-w-lg font-normal text-[#505050] text-base text-center leading-6">
+                <p className="w-full max-w-lg font-normal text-gray-medium text-base text-center leading-6">
                   We&apos;ve sent a reset link to your{" "}
                   <span className="font-semibold">{displayContact}</span> email.
                   Please check your inbox
@@ -195,7 +195,7 @@ export default function VerifyOTPForm() {
                           ? "border-[#FC5555] text-[#FC5555] focus:border-[#FC5555] focus:ring-[#FC5555]"
                           : isVerified
                           ? "border-purple text-purple focus:border-purple focus:ring-purple"
-                          : "border-border-2 text-[#505050] focus:border-[#E97451] focus:ring-[#E97451]"
+                          : "border-border-2 text-gray-medium focus:border-[#E97451] focus:ring-[#E97451]"
                       }
                       focus:outline-none focus:ring-2 focus:ring-opacity-50`}
                   />

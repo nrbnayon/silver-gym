@@ -82,7 +82,7 @@ export default function AddExpenseModal({
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-sm f focus-visible:border-[#F05B23] focus-visible:shadow-[0_0_0_3px_#FCF0ED] transition-all text-base text-[#505050]"
+                className="w-full px-4 py-2 border border-gray-300 rounded-sm f focus-visible:border-[#F05B23] focus-visible:shadow-[0_0_0_3px_#FCF0ED] transition-all text-base text-gray-medium"
               >
                 <option value="">Select Payment Method</option>
                 <option value="cash">Cash</option>

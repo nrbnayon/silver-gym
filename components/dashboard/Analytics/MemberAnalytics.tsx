@@ -18,17 +18,17 @@ const MemberAnalytics = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-semibold text-[#505050]">Member Analytics</h2>
+      <h2 className="text-xl font-semibold text-gray-medium">Member Analytics</h2>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Total Members */}
         <div className="bg-white rounded-lg p-6 border border-gray-200">
           <p className="text-sm text-[#878787] mb-2">Total Members</p>
-          <p className="text-[#505050] text-sm mb-3">
+          <p className="text-gray-medium text-sm mb-3">
             {data.totalMembersDescription}
           </p>
-          <p className="text-4xl font-bold text-[#505050]">
+          <p className="text-4xl font-bold text-gray-medium">
             {data.totalMembers}
             <span className="text-sm font-normal text-[#878787] ml-1">
               {data.totalMembersUnit}
@@ -39,10 +39,10 @@ const MemberAnalytics = () => {
         {/* New Admission */}
         <div className="bg-white rounded-lg p-6 border border-gray-200">
           <p className="text-sm text-[#878787] mb-2">New Admission</p>
-          <p className="text-[#505050] text-sm mb-3">
+          <p className="text-gray-medium text-sm mb-3">
             {data.newAdmissionsDescription}
           </p>
-          <p className="text-4xl font-bold text-[#505050]">
+          <p className="text-4xl font-bold text-gray-medium">
             {data.newAdmissions}
             <span className="text-sm font-normal text-[#878787] ml-1">
               {data.newAdmissionsUnit}
@@ -53,10 +53,10 @@ const MemberAnalytics = () => {
         {/* Active Members */}
         <div className="bg-white rounded-lg p-6 border border-gray-200">
           <p className="text-sm text-[#878787] mb-2">Active Members</p>
-          <p className="text-[#505050] text-sm mb-3">
+          <p className="text-gray-medium text-sm mb-3">
             {data.activeMembersDescription}
           </p>
-          <p className="text-4xl font-bold text-[#505050]">
+          <p className="text-4xl font-bold text-gray-medium">
             {data.activeMembers}
             <span className="text-sm font-normal text-[#878787] ml-1">
               {data.activeMembersUnit}
@@ -68,7 +68,7 @@ const MemberAnalytics = () => {
       {/* Admission Chart */}
       <div className="bg-white rounded-lg p-6 border border-gray-200">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold text-[#505050]">
+          <h3 className="text-lg font-semibold text-gray-medium">
             Admission Chart
           </h3>
           <span className="text-sm text-[#878787]">
@@ -78,7 +78,7 @@ const MemberAnalytics = () => {
 
         <div className="flex items-center gap-4 mb-6">
           <div>
-            <p className="text-4xl font-bold text-[#505050]">8,458</p>
+            <p className="text-4xl font-bold text-gray-medium">8,458</p>
             <p className="text-sm text-[#878787] mt-1">
               New admissions increased compared to the last month
             </p>

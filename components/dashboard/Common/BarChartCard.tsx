@@ -43,7 +43,7 @@ const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
   if (active && payload && payload.length && payload[0].payload) {
     return (
       <div className="bg-white px-4 py-2 rounded-lg shadow-lg border border-gray-200">
-        <p className="text-sm font-semibold text-[#505050]">
+        <p className="text-sm font-semibold text-gray-medium">
           {payload[0].payload.month}
         </p>
         <p className="text-sm text-text-secondary">
@@ -86,14 +86,14 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
   return (
     <div className="w-full bg-white rounded-[20px] p-6 md:p-8 flex flex-col border-8 border-gray-secondary">
       <div className="flex justify-between items-center mb-3 flex-wrap gap-4">
-        <h2 className="text-lg md:text-xl font-semibold text-[#505050]">
+        <h2 className="text-lg md:text-xl font-semibold text-gray-medium">
           {title}
         </h2>
         {showToggle && (
           <div className="relative">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="px-4 py-2 bg-gray-100 text-[#505050] text-sm rounded-sm flex items-center gap-2 hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 bg-gray-100 text-gray-medium text-sm rounded-sm flex items-center gap-2 hover:bg-gray-200 transition-colors"
             >
               {viewMode}
               <ChevronDown className=" w-4 h-4" />
@@ -104,7 +104,7 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
                   onClick={() => handleToggle("Yearly")}
                   className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-primary transition-colors ${
                     viewMode === "Yearly"
-                      ? "text-[#505050] font-semibold"
+                      ? "text-gray-medium font-semibold"
                       : "text-text-secondary"
                   }`}
                 >
@@ -114,7 +114,7 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
                   onClick={() => handleToggle("Monthly")}
                   className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-primary transition-colors ${
                     viewMode === "Monthly"
-                      ? "text-[#505050] font-semibold"
+                      ? "text-gray-medium font-semibold"
                       : "text-text-secondary"
                   }`}
                 >
@@ -128,7 +128,7 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
 
       <div className="flex justify-between items-center">
         <div className="mb-4">
-          <h3 className="text-3xl md:text-4xl font-bold text-[#505050]">
+          <h3 className="text-3xl md:text-4xl font-bold text-gray-medium">
             {totalValue}
           </h3>
           {subtitle && (

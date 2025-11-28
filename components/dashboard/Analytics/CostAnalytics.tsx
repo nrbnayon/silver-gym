@@ -44,7 +44,7 @@ const CustomTooltip = (props: TooltipProps<ValueType, NameType>) => {
     const data = payload[0].payload;
     return (
       <div className="bg-white px-4 py-2 rounded-lg shadow-lg border border-gray-200">
-        <p className="text-sm font-semibold text-[#505050]">{data.name}</p>
+        <p className="text-sm font-semibold text-gray-medium">{data.name}</p>
         <p className="text-sm text-[#878787]">{data.percentage}%</p>
       </div>
     );
@@ -63,13 +63,13 @@ const CostAnalytics = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-[#505050]">
+        <h2 className="text-xl font-semibold text-gray-medium">
           Cost Analytics
         </h2>
         <div className="relative">
           <button
             onClick={() => setIsYearOpen(!isYearOpen)}
-            className="px-4 py-2 bg-gray-100 text-[#505050] text-sm rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors min-w-[100px] justify-between"
+            className="px-4 py-2 bg-gray-100 text-gray-medium text-sm rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors min-w-[100px] justify-between"
           >
             {selectedYear}
             <ChevronDown className="w-4 h-4" />
@@ -85,7 +85,7 @@ const CostAnalytics = () => {
                   }}
                   className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors ${
                     selectedYear === year
-                      ? "text-[#505050] font-semibold"
+                      ? "text-gray-medium font-semibold"
                       : "text-[#878787]"
                   }`}
                 >
@@ -102,7 +102,7 @@ const CostAnalytics = () => {
           <div className="relative">
             <button
               onClick={() => setIsMonthOpen(!isMonthOpen)}
-              className="px-4 py-2 bg-gray-100 text-[#505050] text-sm rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors min-w-[140px] justify-between"
+              className="px-4 py-2 bg-gray-100 text-gray-medium text-sm rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors min-w-[140px] justify-between"
             >
               {selectedMonth}
               <ChevronDown className="w-4 h-4" />
@@ -118,7 +118,7 @@ const CostAnalytics = () => {
                     }}
                     className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors ${
                       selectedMonth === month
-                        ? "text-[#505050] font-semibold"
+                        ? "text-gray-medium font-semibold"
                         : "text-[#878787]"
                     }`}
                   >
@@ -130,7 +130,7 @@ const CostAnalytics = () => {
           </div>
 
           <div className="text-right">
-            <p className="text-2xl font-bold text-[#505050]">
+            <p className="text-2xl font-bold text-gray-medium">
               {data.totalCost}
             </p>
           </div>
@@ -162,7 +162,7 @@ const CostAnalytics = () => {
               </ResponsiveContainer>
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-[#505050]">$79K</p>
+                  <p className="text-3xl font-bold text-gray-medium">$79K</p>
                   <p className="text-sm text-[#878787]">Total</p>
                 </div>
               </div>
@@ -176,7 +176,7 @@ const CostAnalytics = () => {
                     className="w-3 h-3 rounded-sm"
                     style={{ backgroundColor: category.color }}
                   />
-                  <span className="text-sm text-[#505050]">
+                  <span className="text-sm text-gray-medium">
                     {category.name}
                   </span>
                   <span className="text-sm text-[#878787]">
@@ -189,7 +189,7 @@ const CostAnalytics = () => {
 
           {/* Expense List */}
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-[#505050] mb-4">Salary</h3>
+            <h3 className="text-lg font-semibold text-gray-medium mb-4">Salary</h3>
             {data.categories.map((category, index) => (
               <div
                 key={index}
@@ -200,11 +200,11 @@ const CostAnalytics = () => {
                     className="w-2 h-2 rounded-full"
                     style={{ backgroundColor: category.color }}
                   />
-                  <span className="text-sm text-[#505050]">
+                  <span className="text-sm text-gray-medium">
                     {category.name}
                   </span>
                 </div>
-                <span className="text-sm font-semibold text-[#505050]">
+                <span className="text-sm font-semibold text-gray-medium">
                   {category.amount}
                 </span>
               </div>

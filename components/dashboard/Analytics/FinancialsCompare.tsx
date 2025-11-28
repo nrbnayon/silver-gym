@@ -33,7 +33,7 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-[#505050]">
+        <h2 className="text-xl font-semibold text-gray-medium">
           Financials Compare
         </h2>
         <button
@@ -102,7 +102,7 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
       {/* Compare Details Table */}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-[#505050]">
+          <h3 className="text-lg font-semibold text-gray-medium">
             Compare Details
           </h3>
         </div>
@@ -111,16 +111,16 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-[#505050]">
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-medium">
                   Year
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-[#505050]">
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-medium">
                   Income
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-[#505050]">
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-medium">
                   Expanse
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-[#505050]">
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-medium">
                   Net Income
                 </th>
               </tr>
@@ -128,16 +128,16 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
             <tbody className="divide-y divide-gray-200">
               {data.tableData.map((row, index) => (
                 <tr key={index} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm text-[#505050]">
+                  <td className="px-6 py-4 text-sm text-gray-medium">
                     {row.date}
                   </td>
-                  <td className="px-6 py-4 text-sm text-[#505050]">
+                  <td className="px-6 py-4 text-sm text-gray-medium">
                     {row.income}
                   </td>
-                  <td className="px-6 py-4 text-sm text-[#505050]">
+                  <td className="px-6 py-4 text-sm text-gray-medium">
                     {row.expense}
                   </td>
-                  <td className="px-6 py-4 text-sm text-[#505050]">
+                  <td className="px-6 py-4 text-sm text-gray-medium">
                     {row.netIncome}
                   </td>
                 </tr>
@@ -147,8 +147,8 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
         </div>
 
         <div className="px-6 py-4 border-t border-gray-200 flex justify-between items-center">
-          <span className="text-lg font-semibold text-[#505050]">Balance</span>
-          <span className="text-lg font-semibold text-[#505050]">
+          <span className="text-lg font-semibold text-gray-medium">Balance</span>
+          <span className="text-lg font-semibold text-gray-medium">
             {data.balance}
           </span>
         </div>

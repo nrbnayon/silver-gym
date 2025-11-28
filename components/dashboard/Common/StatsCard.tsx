@@ -19,11 +19,11 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, date, stats }) => {
     <div className="w-full bg-white rounded-[20px] p-6 md:p-8 flex flex-col gap-6">
       {/* Header */}
       <div className="flex justify-between items-center flex-wrap gap-2">
-        <h2 className="text-lg md:text-xl font-semibold text-[#505050]">
+        <h2 className="text-lg md:text-xl font-semibold text-gray-medium">
           {title}
         </h2>
         {date && (
-          <div className="px-3 py-1 bg-gray-primary text-[#505050] text-sm rounded-sm">
+          <div className="px-3 py-1 bg-gray-primary text-gray-medium text-sm rounded-sm">
             {date}
           </div>
         )}
@@ -36,11 +36,11 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, date, stats }) => {
             key={index}
             className="flex-1 flex flex-col items-start md:items-center py-4 md:py-0 px-0 md:px-6 text-left md:text-center"
           >
-            <p className="font-semibold text-[#505050] text-base md:text-lg">
+            <p className="font-semibold text-gray-medium text-base md:text-lg">
               {item.label}
             </p>
             <p className="text-sm text-text-secondary mb-2">{item.description}</p>
-            <p className="text-2xl md:text-3xl font-semibold text-[#505050]">
+            <p className="text-2xl md:text-3xl font-semibold text-gray-medium">
               {item.value}
               {item.unit && (
                 <span className="text-sm font-normal text-text-secondary ml-1">

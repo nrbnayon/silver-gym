@@ -41,13 +41,13 @@ const PackagesAnalytics = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-[#505050]">
+        <h2 className="text-xl font-semibold text-gray-medium">
           Packages Analytics
         </h2>
         <div className="relative">
           <button
             onClick={() => setIsYearOpen(!isYearOpen)}
-            className="px-4 py-2 bg-gray-100 text-[#505050] text-sm rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors min-w-[100px] justify-between"
+            className="px-4 py-2 bg-gray-100 text-gray-medium text-sm rounded-md flex items-center gap-2 hover:bg-gray-200 transition-colors min-w-[100px] justify-between"
           >
             {selectedYear}
             <ChevronDown className="w-4 h-4" />
@@ -63,7 +63,7 @@ const PackagesAnalytics = () => {
                   }}
                   className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors ${
                     selectedYear === year
-                      ? "text-[#505050] font-semibold"
+                      ? "text-gray-medium font-semibold"
                       : "text-[#878787]"
                   }`}
                 >
@@ -84,7 +84,7 @@ const PackagesAnalytics = () => {
               onClick={() => setSelectedType(type)}
               className={`px-4 py-2 text-sm rounded-md whitespace-nowrap transition-colors ${
                 selectedType === type
-                  ? "bg-[#505050] text-white"
+                  ? "bg-gray-medium text-white"
                   : "text-[#878787] hover:bg-gray-100"
               }`}
             >
@@ -168,7 +168,7 @@ const PackagesAnalytics = () => {
               >
                 <p className="text-sm text-[#878787] mb-1">{stat.label}</p>
                 <div className="flex items-baseline gap-2">
-                  <p className="text-2xl font-bold text-[#505050]">
+                  <p className="text-2xl font-bold text-gray-medium">
                     {stat.count}
                     <span className="text-sm font-normal text-[#878787] ml-1">
                       {stat.unit}

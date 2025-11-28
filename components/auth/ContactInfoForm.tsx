@@ -128,10 +128,10 @@ export default function ContactInfoForm() {
               <div className="flex flex-col gap-6">
                 <div className="flex justify-between items-start">
                   <div className="flex flex-col gap-1">
-                    <h1 className="font-semibold text-[#505050] text-2xl leading-9">
+                    <h1 className="font-semibold text-gray-medium text-2xl leading-9">
                       Contact Info
                     </h1>
-                    <p className="font-normal text-[#505050] text-base leading-6">
+                    <p className="font-normal text-gray-medium text-base leading-6">
                       Provide your official phone number and email for
                       communication
                     </p>
@@ -147,13 +147,13 @@ export default function ContactInfoForm() {
                 <div className="flex flex-col gap-2">
                   <Label
                     htmlFor="country"
-                    className="text-sm font-medium text-[#505050]"
+                    className="text-sm font-medium text-gray-medium"
                   >
                     Country
                   </Label>
                   <select
                     id="country"
-                    className="w-full h-14 px-4 py-3 rounded-lg border-2 border-border-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#E97451] focus:ring-opacity-50 focus:border-[#E97451] transition-all text-base text-[#505050]"
+                    className="w-full h-14 px-4 py-3 rounded-lg border-2 border-border-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#E97451] focus:ring-opacity-50 focus:border-[#E97451] transition-all text-base text-gray-medium"
                     {...register("country")}
                   >
                     <option value="">Select Your Country</option>
@@ -176,7 +176,7 @@ export default function ContactInfoForm() {
                 <div className="flex flex-col gap-2">
                   <Label
                     htmlFor="businessAddress"
-                    className="text-sm font-medium text-[#505050]"
+                    className="text-sm font-medium text-gray-medium"
                   >
                     Business Address
                   </Label>
@@ -198,7 +198,7 @@ export default function ContactInfoForm() {
                 <div className="flex flex-col gap-2">
                   <Label
                     htmlFor="businessPhone"
-                    className="text-sm font-medium text-[#505050]"
+                    className="text-sm font-medium text-gray-medium"
                   >
                     Business Phone Number
                   </Label>
@@ -220,7 +220,7 @@ export default function ContactInfoForm() {
                 <div className="flex flex-col gap-2">
                   <Label
                     htmlFor="businessEmail"
-                    className="text-sm font-medium text-[#505050]"
+                    className="text-sm font-medium text-gray-medium"
                   >
                     Business Email Address
                   </Label>

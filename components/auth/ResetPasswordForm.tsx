@@ -159,14 +159,14 @@ export default function ResetPasswordForm() {
                 <div className="space-y-4">
                   {/* New Password */}
                   <div className="space-y-2">
-                    <Label className="text-[#505050] text-sm font-medium">
+                    <Label className="text-gray-medium text-sm font-medium">
                       New Password
                     </Label>
                     <div className="relative">
                       <Input
                         type="password"
                         placeholder="Enter new password"
-                        className="w-full px-3 pr-10 h-14 rounded-lg border border-border-2 font-normal text-[#505050] text-base leading-5"
+                        className="w-full px-3 pr-10 h-14 rounded-lg border border-border-2 font-normal text-gray-medium text-base leading-5"
                         value={newPassword}
                         onChange={(e) =>
                           handleNewPasswordChange(e.target.value)
@@ -177,14 +177,14 @@ export default function ResetPasswordForm() {
 
                   {/* Confirm New Password */}
                   <div className="space-y-2">
-                    <Label className="text-[#505050] text-sm font-medium">
+                    <Label className="text-gray-medium text-sm font-medium">
                       Confirm New Password
                     </Label>
                     <div className="relative">
                       <Input
                         type="password"
                         placeholder="Confirm new password"
-                        className="w-full px-3 pr-10 h-14 rounded-lg border border-border-2 font-normal text-[#505050] text-base leading-5"
+                        className="w-full px-3 pr-10 h-14 rounded-lg border border-border-2 font-normal text-gray-medium text-base leading-5"
                         value={confirmPassword}
                         onChange={(e) => {
                           setConfirmPassword(e.target.value);
