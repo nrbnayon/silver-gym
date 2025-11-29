@@ -13,13 +13,18 @@ import { AnalyticsDownIcon } from "@hugeicons/core-free-icons";
 export default function AnalyticsPage() {
   const [showCompareModal, setShowCompareModal] = useState(false);
   const [showCompareView, setShowCompareView] = useState(false);
+  const [compareConfig, setCompareConfig] = useState({
+    options: [] as string[],
+    startYear: 2020,
+    endYear: 2024,
+  });
 
   const handleStartCompare = (
     options: string[],
     startYear: number,
     endYear: number
   ) => {
-    console.log("Compare options:", options, startYear, endYear);
+    setCompareConfig({ options, startYear, endYear });
     setShowCompareView(true);
   };
 
@@ -29,10 +34,9 @@ export default function AnalyticsPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="w-full space-y-4">
+      <div className="w-full">
         {/* Header */}
         <div className="flex justify-between items-center">
-          <h1 className="text-xl md:text-3xl font-bold text-text-primary">Analytics</h1>
           {!showCompareView && (
             <button
               onClick={() => setShowCompareModal(true)}
@@ -46,7 +50,12 @@ export default function AnalyticsPage() {
 
         {/* Main Content */}
         {showCompareView ? (
-          <FinancialsCompare onNewCompare={handleNewCompare} />
+          <FinancialsCompare 
+            onNewCompare={handleNewCompare}
+            selectedOptions={compareConfig.options}
+            startYear={compareConfig.startYear}
+            endYear={compareConfig.endYear}
+          />
         ) : (
           <div className="space-y-6 mb-20">
             {/* Member Analytics */}

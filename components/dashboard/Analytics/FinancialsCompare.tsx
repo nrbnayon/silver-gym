@@ -10,12 +10,15 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { financialsCompareData } from "@/data/analyticsData";
+import { getFinancialsCompareData } from "@/data/analyticsData";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { AnalyticsDownIcon } from "@hugeicons/core-free-icons";
 
 interface FinancialsCompareProps {
   onNewCompare: () => void;
+  selectedOptions: string[];
+  startYear: number;
+  endYear: number;
 }
 
 const yearColors: Record<string, string> = {
@@ -34,15 +37,16 @@ const yearColors: Record<string, string> = {
 
 const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
   onNewCompare,
+  selectedOptions,
+  startYear,
+  endYear,
 }) => {
-  const data = financialsCompareData;
+  const data = getFinancialsCompareData(selectedOptions[0] || "income", startYear, endYear);
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-gray-medium">
-          Financials Compare
-        </h2>
+        <div></div>
         <button
           onClick={onNewCompare}
           className="px-4 py-2.5 bg-purple text-white text-sm rounded-md hover:bg-[#6A3FE0] transition-colors flex items-center justify-center gap-2 cursor-pointer md:text-base"
@@ -54,9 +58,14 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
 
       {/* Chart */}
       <div className="bg-white rounded-2xl p-4">
+        
         {/* Legend */}
-        <div className="flex justify-end gap-4 mb-6">
-          {data.years.map((year) => (
+        <div className="flex justify-between items-center gap-4 mb-6">
+          <h2 className="text-xl font-semibold text-gray-medium">
+          Financials Compare
+        </h2>
+          <div className="flex items-center gap-4">
+            {data.years.map((year) => (
             <div key={year} className="flex items-center gap-2">
               <div
                 className="w-3 h-3 rounded-xs"
@@ -65,6 +74,7 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
               <span className="text-sm text-gray-medium">{year}</span>
             </div>
           ))}
+          </div>
         </div>
 
         <div className="w-full h-[400px]">

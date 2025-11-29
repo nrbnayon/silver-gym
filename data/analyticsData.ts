@@ -6,6 +6,7 @@ import {
   PackagesAnalyticsData,
   FinancialsCompareData,
   ComparisonOption,
+  CompareChartData,
 } from "@/types/analytics";
 
 // Member Analytics Data
@@ -33,7 +34,7 @@ export const memberAnalyticsData: MemberStats = {
 // Generate data for "All Months" view - shows 12 months
 const generateAllMonthsData = (year: number): { period: string; income: number; expense: number }[] => {
   const monthNames = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"];
-  const yearMultiplier = (year - 2020) * 0.15; // 15% growth per year
+  const yearMultiplier = (year - 2020) * 0.15;
   const baseIncome = 5000000 * (1 + yearMultiplier);
   const baseExpense = 2000000 * (1 + yearMultiplier);
   
@@ -65,12 +66,180 @@ const generateFinancialData = (
   return data;
 };
 
+// Helper function to get days in month
+const getDaysInMonth = (monthName: string): number => {
+  const daysMap: Record<string, number> = {
+    "January": 31, "February": 28, "March": 31, "April": 30,
+    "May": 31, "June": 30, "July": 31, "August": 31,
+    "September": 30, "October": 31, "November": 30, "December": 31
+  };
+  return daysMap[monthName] || 30;
+};
+
+export const financialAnalyticsDataTemplate: Record<string, MonthlyFinancialData> = {
+  "All Months": {
+    month: "All Months",
+    data: [],
+    metrics: {
+      totalIncome: "25,25,515 TK",
+      totalExpense: "13,74,645 TK",
+      totalNetIncome: "2,25,515 TK",
+      incomeChange: "+12.3%",
+      expenseChange: "-0.8%",
+      netIncomeChange: "+12.7%",
+    },
+  },
+  January: {
+    month: "January",
+    data: [],
+    metrics: {
+      totalIncome: "25,25,515 TK",
+      totalExpense: "13,74,645 TK",
+      totalNetIncome: "2,25,515 TK",
+      incomeChange: "+12.3%",
+      expenseChange: "-0.8%",
+      netIncomeChange: "+12.7%",
+    },
+  },
+  February: {
+    month: "February",
+    data: [],
+    metrics: {
+      totalIncome: "23,15,420 TK",
+      totalExpense: "12,84,320 TK",
+      totalNetIncome: "2,31,100 TK",
+      incomeChange: "+10.5%",
+      expenseChange: "-1.2%",
+      netIncomeChange: "+11.8%",
+    },
+  },
+  March: {
+    month: "March",
+    data: [],
+    metrics: {
+      totalIncome: "26,45,680 TK",
+      totalExpense: "14,23,540 TK",
+      totalNetIncome: "2,22,140 TK",
+      incomeChange: "+14.2%",
+      expenseChange: "+0.5%",
+      netIncomeChange: "+13.4%",
+    },
+  },
+  April: {
+    month: "April",
+    data: [],
+    metrics: {
+      totalIncome: "24,88,920 TK",
+      totalExpense: "13,45,780 TK",
+      totalNetIncome: "2,43,140 TK",
+      incomeChange: "+9.8%",
+      expenseChange: "-2.1%",
+      netIncomeChange: "+15.2%",
+    },
+  },
+  May: {
+    month: "May",
+    data: [],
+    metrics: {
+      totalIncome: "27,12,340 TK",
+      totalExpense: "14,56,890 TK",
+      totalNetIncome: "2,55,450 TK",
+      incomeChange: "+15.6%",
+      expenseChange: "+1.8%",
+      netIncomeChange: "+16.8%",
+    },
+  },
+  June: {
+    month: "June",
+    data: [],
+    metrics: {
+      totalIncome: "25,25,515 TK",
+      totalExpense: "13,74,645 TK",
+      totalNetIncome: "2,25,515 TK",
+      incomeChange: "+12.3%",
+      expenseChange: "-0.8%",
+      netIncomeChange: "+12.7%",
+    },
+  },
+  July: {
+    month: "July",
+    data: [],
+    metrics: {
+      totalIncome: "28,34,670 TK",
+      totalExpense: "15,12,340 TK",
+      totalNetIncome: "2,22,330 TK",
+      incomeChange: "+18.2%",
+      expenseChange: "+2.3%",
+      netIncomeChange: "+14.5%",
+    },
+  },
+  August: {
+    month: "August",
+    data: [],
+    metrics: {
+      totalIncome: "26,78,920 TK",
+      totalExpense: "14,34,560 TK",
+      totalNetIncome: "2,44,360 TK",
+      incomeChange: "+13.7%",
+      expenseChange: "+0.2%",
+      netIncomeChange: "+17.3%",
+    },
+  },
+  September: {
+    month: "September",
+    data: [],
+    metrics: {
+      totalIncome: "24,56,780 TK",
+      totalExpense: "13,12,450 TK",
+      totalNetIncome: "2,44,330 TK",
+      incomeChange: "+8.9%",
+      expenseChange: "-1.5%",
+      netIncomeChange: "+18.1%",
+    },
+  },
+  October: {
+    month: "October",
+    data: [],
+    metrics: {
+      totalIncome: "29,45,890 TK",
+      totalExpense: "15,67,230 TK",
+      totalNetIncome: "2,78,660 TK",
+      incomeChange: "+21.4%",
+      expenseChange: "+3.1%",
+      netIncomeChange: "+22.8%",
+    },
+  },
+  November: {
+    month: "November",
+    data: [],
+    metrics: {
+      totalIncome: "27,89,120 TK",
+      totalExpense: "14,89,340 TK",
+      totalNetIncome: "2,99,780 TK",
+      incomeChange: "+16.8%",
+      expenseChange: "+1.9%",
+      netIncomeChange: "+24.6%",
+    },
+  },
+  December: {
+    month: "December",
+    data: [],
+    metrics: {
+      totalIncome: "30,12,450 TK",
+      totalExpense: "16,23,670 TK",
+      totalNetIncome: "2,88,780 TK",
+      incomeChange: "+23.5%",
+      expenseChange: "+4.2%",
+      netIncomeChange: "+21.9%",
+    },
+  },
+};
+
 // Function to get financial data by year and month
 export const getFinancialData = (month: string, year: number): MonthlyFinancialData => {
   const yearMultiplier = (year - 2020) * 0.15;
   const baseMetrics = financialAnalyticsDataTemplate[month].metrics;
   
-  // Parse and adjust metrics based on year
   const parseAmount = (str: string) => parseFloat(str.replace(/,/g, '').replace(' TK', ''));
   const formatAmount = (num: number) => `${num.toFixed(2).replace(/\B(?=(\d{2})+(?!\d))/g, ",")} TK`;
   
@@ -92,175 +261,6 @@ export const getFinancialData = (month: string, year: number): MonthlyFinancialD
       netIncomeChange: baseMetrics.netIncomeChange,
     },
   };
-};
-
-// Helper function to get days in month
-const getDaysInMonth = (monthName: string): number => {
-  const daysMap: Record<string, number> = {
-    "January": 31, "February": 28, "March": 31, "April": 30,
-    "May": 31, "June": 30, "July": 31, "August": 31,
-    "September": 30, "October": 31, "November": 30, "December": 31
-  };
-  return daysMap[monthName] || 30;
-};
-
-export const financialAnalyticsDataTemplate: Record<string, MonthlyFinancialData> = {
-  "All Months": {
-    month: "All Months",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "25,25,515 TK",
-      totalExpense: "13,74,645 TK",
-      totalNetIncome: "2,25,515 TK",
-      incomeChange: "+12.3%",
-      expenseChange: "-0.8%",
-      netIncomeChange: "+12.7%",
-    },
-  },
-  January: {
-    month: "January",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "25,25,515 TK",
-      totalExpense: "13,74,645 TK",
-      totalNetIncome: "2,25,515 TK",
-      incomeChange: "+12.3%",
-      expenseChange: "-0.8%",
-      netIncomeChange: "+12.7%",
-    },
-  },
-  February: {
-    month: "February",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "23,15,420 TK",
-      totalExpense: "12,84,320 TK",
-      totalNetIncome: "2,31,100 TK",
-      incomeChange: "+10.5%",
-      expenseChange: "-1.2%",
-      netIncomeChange: "+11.8%",
-    },
-  },
-  March: {
-    month: "March",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "26,45,680 TK",
-      totalExpense: "14,23,540 TK",
-      totalNetIncome: "2,22,140 TK",
-      incomeChange: "+14.2%",
-      expenseChange: "+0.5%",
-      netIncomeChange: "+13.4%",
-    },
-  },
-  April: {
-    month: "April",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "24,88,920 TK",
-      totalExpense: "13,45,780 TK",
-      totalNetIncome: "2,43,140 TK",
-      incomeChange: "+9.8%",
-      expenseChange: "-2.1%",
-      netIncomeChange: "+15.2%",
-    },
-  },
-  May: {
-    month: "May",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "27,12,340 TK",
-      totalExpense: "14,56,890 TK",
-      totalNetIncome: "2,55,450 TK",
-      incomeChange: "+15.6%",
-      expenseChange: "+1.8%",
-      netIncomeChange: "+16.8%",
-    },
-  },
-  June: {
-    month: "June",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "25,25,515 TK",
-      totalExpense: "13,74,645 TK",
-      totalNetIncome: "2,25,515 TK",
-      incomeChange: "+12.3%",
-      expenseChange: "-0.8%",
-      netIncomeChange: "+12.7%",
-    },
-  },
-  July: {
-    month: "July",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "28,34,670 TK",
-      totalExpense: "15,12,340 TK",
-      totalNetIncome: "2,22,330 TK",
-      incomeChange: "+18.2%",
-      expenseChange: "+2.3%",
-      netIncomeChange: "+14.5%",
-    },
-  },
-  August: {
-    month: "August",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "26,78,920 TK",
-      totalExpense: "14,34,560 TK",
-      totalNetIncome: "2,44,360 TK",
-      incomeChange: "+13.7%",
-      expenseChange: "+0.2%",
-      netIncomeChange: "+17.3%",
-    },
-  },
-  September: {
-    month: "September",
-    data: [], // Will be generated dynamically,
-    metrics: {
-      totalIncome: "24,56,780 TK",
-      totalExpense: "13,12,450 TK",
-      totalNetIncome: "2,44,330 TK",
-      incomeChange: "+8.9%",
-      expenseChange: "-1.5%",
-      netIncomeChange: "+18.1%",
-    },
-  },
-  October: {
-    month: "October",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "29,45,890 TK",
-      totalExpense: "15,67,230 TK",
-      totalNetIncome: "2,78,660 TK",
-      incomeChange: "+21.4%",
-      expenseChange: "+3.1%",
-      netIncomeChange: "+22.8%",
-    },
-  },
-  November: {
-    month: "November",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "27,89,120 TK",
-      totalExpense: "14,89,340 TK",
-      totalNetIncome: "2,99,780 TK",
-      incomeChange: "+16.8%",
-      expenseChange: "+1.9%",
-      netIncomeChange: "+24.6%",
-    },
-  },
-  December: {
-    month: "December",
-    data: [], // Will be generated dynamically
-    metrics: {
-      totalIncome: "30,12,450 TK",
-      totalExpense: "16,23,670 TK",
-      totalNetIncome: "2,88,780 TK",
-      incomeChange: "+23.5%",
-      expenseChange: "+4.2%",
-      netIncomeChange: "+21.9%",
-    },
-  },
 };
 
 // Cost Analytics Data Template
@@ -317,45 +317,32 @@ const costAnalyticsDataTemplate: CostAnalyticsData = {
 // Function to get cost analytics data by year and month
 export const getCostAnalyticsData = (month: string, year: number): CostAnalyticsData => {
   const monthsList = [
-    "All Months",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "All Months", "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
   ];
   
-  const yearMultiplier = (year - 2020) * 0.12; // 12% growth per year
-  const monthMultiplier = month === "All Months" ? 12 : 1; // All Months = sum of 12 months
+  const yearMultiplier = (year - 2020) * 0.12;
+  const monthMultiplier = month === "All Months" ? 12 : 1;
   
-  // Add different variance for each category based on month
   const getMonthVariance = (categoryName: string, month: string): number => {
     if (month === "All Months") return 1;
     
-    // Different categories have different monthly patterns
     const monthIndex = monthsList.indexOf(month);
     const seed = monthIndex * 100 + year;
     
     switch(categoryName) {
       case "Salary":
-        return 0.95 + (seed % 10) / 100; // Salary is stable: 95%-105%
+        return 0.95 + (seed % 10) / 100;
       case "Food":
-        return 0.85 + (seed % 30) / 100; // Food varies: 85%-115%
+        return 0.85 + (seed % 30) / 100;
       case "Transport":
-        return 0.75 + (seed % 50) / 100; // Transport varies: 75%-125%
+        return 0.75 + (seed % 50) / 100;
       case "Equipment Purchase":
-        return 0.5 + (seed % 100) / 100; // Equipment varies greatly: 50%-150%
+        return 0.5 + (seed % 100) / 100;
       case "Rent":
-        return 0.98 + (seed % 5) / 100; // Rent is very stable: 98%-103%
+        return 0.98 + (seed % 5) / 100;
       case "Others":
-        return 0.7 + (seed % 60) / 100; // Others vary: 70%-130%
+        return 0.7 + (seed % 60) / 100;
       default:
         return 0.8 + Math.random() * 0.4;
     }
@@ -368,17 +355,13 @@ export const getCostAnalyticsData = (month: string, year: number): CostAnalytics
     
     return {
       ...category,
-      value: adjustedValue, // Dynamic value for pie chart
+      value: adjustedValue,
       amount: adjustedValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
     };
   });
 
-  // Calculate total cost for percentage calculation
-  const totalCost = categories.reduce((sum, cat) => {
-    return sum + cat.value;
-  }, 0);
+  const totalCost = categories.reduce((sum, cat) => sum + cat.value, 0);
 
-  // Update percentages dynamically based on actual values
   const categoriesWithPercentage = categories.map(category => ({
     ...category,
     percentage: Math.round((category.value / totalCost) * 100),
@@ -423,12 +406,10 @@ const packagesAnalyticsDataTemplate: PackagesAnalyticsData = {
 
 // Function to get packages analytics data by year
 export const getPackagesAnalyticsData = (year: number): PackagesAnalyticsData => {
-  const yearMultiplier = (year - 2020) * 0.10; // 10% growth per year
+  const yearMultiplier = (year - 2020) * 0.10;
   
-  // Generate dynamic chart data
   const chartData = packagesAnalyticsDataTemplate.chartData.map(month => {
-    // Add some variance for each month and package type
-    const variance = () => 0.9 + Math.random() * 0.2; // 90%-110% variance
+    const variance = () => 0.9 + Math.random() * 0.2;
     
     return {
       month: month.month,
@@ -440,7 +421,6 @@ export const getPackagesAnalyticsData = (year: number): PackagesAnalyticsData =>
     };
   });
 
-  // Calculate totals from chart data
   const totals = {
     Weekly: 0,
     Monthly: 0,
@@ -459,12 +439,10 @@ export const getPackagesAnalyticsData = (year: number): PackagesAnalyticsData =>
 
   const totalMembers = totals.Weekly + totals.Monthly + totals["Quarter Yearly"] + totals["Half Yearly"] + totals.Yearly;
 
-  // Calculate percentages
   const calculatePercentage = (value: number) => {
     return `${Math.round((value / totalMembers) * 100)}%`;
   };
 
-  // Generate dynamic stats
   const stats = [
     { label: "Total Members", count: totalMembers, unit: "/pers", percentage: "" },
     { label: "Monthly", count: totals.Monthly, unit: "/per", percentage: calculatePercentage(totals.Monthly) },
@@ -518,7 +496,7 @@ export const comparisonOptions: ComparisonOption[] = [
 ];
 
 // Financials Compare Data
-export const financialsCompareData: FinancialsCompareData = {
+const financialsCompareDataTemplate: FinancialsCompareData = {
   years: ["2020", "2021", "2022", "2023", "2024"],
   chartData: [
     { month: "Feb", "2020": 150000, "2021": 180000, "2022": 210000, "2023": 250000, "2024": 280000 },
@@ -548,5 +526,66 @@ export const financialsCompareData: FinancialsCompareData = {
   ],
   balance: "25,00.00",
 };
+
+// Function to get financials compare data
+export const getFinancialsCompareData = (
+  compareType: string,
+  startYear: number,
+  endYear: number
+): FinancialsCompareData => {
+  const years: string[] = [];
+  for (let year = startYear; year <= endYear; year++) {
+    years.push(year.toString());
+  }
+
+  const chartData: CompareChartData[] = financialsCompareDataTemplate.chartData.map(month => {
+    const monthData: CompareChartData = { month: month.month };
+    
+    years.forEach(year => {
+      const yearNum = parseInt(year);
+      const baseValue = 150000 + (yearNum - 2020) * 30000;
+      const monthVariance = 0.9 + Math.random() * 0.2;
+      monthData[year] = Math.round(baseValue * monthVariance);
+    });
+    
+    return monthData;
+  });
+
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const tableData = [];
+  
+  for (let year = startYear; year <= endYear; year++) {
+    const randomMonth = months[Math.floor(Math.random() * months.length)];
+    const randomDay = Math.floor(Math.random() * 28) + 1;
+    
+    const income = 100 + Math.random() * 800;
+    const expense = 100 + Math.random() * 800;
+    const netIncome = income - expense + Math.random() * 300;
+    
+    tableData.push({
+      date: `${randomDay} ${randomMonth}, ${year}`,
+      income: `${income.toFixed(2)}`,
+      expense: `${expense.toFixed(2)}`,
+      netIncome: `${Math.abs(netIncome).toFixed(2)}`,
+    });
+  }
+
+  const totalIncome = tableData.reduce((sum, row) => 
+    sum + parseFloat(row.income.replace(/\$/g, '')), 0
+  );
+  const totalExpense = tableData.reduce((sum, row) => 
+    sum + parseFloat(row.expense.replace(/\$/g, '')), 0
+  );
+  const balance = totalIncome - totalExpense;
+
+  return {
+    years: years,
+    chartData: chartData,
+    tableData: tableData,
+    balance: balance.toFixed(2),
+  };
+};
+
+export const financialsCompareData: FinancialsCompareData = financialsCompareDataTemplate;
 
 export const availableYears = [2020, 2021, 2022, 2023, 2024, 2025];

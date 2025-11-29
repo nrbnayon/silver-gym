@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogOverlay, DialogTitle } from "@/components/ui/dialog";
-import { comparisonOptions } from "@/data/analyticsData";
+import { comparisonOptions, availableYears } from "@/data/analyticsData";
 import { ImageIcon } from "@/components/utils/ImageIcon";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { AnalyticsUpIcon, MoneyReceiveSquareIcon, MoneySendSquareIcon } from "@hugeicons/core-free-icons";
@@ -20,8 +20,6 @@ const iconMap: Record<string, React.ReactNode> = {
   "money-send": <HugeiconsIcon icon={MoneySendSquareIcon} size={32} className="text-gray-medium" strokeWidth={1} />,
   chart: <HugeiconsIcon icon={AnalyticsUpIcon} size={32} className="text-gray-medium" strokeWidth={1} />,
 };
-
-const years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
 
 const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
   isOpen,
@@ -46,11 +44,31 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
     if (selectedOptions.length > 0 && startYear && endYear) {
       onStartCompare(selectedOptions, Number(startYear), Number(endYear));
       onClose();
+      // Reset selections
+      setSelectedOptions([]);
+      setStartYear("");
+      setEndYear("");
     }
   };
 
+  const handleClose = () => {
+    // Reset selections on close
+    setSelectedOptions([]);
+    setStartYear("");
+    setEndYear("");
+    onClose();
+  };
+
+  // Filter years for end year dropdown (should be >= start year)
+  const availableEndYears = startYear 
+    ? availableYears.filter(year => year >= Number(startYear))
+    : availableYears;
+
+  // Validate if end year is less than start year
+  const isYearRangeValid = !startYear || !endYear || Number(endYear) >= Number(startYear);
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogOverlay className="bg-white/30 backdrop-blur-sm" />
       <DialogContent className="w-[95vw] w-full md:min-w-3xl max-h-[90vh] overflow-hidden flex flex-col p-0">
         {/* Header - Fixed */}
@@ -166,12 +184,16 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
 
                     {isStartYearOpen && (
                       <div className="absolute z-[999] w-full bottom-full mb-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-48 overflow-y-auto">
-                        {years.map((year) => (
+                        {availableYears.map((year) => (
                           <button
                             key={year}
                             type="button"
                             onClick={() => {
                               setStartYear(year.toString());
+                              // Reset end year if it's less than new start year
+                              if (endYear && Number(endYear) < year) {
+                                setEndYear("");
+                              }
                               setIsStartYearOpen(false);
                             }}
                             className={`w-full px-4 py-2 text-left hover:bg-gray-50 transition-colors text-sm ${
@@ -200,7 +222,10 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
                         setIsEndYearOpen(!isEndYearOpen);
                         setIsStartYearOpen(false);
                       }}
-                      className="w-full px-4 py-2 text-left border border-gray-300 rounded-md text-gray-medium bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-sm"
+                      disabled={!startYear}
+                      className={`w-full px-4 py-2 text-left border border-gray-300 rounded-md bg-white hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-sm ${
+                        !startYear ? "opacity-50 cursor-not-allowed" : "text-gray-medium"
+                      }`}
                     >
                       {endYear || "Select year"}
                       <svg
@@ -218,9 +243,9 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
                       </svg>
                     </button>
 
-                    {isEndYearOpen && (
+                    {isEndYearOpen && startYear && (
                       <div className="absolute z-10 w-full bottom-full mb-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-48 overflow-y-auto">
-                        {years.map((year) => (
+                        {availableEndYears.map((year) => (
                           <button
                             key={year}
                             type="button"
@@ -249,16 +274,16 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
         {/* Footer - Fixed */}
         <div className="flex-shrink-0 flex justify-end gap-3 px-4 sm:px-6 py-4 border-t border-gray-200">
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="px-4 sm:px-6 py-2 text-sm sm:text-base text-gray-medium border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleStartCompare}
-            disabled={selectedOptions.length === 0 || !startYear || !endYear}
+            disabled={selectedOptions.length === 0 || !startYear || !endYear || !isYearRangeValid}
             className={`px-4 sm:px-6 py-2 text-sm sm:text-base rounded-md transition-colors ${
-              selectedOptions.length === 0 || !startYear || !endYear
+              selectedOptions.length === 0 || !startYear || !endYear || !isYearRangeValid
                 ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                 : "bg-purple text-white hover:bg-[#6A3FE0]"
             }`}
