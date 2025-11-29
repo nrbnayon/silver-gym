@@ -56,7 +56,7 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
 
         <div className="space-y-6 py-4">
           <div>
-            <p className="text-sm text-[#878787] mb-4">
+            <p className="text-sm text-gray-medium mb-4">
               Select your compare option
             </p>
 
@@ -83,7 +83,7 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
                       <p className="font-semibold text-gray-medium text-sm mb-1">
                         {option.label}
                       </p>
-                      <p className="text-xs text-[#878787] leading-relaxed">
+                      <p className="text-xs text-gray-medium leading-relaxed">
                         {option.description}
                       </p>
                     </div>
@@ -94,7 +94,7 @@ const CompareAnalyticsModal: React.FC<CompareAnalyticsModalProps> = ({
           </div>
 
           <div>
-            <p className="text-sm text-[#878787] mb-4">
+            <p className="text-sm text-gray-medium mb-4">
               Select your year duration
             </p>
 

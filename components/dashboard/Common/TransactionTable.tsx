@@ -203,7 +203,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                     <span
                       className={`text-sm ${
                         transaction.category === "Expanse"
-                          ? "text-[#E16349]"
+                          ? "text-primary-500"
                           : "text-gray-medium"
                       }`}
                     >
@@ -217,7 +217,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                     <span
                       className={`text-sm font-medium ${
                         transaction.category === "Expanse"
-                          ? "text-[#E16349]"
+                          ? "text-primary-500"
                           : "text-[#4A9FF5]"
                       }`}
                     >
@@ -261,7 +261,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                       <ImageIcon activeImage="/icons/sleep.svg" size={56} />
                       <div className="text-center">
                         <p className="text-base">
-                          <span className="text-[#E16349]">Oops!</span>{" "}
+                          <span className="text-primary-500">Oops!</span>{" "}
                           <span className="text-gray-medium">Nothing matches</span>
                         </p>
                         <p className="text-sm text-gray-medium">your search</p>
@@ -278,7 +278,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       <div className="flex justify-between items-center mt-4 bg-gray-primary p-4 md:pr-20 rounded-lg">
         <p className="text-xl font-semibold text-primary">Balance</p>
         <p className={`text-xl font-semibold  ${
-          totalBalance >= 0 ? "text-primary" : "text-[#E16349]"
+          totalBalance >= 0 ? "text-primary" : "text-primary-500"
         }`}>
           {totalBalance.toLocaleString("en-US", {
             minimumFractionDigits: 2,

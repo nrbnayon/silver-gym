@@ -177,7 +177,7 @@ const MemberStatsChart: React.FC<MemberStatsChartProps> = ({
       <div className="lg:hidden space-y-8">
         {/* Three Stats */}
         <div className="lg:hidden">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6">
                 {[
                 {
                     label: "Total Members",

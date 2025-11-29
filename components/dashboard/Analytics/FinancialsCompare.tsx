@@ -55,7 +55,7 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
                 className="w-3 h-3 rounded-sm"
                 style={{ backgroundColor: yearColors[year] }}
               />
-              <span className="text-sm text-[#878787]">{year}</span>
+              <span className="text-sm text-gray-medium">{year}</span>
             </div>
           ))}
         </div>

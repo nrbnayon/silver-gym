@@ -8,7 +8,7 @@ const MemberAnalytics = () => {
   const data = memberAnalyticsData;
 
   return (
-    <div className="space-y-6">
+    <div className="md:space-y-6">
       {/* Single Card with Stats and Chart */}
       <MemberStatsChart data={data} title="Member Analytics" />
     </div>

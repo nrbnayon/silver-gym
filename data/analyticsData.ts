@@ -30,14 +30,30 @@ export const memberAnalyticsData: MemberStats = {
   admissionChartPeriod: "Last six month",
 };
 
-// Financial Analytics Data
+// Generate data for "All Months" view - shows 12 months
+const generateAllMonthsData = (year: number): { period: string; income: number; expense: number }[] => {
+  const monthNames = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"];
+  const yearMultiplier = (year - 2020) * 0.15; // 15% growth per year
+  const baseIncome = 5000000 * (1 + yearMultiplier);
+  const baseExpense = 2000000 * (1 + yearMultiplier);
+  
+  return monthNames.map((month, index) => ({
+    period: month,
+    income: baseIncome + Math.random() * 1000000 + (index * 50000),
+    expense: baseExpense + Math.random() * 500000 + (index * 20000),
+  }));
+};
+
+// Generate data for specific month view - shows daily data
 const generateFinancialData = (
   startDate: string,
-  days: number
+  days: number,
+  year: number
 ): { period: string; income: number; expense: number }[] => {
   const data = [];
-  const baseIncome = 5000000;
-  const baseExpense = 2000000;
+  const yearMultiplier = (year - 2020) * 0.15;
+  const baseIncome = 5000000 * (1 + yearMultiplier);
+  const baseExpense = 2000000 * (1 + yearMultiplier);
 
   for (let i = 1; i <= days; i++) {
     data.push({
@@ -49,10 +65,49 @@ const generateFinancialData = (
   return data;
 };
 
-export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
+// Function to get financial data by year and month
+export const getFinancialData = (month: string, year: number): MonthlyFinancialData => {
+  const yearMultiplier = (year - 2020) * 0.15;
+  const baseMetrics = financialAnalyticsDataTemplate[month].metrics;
+  
+  // Parse and adjust metrics based on year
+  const parseAmount = (str: string) => parseFloat(str.replace(/,/g, '').replace(' TK', ''));
+  const formatAmount = (num: number) => `${num.toFixed(2).replace(/\B(?=(\d{2})+(?!\d))/g, ",")} TK`;
+  
+  const adjustedIncome = parseAmount(baseMetrics.totalIncome) * (1 + yearMultiplier);
+  const adjustedExpense = parseAmount(baseMetrics.totalExpense) * (1 + yearMultiplier);
+  const adjustedNetIncome = adjustedIncome - adjustedExpense;
+  
+  return {
+    month: month,
+    data: month === "All Months" 
+      ? generateAllMonthsData(year) 
+      : generateFinancialData(month.substring(0, 3) + " " + year, getDaysInMonth(month), year),
+    metrics: {
+      totalIncome: formatAmount(adjustedIncome),
+      totalExpense: formatAmount(adjustedExpense),
+      totalNetIncome: formatAmount(adjustedNetIncome),
+      incomeChange: baseMetrics.incomeChange,
+      expenseChange: baseMetrics.expenseChange,
+      netIncomeChange: baseMetrics.netIncomeChange,
+    },
+  };
+};
+
+// Helper function to get days in month
+const getDaysInMonth = (monthName: string): number => {
+  const daysMap: Record<string, number> = {
+    "January": 31, "February": 28, "March": 31, "April": 30,
+    "May": 31, "June": 30, "July": 31, "August": 31,
+    "September": 30, "October": 31, "November": 30, "December": 31
+  };
+  return daysMap[monthName] || 30;
+};
+
+export const financialAnalyticsDataTemplate: Record<string, MonthlyFinancialData> = {
   "All Months": {
     month: "All Months",
-    data: generateFinancialData("Jan 2025", 30),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "25,25,515 TK",
       totalExpense: "13,74,645 TK",
@@ -64,7 +119,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   January: {
     month: "January",
-    data: generateFinancialData("Jan 2025", 30),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "25,25,515 TK",
       totalExpense: "13,74,645 TK",
@@ -76,7 +131,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   February: {
     month: "February",
-    data: generateFinancialData("Feb 2025", 28),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "23,15,420 TK",
       totalExpense: "12,84,320 TK",
@@ -88,7 +143,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   March: {
     month: "March",
-    data: generateFinancialData("Mar 2025", 31),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "26,45,680 TK",
       totalExpense: "14,23,540 TK",
@@ -100,7 +155,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   April: {
     month: "April",
-    data: generateFinancialData("Apr 2025", 30),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "24,88,920 TK",
       totalExpense: "13,45,780 TK",
@@ -112,7 +167,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   May: {
     month: "May",
-    data: generateFinancialData("May 2025", 31),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "27,12,340 TK",
       totalExpense: "14,56,890 TK",
@@ -124,7 +179,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   June: {
     month: "June",
-    data: generateFinancialData("Jun 2025", 30),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "25,25,515 TK",
       totalExpense: "13,74,645 TK",
@@ -136,7 +191,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   July: {
     month: "July",
-    data: generateFinancialData("Jul 2025", 31),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "28,34,670 TK",
       totalExpense: "15,12,340 TK",
@@ -148,7 +203,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   August: {
     month: "August",
-    data: generateFinancialData("Aug 2025", 31),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "26,78,920 TK",
       totalExpense: "14,34,560 TK",
@@ -160,7 +215,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   September: {
     month: "September",
-    data: generateFinancialData("Sep 2025", 30),
+    data: [], // Will be generated dynamically,
     metrics: {
       totalIncome: "24,56,780 TK",
       totalExpense: "13,12,450 TK",
@@ -172,7 +227,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   October: {
     month: "October",
-    data: generateFinancialData("Oct 2025", 31),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "29,45,890 TK",
       totalExpense: "15,67,230 TK",
@@ -184,7 +239,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   November: {
     month: "November",
-    data: generateFinancialData("Nov 2025", 30),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "27,89,120 TK",
       totalExpense: "14,89,340 TK",
@@ -196,7 +251,7 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
   December: {
     month: "December",
-    data: generateFinancialData("Dec 2025", 31),
+    data: [], // Will be generated dynamically
     metrics: {
       totalIncome: "30,12,450 TK",
       totalExpense: "16,23,670 TK",
@@ -208,56 +263,136 @@ export const financialAnalyticsData: Record<string, MonthlyFinancialData> = {
   },
 };
 
-// Cost Analytics Data
-export const costAnalyticsData: CostAnalyticsData = {
+// Cost Analytics Data Template
+const costAnalyticsDataTemplate: CostAnalyticsData = {
   totalCost: "79,556,65.00/-",
   month: "All Months",
   year: "2025",
   categories: [
     {
       name: "Salary",
-      value: 20,
+      value: 120000,
       percentage: 20,
-      color: "#EF4444",
+      color: "#F75270",
       amount: "120,000.00",
     },
     {
       name: "Food",
-      value: 12,
+      value: 72000,
       percentage: 12,
-      color: "#93C5FD",
-      amount: "120,000.00",
+      color: "#BBDCE5",
+      amount: "72,000.00",
     },
     {
       name: "Transport",
-      value: 5,
+      value: 30000,
       percentage: 5,
-      color: "#3B82F6",
-      amount: "120,000.00",
+      color: "#FFDBB6",
+      amount: "30,000.00",
     },
     {
       name: "Equipment Purchase",
-      value: 52,
+      value: 312000,
       percentage: 52,
-      color: "#86EFAC",
-      amount: "120,000.00",
+      color: "#A8BBA3",
+      amount: "312,000.00",
     },
     {
       name: "Rent",
-      value: 20,
+      value: 120000,
       percentage: 20,
-      color: "#1D4ED8",
+      color: "#0BA6DF",
       amount: "120,000.00",
     },
     {
       name: "Others",
-      value: 6,
+      value: 36000,
       percentage: 6,
-      color: "#FDE047",
-      amount: "120,000.00",
+      color: "#67C090",
+      amount: "36,000.00",
     },
   ],
 };
+
+// Function to get cost analytics data by year and month
+export const getCostAnalyticsData = (month: string, year: number): CostAnalyticsData => {
+  const monthsList = [
+    "All Months",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  
+  const yearMultiplier = (year - 2020) * 0.12; // 12% growth per year
+  const monthMultiplier = month === "All Months" ? 12 : 1; // All Months = sum of 12 months
+  
+  // Add different variance for each category based on month
+  const getMonthVariance = (categoryName: string, month: string): number => {
+    if (month === "All Months") return 1;
+    
+    // Different categories have different monthly patterns
+    const monthIndex = monthsList.indexOf(month);
+    const seed = monthIndex * 100 + year;
+    
+    switch(categoryName) {
+      case "Salary":
+        return 0.95 + (seed % 10) / 100; // Salary is stable: 95%-105%
+      case "Food":
+        return 0.85 + (seed % 30) / 100; // Food varies: 85%-115%
+      case "Transport":
+        return 0.75 + (seed % 50) / 100; // Transport varies: 75%-125%
+      case "Equipment Purchase":
+        return 0.5 + (seed % 100) / 100; // Equipment varies greatly: 50%-150%
+      case "Rent":
+        return 0.98 + (seed % 5) / 100; // Rent is very stable: 98%-103%
+      case "Others":
+        return 0.7 + (seed % 60) / 100; // Others vary: 70%-130%
+      default:
+        return 0.8 + Math.random() * 0.4;
+    }
+  };
+  
+  const categories = costAnalyticsDataTemplate.categories.map(category => {
+    const baseValue = category.value;
+    const variance = getMonthVariance(category.name, month);
+    const adjustedValue = baseValue * (1 + yearMultiplier) * monthMultiplier * variance;
+    
+    return {
+      ...category,
+      value: adjustedValue, // Dynamic value for pie chart
+      amount: adjustedValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    };
+  });
+
+  // Calculate total cost for percentage calculation
+  const totalCost = categories.reduce((sum, cat) => {
+    return sum + cat.value;
+  }, 0);
+
+  // Update percentages dynamically based on actual values
+  const categoriesWithPercentage = categories.map(category => ({
+    ...category,
+    percentage: Math.round((category.value / totalCost) * 100),
+  }));
+
+  return {
+    totalCost: `${totalCost.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/-`,
+    month: month,
+    year: year.toString(),
+    categories: categoriesWithPercentage,
+  };
+};
+
+export const costAnalyticsData: CostAnalyticsData = costAnalyticsDataTemplate;
 
 // Packages Analytics Data
 export const packagesAnalyticsData: PackagesAnalyticsData = {

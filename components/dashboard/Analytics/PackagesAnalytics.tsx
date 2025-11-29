@@ -64,7 +64,7 @@ const PackagesAnalytics = () => {
                   className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors ${
                     selectedYear === year
                       ? "text-gray-medium font-semibold"
-                      : "text-[#878787]"
+                      : "text-gray-medium"
                   }`}
                 >
                   {year}
@@ -85,7 +85,7 @@ const PackagesAnalytics = () => {
               className={`px-4 py-2 text-sm rounded-md whitespace-nowrap transition-colors ${
                 selectedType === type
                   ? "bg-gray-medium text-white"
-                  : "text-[#878787] hover:bg-gray-100"
+                  : "text-gray-medium hover:bg-gray-100"
               }`}
             >
               {type}
@@ -166,16 +166,16 @@ const PackagesAnalytics = () => {
                 key={index}
                 className="border border-gray-200 rounded-lg p-4"
               >
-                <p className="text-sm text-[#878787] mb-1">{stat.label}</p>
+                <p className="text-sm text-gray-medium mb-1">{stat.label}</p>
                 <div className="flex items-baseline gap-2">
                   <p className="text-2xl font-bold text-gray-medium">
                     {stat.count}
-                    <span className="text-sm font-normal text-[#878787] ml-1">
+                    <span className="text-sm font-normal text-gray-medium ml-1">
                       {stat.unit}
                     </span>
                   </p>
                   {stat.percentage && (
-                    <p className="text-sm text-[#878787]">{stat.percentage}</p>
+                    <p className="text-sm text-gray-medium">{stat.percentage}</p>
                   )}
                 </div>
               </div>
