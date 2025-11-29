@@ -36,7 +36,8 @@ export default function AnalyticsPage() {
     <div className="min-h-screen">
       <div className="w-full">
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-5">
+          <div></div>
           {!showCompareView && (
             <button
               onClick={() => setShowCompareModal(true)}
