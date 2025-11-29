@@ -191,4 +191,4 @@ For support, email support@silvergym.com or join our Slack channel.
 
 ---
 
-**Built with ❤️ by the Silver GYM Team**
+**Built with ❤️ by Nayon**
