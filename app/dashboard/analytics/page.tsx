@@ -32,11 +32,11 @@ export default function AnalyticsPage() {
       <div className="w-full space-y-4">
         {/* Header */}
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-text-primary">Analytics</h1>
+          <h1 className="text-xl md:text-3xl font-bold text-text-primary">Analytics</h1>
           {!showCompareView && (
             <button
               onClick={() => setShowCompareModal(true)}
-              className="px-4 py-2.5 bg-purple text-white text-sm rounded-md hover:bg-[#6A3FE0] transition-colors flex items-center gap-2 cursor-pointer"
+              className="px-4 py-2.5 bg-purple text-white text-sm rounded-md hover:bg-[#6A3FE0] transition-colors flex items-center justify-center gap-2 cursor-pointer md:text-base"
             >
              <HugeiconsIcon icon={AnalyticsDownIcon} />
               Compare Analytics
