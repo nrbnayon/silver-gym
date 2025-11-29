@@ -48,7 +48,7 @@ export default function AnalyticsPage() {
         {showCompareView ? (
           <FinancialsCompare onNewCompare={handleNewCompare} />
         ) : (
-          <>
+          <div className="space-y-6 mb-20">
             {/* Member Analytics */}
             <MemberAnalytics />
 
@@ -60,7 +60,7 @@ export default function AnalyticsPage() {
 
             {/* Packages Analytics */}
             <PackagesAnalytics />
-          </>
+          </div>
         )}
 
         {/* Compare Analytics Modal */}

@@ -395,7 +395,7 @@ export const getCostAnalyticsData = (month: string, year: number): CostAnalytics
 export const costAnalyticsData: CostAnalyticsData = costAnalyticsDataTemplate;
 
 // Packages Analytics Data
-export const packagesAnalyticsData: PackagesAnalyticsData = {
+const packagesAnalyticsDataTemplate: PackagesAnalyticsData = {
   year: "2025",
   chartData: [
     { month: "Feb", Weekly: 45, Monthly: 89, "Quarter Yearly": 34, "Half Yearly": 23, Yearly: 12 },
@@ -420,6 +420,68 @@ export const packagesAnalyticsData: PackagesAnalyticsData = {
     { label: "Weekly", count: 12, unit: "/per", percentage: "3%" },
   ],
 };
+
+// Function to get packages analytics data by year
+export const getPackagesAnalyticsData = (year: number): PackagesAnalyticsData => {
+  const yearMultiplier = (year - 2020) * 0.10; // 10% growth per year
+  
+  // Generate dynamic chart data
+  const chartData = packagesAnalyticsDataTemplate.chartData.map(month => {
+    // Add some variance for each month and package type
+    const variance = () => 0.9 + Math.random() * 0.2; // 90%-110% variance
+    
+    return {
+      month: month.month,
+      Weekly: Math.round(month.Weekly * (1 + yearMultiplier) * variance()),
+      Monthly: Math.round(month.Monthly * (1 + yearMultiplier) * variance()),
+      "Quarter Yearly": Math.round(month["Quarter Yearly"] * (1 + yearMultiplier) * variance()),
+      "Half Yearly": Math.round(month["Half Yearly"] * (1 + yearMultiplier) * variance()),
+      Yearly: Math.round(month.Yearly * (1 + yearMultiplier) * variance()),
+    };
+  });
+
+  // Calculate totals from chart data
+  const totals = {
+    Weekly: 0,
+    Monthly: 0,
+    "Quarter Yearly": 0,
+    "Half Yearly": 0,
+    Yearly: 0,
+  };
+
+  chartData.forEach(month => {
+    totals.Weekly += month.Weekly;
+    totals.Monthly += month.Monthly;
+    totals["Quarter Yearly"] += month["Quarter Yearly"];
+    totals["Half Yearly"] += month["Half Yearly"];
+    totals.Yearly += month.Yearly;
+  });
+
+  const totalMembers = totals.Weekly + totals.Monthly + totals["Quarter Yearly"] + totals["Half Yearly"] + totals.Yearly;
+
+  // Calculate percentages
+  const calculatePercentage = (value: number) => {
+    return `${Math.round((value / totalMembers) * 100)}%`;
+  };
+
+  // Generate dynamic stats
+  const stats = [
+    { label: "Total Members", count: totalMembers, unit: "/pers", percentage: "" },
+    { label: "Monthly", count: totals.Monthly, unit: "/per", percentage: calculatePercentage(totals.Monthly) },
+    { label: "Half Yearly", count: totals["Half Yearly"], unit: "/per", percentage: calculatePercentage(totals["Half Yearly"]) },
+    { label: "Quarter Yearly", count: totals["Quarter Yearly"], unit: "/per", percentage: calculatePercentage(totals["Quarter Yearly"]) },
+    { label: "Yearly", count: totals.Yearly, unit: "/per", percentage: calculatePercentage(totals.Yearly) },
+    { label: "Weekly", count: totals.Weekly, unit: "/per", percentage: calculatePercentage(totals.Weekly) },
+  ];
+
+  return {
+    year: year.toString(),
+    chartData: chartData,
+    stats: stats,
+  };
+};
+
+export const packagesAnalyticsData: PackagesAnalyticsData = packagesAnalyticsDataTemplate;
 
 // Comparison Options
 export const comparisonOptions: ComparisonOption[] = [
