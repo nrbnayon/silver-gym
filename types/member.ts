@@ -24,6 +24,11 @@ export interface MemberProfile {
   trainingGoals?: string[]; // e.g., ["Yoga", "Muscle Gain", "Cardio Endurance"]
   joinDate?: string;
   membershipExpiry?: string;
+  assignDate?: string;
+  serialNo?: string;
+  roleTitle?: string;
+  permissionList?: string;
+  role?: string;
 }
 
 export interface Member {
@@ -37,6 +42,11 @@ export interface Member {
   status: MemberStatus;
   dueDate: string | null;
   payment: PaymentStatus;
+  assignDate: string;
+  serialNo: string;
+  roleTitle: string;
+  permissionList: string;
+  role: string;
 }
 
 export interface MemberStats {

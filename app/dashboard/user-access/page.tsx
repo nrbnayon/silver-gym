@@ -6,66 +6,24 @@ import UserAccessTable from "@/components/dashboard/UserAccess/UserAccessTable";
 import CreateCustomRoleModal from "@/components/modals/CreateCustomRoleModal";
 import { User, RoleData } from "@/types/user-access";
 import { toast } from "sonner";
+import { membersData } from "@/data/memberData";
 
 const UserAccessPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [customRoles, setCustomRoles] = useState<RoleData[]>([]);
-  const [users, setUsers] = useState<User[]>([
-    {
-      id: "1",
-      assignDate: "17 Oct, 2020",
-      serialNo: "105986",
-      name: "Guy Hawkins",
-      roleTitle: "Admin",
-      permissionList: "Full Access",
-      role: "admin",
-    },
-    {
-      id: "2",
-      assignDate: "21 Sep, 2020",
-      serialNo: "526587",
-      name: "Annette Black",
-      roleTitle: "Admin",
-      permissionList: "Full Access",
-      role: "admin",
-    },
-    {
-      id: "3",
-      assignDate: "8 Sep, 2020",
-      serialNo: "526534",
-      name: "Courtney Henry",
-      roleTitle: "Admin",
-      permissionList: "Full Access",
-      role: "admin",
-    },
-    {
-      id: "4",
-      assignDate: "17 Oct, 2020",
-      serialNo: "105986",
-      name: "Guy Hawkins",
-      roleTitle: "Manager",
-      permissionList: "Custom Access",
-      role: "manager",
-    },
-    {
-      id: "5",
-      assignDate: "21 Sep, 2020",
-      serialNo: "526587",
-      name: "Annette Black",
-      roleTitle: "Sales",
-      permissionList: "Custom Access",
-      role: "manager",
-    },
-    {
-      id: "6",
-      assignDate: "8 Sep, 2020",
-      serialNo: "526534",
-      name: "Courtney Henry",
-      roleTitle: "Manager",
-      permissionList: "Custom Access",
-      role: "manager",
-    },
-  ]);
+  
+  // Convert Member[] to User[] format
+  const initialUsers: User[] = membersData.map((member) => ({
+    id: member.id,
+    assignDate: member.assignDate,
+    serialNo: member.serialNo,
+    name: member.name,
+    roleTitle: member.roleTitle,
+    permissionList: member.permissionList,
+    role: member.role as "admin" | "manager",
+  }));
+
+  const [users, setUsers] = useState<User[]>(initialUsers);
 
   const handleCreateRole = (roleData: RoleData) => {
     console.log("New role created:", roleData);
