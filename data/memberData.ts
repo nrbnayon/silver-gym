@@ -1,6 +1,6 @@
 // data/memberData.ts
 
-import { Member, MemberStats, SMSTemplate } from "@/types/member";
+import { Member, MemberStats, SMSTemplate, CustomFormField } from "@/types/member";
 
 export const memberStatsData: MemberStats = {
   totalMembers: 2364,
@@ -31,6 +31,15 @@ export const membersData: Member[] = [
     roleTitle: "Admin",
     permissionList: "Full Access",
     role: "admin",
+    emergencyContact: "+880 1636-828200",
+    address: "33 Pendergast Avenue, GA, 30736",
+    birthday: "17 Sep 2000",
+    gender: "Male",
+    nid: "1056484545",
+    height: "5.10\"",
+    age: "36",
+    weight: "68kg",
+    trainingGoals: ["Strength Training", "Cardio Endurance"],
   },
   {
     id: "2",
@@ -47,6 +56,15 @@ export const membersData: Member[] = [
     roleTitle: "Admin",
     permissionList: "Full Access",
     role: "admin",
+    emergencyContact: "+880 1636-828201",
+    address: "45 Oak Street, NY, 10001",
+    birthday: "12 Jan 1995",
+    gender: "Female",
+    nid: "1056484546",
+    height: "5.6\"",
+    age: "29",
+    weight: "55kg",
+    trainingGoals: ["Yoga", "Flexibility & Mobility"],
   },
   {
     id: "3",
@@ -63,6 +81,15 @@ export const membersData: Member[] = [
     roleTitle: "Admin",
     permissionList: "Full Access",
     role: "admin",
+    emergencyContact: "+880 1636-828202",
+    address: "78 Pine Road, CA, 90210",
+    birthday: "25 Mar 1988",
+    gender: "Male",
+    nid: "1056484547",
+    height: "6.0\"",
+    age: "36",
+    weight: "75kg",
+    trainingGoals: ["Bodybuilding", "Muscle Gain"],
   },
   {
     id: "4",
@@ -197,6 +224,16 @@ export const smsTemplates: SMSTemplate[] = [
     message: "Eid Mubarak! Stay strong and fit with Silver Gym",
     type: "greeting",
   },
+];
+
+// Default custom form fields
+export const defaultCustomFormFields: CustomFormField[] = [
+  { id: "fullName", label: "Full Name", type: "text", required: true },
+  { id: "email", label: "Email", type: "email", required: true },
+  { id: "phone", label: "Phone", type: "text", required: true },
+  { id: "dateOfBirth", label: "Date of Birth", type: "date", required: false },
+  { id: "gender", label: "Gender", type: "select", required: false, options: ["Male", "Female", "Other"] },
+  { id: "address", label: "Address", type: "text", required: false },
 ];
 
 // Helper function to filter members by search query

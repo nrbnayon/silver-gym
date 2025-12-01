@@ -16,13 +16,13 @@ export interface MemberProfile {
   nid?: string;
   address?: string;
   gender?: "Male" | "Female" | "Other";
-  height?: string; // e.g., "5'10"" or "178 cm"
-  weight?: string; // e.g., "70 kg"
+  height?: string;
+  weight?: string;
   age?: string;
   profileImage?: string;
   avatar?: string;
   status: MemberStatus;
-  trainingGoals?: string[]; // e.g., ["Yoga", "Muscle Gain", "Cardio Endurance"]
+  trainingGoals?: string[];
   joinDate?: string;
   membershipExpiry?: string;
   assignDate?: string;
@@ -48,6 +48,15 @@ export interface Member {
   roleTitle: string;
   permissionList: string;
   role: string;
+  emergencyContact?: string;
+  address?: string;
+  birthday?: string;
+  gender?: string;
+  nid?: string;
+  height?: string;
+  age?: string;
+  weight?: string;
+  trainingGoals?: string[];
 }
 
 export interface MemberStats {
@@ -86,7 +95,16 @@ export interface PaymentRecord {
 }
 
 export interface MemberActivity {
-  date: string;
-  type: "workout" | "payment" | "attendance";
+  date: Date;
+  hasActivity: boolean;
+  type?: "workout" | "payment" | "attendance";
   description?: string;
+}
+
+export interface CustomFormField {
+  id: string;
+  label: string;
+  type: "text" | "email" | "number" | "date" | "select" | "checkbox";
+  required: boolean;
+  options?: string[];
 }

@@ -5,13 +5,15 @@ import { useState, useMemo } from "react";
 import MemberStatsCards from "@/components/dashboard/Members/MemberStatsCards";
 import MemberTable from "@/components/dashboard/Members/MemberTable";
 import SelectSMSTypeModal from "@/components/modals/SelectSMSTypeModal";
+import ManageMemberFormModal from "@/components/modals/ManageMemberFormModal";
 import {
   membersData,
   memberStatsData,
   filterMembersBySearch,
   filterMembersByStatus,
+  defaultCustomFormFields,
 } from "@/data/memberData";
-import { Member } from "@/types/member";
+import { CustomFormField, Member } from "@/types/member";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { UserAdd02Icon, Search01Icon, FilterHorizontalIcon, UserBlock01Icon, UserCheck01Icon } from "@hugeicons/core-free-icons";
 import Link from "next/link";
@@ -22,6 +24,10 @@ export default function MembersPage() {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [showSMSModal, setShowSMSModal] = useState(false);
+  const [showManageFormModal, setShowManageFormModal] = useState(false);
+  const [customFormFields, setCustomFormFields] = useState<CustomFormField[]>(
+    defaultCustomFormFields
+  );
 
   // Filter members based on search and filter
   const filteredMembers = useMemo(() => {
@@ -52,8 +58,15 @@ export default function MembersPage() {
   };
 
   const handleManageClick = () => {
-    console.log("Manage member form clicked");
-    // TODO: Implement manage member form functionality
+    setShowManageFormModal(true);
+  };
+
+  const handleCloseManageFormModal = () => {
+    setShowManageFormModal(false);
+  };
+
+  const handleSaveFormFields = (fields: CustomFormField[]) => {
+    setCustomFormFields(fields);
   };
 
   return (
@@ -257,6 +270,14 @@ export default function MembersPage() {
             memberName={selectedMember.name}
           />
         )}
+
+        {/* Manage Form Modal */}
+        <ManageMemberFormModal
+          isOpen={showManageFormModal}
+          onClose={handleCloseManageFormModal}
+          onSave={handleSaveFormFields}
+          initialFields={customFormFields}
+        />
       </div>
     </div>
   );
