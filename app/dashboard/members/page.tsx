@@ -1,7 +1,7 @@
 // app/dashboard/members/page.tsx
 "use client";
 
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import MemberStatsCards from "@/components/dashboard/Members/MemberStatsCards";
 import MemberTable from "@/components/dashboard/Members/MemberTable";
 import SelectSMSTypeModal from "@/components/modals/SelectSMSTypeModal";

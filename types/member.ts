@@ -4,6 +4,28 @@ export type MemberStatus = "Active" | "Inactive";
 export type PaymentStatus = "Complete" | "Due";
 export type SMSDeliveryMethod = "email" | "phone" | "both";
 
+export interface MemberProfile {
+  id: string;
+  memberId: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  emergencyContact?: string;
+  emergencyPhone?: string;
+  dateOfBirth?: string;
+  nid?: string;
+  address?: string;
+  gender?: "Male" | "Female" | "Other";
+  height?: string; // e.g., "5'10"" or "178 cm"
+  weight?: string; // e.g., "70 kg"
+  profileImage?: string;
+  avatar?: string;
+  status: MemberStatus;
+  trainingGoals?: string[]; // e.g., ["Yoga", "Muscle Gain", "Cardio Endurance"]
+  joinDate?: string;
+  membershipExpiry?: string;
+}
+
 export interface Member {
   id: string;
   memberId: string;

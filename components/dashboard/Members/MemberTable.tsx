@@ -62,7 +62,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ members, onSendSMS }) => {
                   {/* Name with Avatar & Email */}
                   <td className="px-6 py-4 text-sm rounded-l-md">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gray-300 overflow-hidden flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-md bg-gray-300 overflow-hidden flex items-center justify-center flex-shrink-0">
                         {member.profileImage || member.avatar ? (
                           <img
                             src={
