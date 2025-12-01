@@ -18,6 +18,7 @@ export interface MemberProfile {
   gender?: "Male" | "Female" | "Other";
   height?: string; // e.g., "5'10"" or "178 cm"
   weight?: string; // e.g., "70 kg"
+  age?: string;
   profileImage?: string;
   avatar?: string;
   status: MemberStatus;
@@ -72,4 +73,20 @@ export interface SMSTemplate {
 export interface SMSSchedule {
   date: Date;
   time: string;
+}
+
+export interface PaymentRecord {
+  id: string;
+  dateTime: string;
+  invoiceNo: string;
+  memberId: string;
+  month: string;
+  package: string;
+  amount: string;
+}
+
+export interface MemberActivity {
+  date: string;
+  type: "workout" | "payment" | "attendance";
+  description?: string;
 }

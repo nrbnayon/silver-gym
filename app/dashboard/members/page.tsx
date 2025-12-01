@@ -13,7 +13,8 @@ import {
 } from "@/data/memberData";
 import { Member } from "@/types/member";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { UserAdd02Icon, Search01Icon, FilterIcon } from "@hugeicons/core-free-icons";
+import { UserAdd02Icon, Search01Icon, FilterHorizontalIcon, UserBlock01Icon, UserCheck01Icon } from "@hugeicons/core-free-icons";
+import Link from "next/link";
 
 export default function MembersPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,11 +56,6 @@ export default function MembersPage() {
     // TODO: Implement manage member form functionality
   };
 
-  const handleAddMember = () => {
-    console.log("Add new member clicked");
-    // TODO: Implement add member functionality
-  };
-
   return (
     <div className="min-h-screen">
       <div className="w-full">
@@ -73,23 +69,23 @@ export default function MembersPage() {
               Effortlessly manage and oversee your organization's expenditure details.
             </p>
           </div>
-          <button
-            onClick={handleAddMember}
+          <Link
+            href="/dashboard/members/add-member"
             className="px-4 py-2.5 bg-purple text-white text-sm rounded-md hover:bg-[#6A3FE0] transition-colors flex items-center justify-center gap-2 cursor-pointer md:text-base"
           >
             <HugeiconsIcon icon={UserAdd02Icon} size={20} />
             Add New Member
-          </button>
+          </Link>
         </div>
 
         {/* Stats Cards */}
         <MemberStatsCards stats={memberStatsData} onManageClick={handleManageClick} />
 
         {/* Member List Section */}
-        <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <div className="bg-white rounded-2xl border border-border p-6">
           {/* Member List Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <h2 className="text-xl font-semibold text-gray-800">Member List</h2>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
+            <h2 className="text-xl font-semibold text-gray-medium">Member List</h2>
             
             <div className="flex items-center gap-3">
               {/* Search */}
@@ -118,7 +114,7 @@ export default function MembersPage() {
                       : "border-gray-300 text-gray-700 hover:bg-gray-50"
                   }`}
                 >
-                  <HugeiconsIcon icon={FilterIcon} size={18} />
+                  <HugeiconsIcon icon={FilterHorizontalIcon} size={18} />
                   Filter
                   {filterType && (
                     <span className="ml-1 w-2 h-2 bg-primary rounded-full"></span>
@@ -135,7 +131,7 @@ export default function MembersPage() {
                           filterType === "active" ? "bg-primary/5 text-primary" : "text-gray-700"
                         }`}
                       >
-                        <HugeiconsIcon icon={UserAdd02Icon} size={18} />
+                        <HugeiconsIcon icon={UserCheck01Icon} size={18} />
                         Active Members
                         {filterType === "active" && (
                           <svg
@@ -157,7 +153,7 @@ export default function MembersPage() {
                           filterType === "inactive" ? "bg-primary/5 text-primary" : "text-gray-700"
                         }`}
                       >
-                        <HugeiconsIcon icon={UserAdd02Icon} size={18} />
+                        <HugeiconsIcon icon={UserBlock01Icon} size={18} />
                         Inactive Members
                         {filterType === "inactive" && (
                           <svg

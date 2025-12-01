@@ -18,7 +18,7 @@ const MemberStatsCards: React.FC<MemberStatsCardsProps> = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       {/* Total Members */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white rounded-lg p-4">
         <h3 className="text-sm text-gray-500 mb-2">Total Members</h3>
         <p className="text-gray-600 text-xs mb-3">
           {stats.totalMembersDescription}
@@ -32,7 +32,7 @@ const MemberStatsCards: React.FC<MemberStatsCardsProps> = ({
       </div>
 
       {/* New Admission */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white rounded-lg p-4">
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-sm text-gray-500">New Admission</h3>
           <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">
@@ -51,7 +51,7 @@ const MemberStatsCards: React.FC<MemberStatsCardsProps> = ({
       </div>
 
       {/* Active Members */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white rounded-lg p-4">
         <h3 className="text-sm text-gray-500 mb-2">Active Members</h3>
         <p className="text-gray-600 text-xs mb-3">
           {stats.activeMembersDescription}
@@ -67,7 +67,7 @@ const MemberStatsCards: React.FC<MemberStatsCardsProps> = ({
       </div>
 
       {/* Manage Member Form */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
+      <div className="bg-white rounded-lg p-4">
         <h3 className="text-sm text-gray-500 mb-2">Manage Member Form</h3>
         <p className="text-gray-600 text-xs mb-3">
           Customize the member registration form

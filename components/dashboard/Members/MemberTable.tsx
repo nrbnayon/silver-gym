@@ -2,9 +2,10 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Member } from "@/types/member";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { MailSend01Icon } from "@hugeicons/core-free-icons";
+import { MailSend01Icon, UserGroup02Icon } from "@hugeicons/core-free-icons";
 
 interface MemberTableProps {
   members: Member[];
@@ -12,8 +13,19 @@ interface MemberTableProps {
 }
 
 const MemberTable: React.FC<MemberTableProps> = ({ members, onSendSMS }) => {
+  const router = useRouter();
+
+  const handleRowClick = (memberId: string) => {
+    router.push(`/dashboard/members/details/${memberId}`);
+  };
+
+  const handleSMSClick = (e: React.MouseEvent, member: Member) => {
+    e.stopPropagation(); // Prevent row click when clicking SMS button
+    onSendSMS(member);
+  };
+
   return (
-    <div className="bg-white rounded-2xl border-8 border-gray-secondary overflow-hidden p-3">
+    <div className="bg-white rounded-2xl overflow-hidden p-3">
       <div className="overflow-auto">
         <table className="w-full border-separate border-spacing-y-0.5 border border-border-2 rounded-lg px-2">
           <thead>
@@ -48,6 +60,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ members, onSendSMS }) => {
                   colSpan={7}
                   className="px-6 py-8 text-center text-gray-500"
                 >
+                  <HugeiconsIcon icon={UserGroup02Icon} size={24} />
                   No members found
                 </td>
               </tr>
@@ -55,9 +68,10 @@ const MemberTable: React.FC<MemberTableProps> = ({ members, onSendSMS }) => {
               members.map((member, index) => (
                 <tr
                   key={member.id}
+                  onClick={() => handleRowClick(member.id)}
                   className={`transition-colors ${
                     index % 2 === 0 ? "bg-white" : "bg-gray-primary"
-                  } hover:bg-[#F2EEFF] rounded-md`}
+                  } hover:bg-[#F2EEFF] rounded-md cursor-pointer `}
                 >
                   {/* Name with Avatar & Email */}
                   <td className="px-6 py-4 text-sm rounded-l-md">
@@ -134,7 +148,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ members, onSendSMS }) => {
                   {/* View (SMS Icon) */}
                   <td className="px-6 py-4 text-center rounded-r-md">
                     <button
-                      onClick={() => onSendSMS(member)}
+                      onClick={(e) => handleSMSClick(e, member)}
                       className="inline-flex items-center justify-center p-2 hover:bg-gray-100 rounded-lg transition-colors"
                       title="Send SMS"
                     >
