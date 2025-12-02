@@ -2,14 +2,88 @@
 "use client";
 
 import { useState } from "react";
+import { Calendar } from "@/components/ui/calendar";
+import { MemberActivity } from "@/types/member";
 
-const MemberActivitiesCalendar = () => {
-  const [selectedYear, setSelectedYear] = useState("2020");
-  const [selectedMonth, setSelectedMonth] = useState("January");
+interface MemberActivitiesCalendarProps {
+  memberId?: string;
+}
+
+const MemberActivitiesCalendar: React.FC<MemberActivitiesCalendarProps> = ({
+  memberId,
+}) => {
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+    new Date()
+  );
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   const [showDate, setShowDate] = useState(true);
-  const [showMonthDropdown, setShowMonthDropdown] = useState(false);
 
-  const years = ["2020", "2021", "2022", "2023", "2024"];
+  // Sample activity data - in a real app, this would come from an API
+  const activities: MemberActivity[] = [
+    {
+      date: new Date(2025, 11, 3),
+      hasActivity: true,
+      type: "workout",
+      description: "Cardio session completed",
+    },
+    {
+      date: new Date(2025, 11, 7),
+      hasActivity: true,
+      type: "workout",
+      description: "Strength training",
+    },
+    {
+      date: new Date(2025, 11, 12),
+      hasActivity: true,
+      type: "attendance",
+      description: "Gym check-in",
+    },
+    {
+      date: new Date(2025, 11, 17),
+      hasActivity: true,
+      type: "workout",
+      description: "HIIT workout session",
+    },
+    {
+      date: new Date(2025, 11, 22),
+      hasActivity: true,
+      type: "attendance",
+      description: "Gym check-in",
+    },
+    {
+      date: new Date(2025, 11, 28),
+      hasActivity: true,
+      type: "workout",
+      description: "Group class",
+    },
+  ];
+
+  const getActivityForDate = (date: Date): MemberActivity | undefined => {
+    return activities.find(
+      (activity) =>
+        activity.date.getDate() === date.getDate() &&
+        activity.date.getMonth() === date.getMonth() &&
+        activity.date.getFullYear() === date.getFullYear()
+    );
+  };
+
+  // Separate activities by type
+  const workoutDates = activities
+    .filter((a) => a.hasActivity && a.type === "workout")
+    .map((a) => a.date);
+
+  const paymentDates = activities
+    .filter((a) => a.hasActivity && a.type === "payment")
+    .map((a) => a.date);
+
+  const attendanceDates = activities
+    .filter((a) => a.hasActivity && a.type === "attendance")
+    .map((a) => a.date);
+
+  const selectedActivity = selectedDate
+    ? getActivityForDate(selectedDate)
+    : null;
+
   const months = [
     "Jan",
     "Feb",
@@ -24,34 +98,9 @@ const MemberActivitiesCalendar = () => {
     "Nov",
     "Dec",
   ];
-  const fullMonths = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
-  // Generate calendar days for the selected month
-  const getDaysInMonth = () => {
-    const daysInMonth = new Date(
-      parseInt(selectedYear),
-      fullMonths.indexOf(selectedMonth) + 1,
-      0
-    ).getDate();
-    return Array.from({ length: daysInMonth }, (_, i) => i + 1);
-  };
-
-  const handleMonthSelect = (month: string) => {
-    setSelectedMonth(month);
-    setShowMonthDropdown(false);
+  const handleMonthClick = (monthIndex: number) => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), monthIndex));
   };
 
   return (
@@ -60,32 +109,17 @@ const MemberActivitiesCalendar = () => {
         Member Activities
       </h2>
 
-      {/* Year Selector */}
-      <div className="relative">
-        <select
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple bg-white"
-        >
-          {years.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Month Buttons */}
+      {/* Months Grid */}
       <div className="grid grid-cols-4 gap-2">
         {months.map((month, index) => (
           <button
             key={month}
-            onClick={() => setSelectedMonth(fullMonths[index])}
+            onClick={() => handleMonthClick(index)}
             className={`px-3 py-2 text-sm rounded-md transition-colors ${
-              fullMonths[index] === selectedMonth
+              currentMonth.getMonth() === index
                 ? "bg-purple text-white"
                 : month === "Oct"
-                ? "bg-red-50 text-red-600"
+                ? "bg-red-50 text-red-600 hover:bg-red-100"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
@@ -111,92 +145,89 @@ const MemberActivitiesCalendar = () => {
         </button>
       </div>
 
-      {/* Month Dropdown */}
+      {/* Calendar with dropdown support */}
       {showDate && (
-        <div className="relative">
-          <button
-            onClick={() => setShowMonthDropdown(!showMonthDropdown)}
-            className="w-full px-4 py-2 border border-orange-500 text-orange-500 rounded-md hover:bg-orange-50 transition-colors flex items-center justify-between"
-          >
-            <span>{selectedMonth}</span>
-            <svg
-              className={`w-4 h-4 transition-transform ${
-                showMonthDropdown ? "rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
+        <div className="space-y-4">
+          <Calendar
+            mode="single"
+            selected={selectedDate}
+            onSelect={setSelectedDate}
+            month={currentMonth}
+            onMonthChange={setCurrentMonth}
+            captionLayout="dropdown"
+            startMonth={new Date(1950, 0)}
+            endMonth={new Date(2100, 11)}
+            className="rounded-xl border w-full"
+            modifiers={{
+              workout: workoutDates,
+              payment: paymentDates,
+              attendance: attendanceDates,
+            }}
+            modifiersClassNames={{
+              workout: "bg-orange-100 text-orange-600 font-semibold hover:bg-orange-200 rounded-md mx-2",
+              payment: "bg-green-100 text-green-600 font-semibold hover:bg-green-200 rounded-md mx-2",
+              attendance: "bg-blue-100 text-blue-600 font-semibold hover:bg-blue-200 rounded-md mx-2",
+            }}
+          />
 
-          {showMonthDropdown && (
-            <div className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto">
-              {fullMonths.map((month) => (
-                <button
-                  key={month}
-                  onClick={() => handleMonthSelect(month)}
-                  className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors ${
-                    month === selectedMonth
-                      ? "bg-purple/10 text-purple font-medium"
-                      : "text-gray-700"
+          {/* Selected Date Activity Info */}
+          {selectedActivity && (
+            <div className={`p-4 border rounded-lg ${
+              selectedActivity.type === "workout"
+                ? "bg-orange-50 border-orange-200"
+                : selectedActivity.type === "payment"
+                ? "bg-green-50 border-green-200"
+                : "bg-blue-50 border-blue-200"
+            }`}>
+              <div className="flex items-center gap-2 mb-2">
+                <div
+                  className={`w-3 h-3 rounded-full ${
+                    selectedActivity.type === "workout"
+                      ? "bg-orange-500"
+                      : selectedActivity.type === "payment"
+                      ? "bg-green-500"
+                      : "bg-blue-500"
                   }`}
-                >
-                  {month}
-                </button>
-              ))}
+                />
+                <span className={`text-sm font-medium capitalize ${
+                  selectedActivity.type === "workout"
+                    ? "text-orange-800"
+                    : selectedActivity.type === "payment"
+                    ? "text-green-800"
+                    : "text-blue-800"
+                }`}>
+                  {selectedActivity.type}
+                </span>
+              </div>
+              <p className={`text-sm ${
+                selectedActivity.type === "workout"
+                  ? "text-orange-700"
+                  : selectedActivity.type === "payment"
+                  ? "text-green-700"
+                  : "text-blue-700"
+              }`}>
+                {selectedActivity.description}
+              </p>
             </div>
           )}
-        </div>
-      )}
 
-      {/* Calendar Grid */}
-      {showDate && (
-        <div className="space-y-2">
-          {/* Weekday Headers */}
-          <div className="grid grid-cols-7 gap-1">
-            {["S", "M", "T", "W", "T", "F", "S"].map((day, index) => (
-              <div
-                key={index}
-                className="text-center text-xs font-medium text-gray-500 py-1"
-              >
-                {day}
+          {/* Legend */}
+          <div className="space-y-2">
+            <p className="text-xs font-medium text-gray-700">Activity Types:</p>
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-orange-500" />
+                <span className="text-xs text-gray-600">Workout</span>
               </div>
-            ))}
-          </div>
-
-          {/* Calendar Days */}
-          <div className="grid grid-cols-7 gap-1">
-            {/* Empty cells for days before month starts */}
-            {Array.from({
-              length: new Date(
-                parseInt(selectedYear),
-                fullMonths.indexOf(selectedMonth),
-                1
-              ).getDay(),
-            }).map((_, index) => (
-              <div key={`empty-${index}`} className="aspect-square" />
-            ))}
-
-            {/* Actual month days */}
-            {getDaysInMonth().map((day) => (
-              <button
-                key={day}
-                className={`aspect-square flex items-center justify-center text-sm rounded-md transition-colors ${
-                  day === 17
-                    ? "bg-orange-500 text-white font-semibold"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                {day}
-              </button>
-            ))}
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <span className="text-xs text-gray-600">Payment</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-blue-500" />
+                <span className="text-xs text-gray-600">Attendance</span>
+              </div>
+            </div>
           </div>
         </div>
       )}

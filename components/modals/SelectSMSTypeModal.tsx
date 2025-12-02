@@ -359,6 +359,9 @@ const SelectSMSTypeModal: React.FC<SelectSMSTypeModalProps> = ({
                       mode="single"
                       selected={selectedDate}
                       onSelect={setSelectedDate}
+                      captionLayout="dropdown"
+                      startMonth={new Date(2025, 0)}
+                      endMonth={new Date(2100, 11)}
                       disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                       className="rounded-xl border w-full [--cell-size:theme(spacing.9)]"
                     />
