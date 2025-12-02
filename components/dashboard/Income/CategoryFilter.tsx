@@ -1,13 +1,14 @@
 // components/dashboard/Income/CategoryFilter.tsx
 "use client";
 
-import { Filter, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { FilterHorizontalIcon } from "@hugeicons/core-free-icons";
 
 interface CategoryFilterProps {
   selectedCategory: string;
@@ -23,10 +24,10 @@ export default function CategoryFilter({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-          <Filter className="w-4 h-4 text-gray-500" />
+        <button className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors min-w-[100px] justify-between h-10 bg-gray-primary! hover:bg-gray-200! cursor-pointer">
+          <HugeiconsIcon icon={FilterHorizontalIcon} size={24} />
           <span>{selectedCategory || "Filter by Category"}</span>
-          <ChevronDown className="w-4 h-4 text-gray-500" />
+          {/* <ChevronDown className="w-4 h-4 text-gray-500" /> */}
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px]">
