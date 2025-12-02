@@ -49,12 +49,12 @@ The **Accounts Module** for the Silver Gym application has been successfully imp
 **File:** `components/accounts/AddDetails.tsx`
 
 - **Features:**
-  - Tab switching between Package and Expanse
+  - Tab switching between Package and Expense
   - Active tab styling (purple background)
   - Content switching
 - **Child Components:**
   - PackageTab
-  - ExpanseTab
+  - ExpenseTab
 - **Status:** ✅ Complete
 
 ### 4. Package Tab Component
@@ -80,9 +80,9 @@ The **Accounts Module** for the Silver Gym application has been successfully imp
 - **Initial Data:** 3 sample packages (Quatre Yearly, Half Yearly, Yearly)
 - **Status:** ✅ Complete
 
-### 5. Expanse Tab Component
+### 5. Expense Tab Component
 
-**File:** `components/accounts/tabs/ExpanseTab.tsx`
+**File:** `components/accounts/tabs/ExpenseTab.tsx`
 
 - **Features:**
   - Two-column layout (Categories | Subcategories)
@@ -280,7 +280,7 @@ AccountsPage
     ├── PackageTab (no props)
     │   ├── CreatePackageModal (isOpen, onClose, onSubmit)
     │   └── EditPackageModal (isOpen, package, onClose, onSubmit, onDelete)
-    └── ExpanseTab (no props)
+    └── ExpenseTab (no props)
         ├── CreateCategoryModal (isOpen, onClose, onSubmit)
         └── AddSubcategoryModal (isOpen, onClose, onSubmit, categoryTitle)
 ```
@@ -294,7 +294,7 @@ AccountsPage
 │   └── handlers (toggle, amount change)
 └── AddDetails
     ├── activeTab state
-    └── PackageTab / ExpanseTab
+    └── PackageTab / ExpenseTab
         ├── packages/categories state
         ├── modal open/close state
         ├── selected item state
@@ -321,7 +321,7 @@ components/
     ├── IMPLEMENTATION_COMPLETE.md
     ├── tabs/
     │   ├── PackageTab.tsx
-    │   └── ExpanseTab.tsx
+    │   └── ExpenseTab.tsx
     └── modals/
         ├── CreatePackageModal.tsx
         ├── EditPackageModal.tsx

@@ -21,7 +21,7 @@ const RoleStatsCards: React.FC<RoleStatsCardsProps> = ({ onCreateRole }) => {
     {
       title: "Total Manager",
       count: 4,
-      description: "Monthly expanse of your company",
+      description: "Monthly expense of your company",
     },
   ];
 

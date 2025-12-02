@@ -2,11 +2,11 @@
 "use client";
 
 import { PackageTab } from "./tabs/PackageTab";
-import { ExpanseTab } from "./tabs/ExpanseTab";
+import { ExpenseTab } from "./tabs/ExpenseTab";
 
 interface AddDetailsProps {
-  activeTab: "package" | "expanse";
-  setActiveTab: (tab: "package" | "expanse") => void;
+  activeTab: "package" | "expense";
+  setActiveTab: (tab: "package" | "expense") => void;
 }
 
 export const AddDetails = ({ activeTab, setActiveTab }: AddDetailsProps) => {
@@ -29,19 +29,19 @@ export const AddDetails = ({ activeTab, setActiveTab }: AddDetailsProps) => {
           Package
         </button>
         <button
-          onClick={() => setActiveTab("expanse")}
+          onClick={() => setActiveTab("expense")}
           className={`flex-1 px-6 py-3 text-center font-medium transition-colors cursor-pointer rounded-lg ${
-            activeTab === "expanse"
+            activeTab === "expense"
               ? "bg-purple hover:bg-purple/90 text-white"
               : "bg-white text-gray-600 hover:bg-gray-50"
           }`}
         >
-          Expanse
+          Expense
         </button>
       </div>
 
       {/* Tab Content */}
-      <div>{activeTab === "package" ? <PackageTab /> : <ExpanseTab />}</div>
+      <div>{activeTab === "package" ? <PackageTab /> : <ExpenseTab />}</div>
     </div>
   );
 };

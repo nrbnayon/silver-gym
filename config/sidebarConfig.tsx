@@ -80,10 +80,10 @@ export const sidebarConfig: Record<string, SidebarSection[]> = {
           permissions: ["billing:view"],
         },
         {
-          id: "expanse",
-          label: "Expanse",
+          id: "expense",
+          label: "Expense",
           icon: <HugeiconsIcon icon={MoneySendSquareIcon} size={24} />,
-          path: "/dashboard/expanse",
+          path: "/dashboard/expense",
           roles: ["admin"],
           permissions: ["billing:view"],
         },

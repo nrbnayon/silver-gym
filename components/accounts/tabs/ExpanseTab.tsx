@@ -1,4 +1,4 @@
-// components/accounts/tabs/ExpanseTab.tsx
+// components/accounts/tabs/ExpenseTab.tsx
 "use client";
 
 import { useState } from "react";
@@ -11,9 +11,9 @@ import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Edit02Icon, PlusSignSquareIcon, Delete02Icon, ArchiveArrowDownIcon } from "@hugeicons/core-free-icons";
 import { toast } from "sonner";
-import { ExpenseCategory, ExpenseSubcategory } from "@/types/expanse";
+import { ExpenseCategory, ExpenseSubcategory } from "@/types/expense";
 
-export const ExpanseTab = () => {
+export const ExpenseTab = () => {
   const [categories, setCategories] = useState<ExpenseCategory[]>([
     {
       id: "1",
@@ -287,7 +287,7 @@ export const ExpanseTab = () => {
         {selectedCategory && (
           <div className="bg-gray-primary p-4 rounded-md h-full">
             <h3 className="text-xl font-semibold mb-4 text-text-secondary">
-              Expanse Subcategory
+              Expense Subcategory
             </h3>
 
             {selectedCategory.subcategories.length === 0 ? (

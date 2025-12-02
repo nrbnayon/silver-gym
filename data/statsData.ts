@@ -6,8 +6,8 @@ export const statsData = [
     value: "$12,153.00",
   },
   {
-    label: "Expanse",
-    description: "Monthly expanse of your company",
+    label: "Expense",
+    description: "Monthly expense of your company",
     value: "$12,153.00",
   },
   {

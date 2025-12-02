@@ -139,7 +139,7 @@ const CreateCustomRoleModal: React.FC<CreateCustomRoleModalProps> = ({
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Type about your expanse as description..."
+              placeholder="Type about your expense as description..."
               rows={4}
               className="focus:ring-purple focus:border-purple resize-x-none border"
             />

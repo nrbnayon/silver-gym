@@ -8,7 +8,7 @@ export const memberStatsData: MemberStats = {
   totalMembersDescription: "Monthly income of your company",
   newAdmission: 64,
   newAdmissionUnit: "/Person",
-  newAdmissionDescription: "Monthly expanse of your company",
+  newAdmissionDescription: "Monthly expense of your company",
   newAdmissionBadge: "Monthly",
   activeMembers: 764,
   activeMembersUnit: "/Person",

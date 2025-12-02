@@ -135,7 +135,7 @@ const FinancialsCompare: React.FC<FinancialsCompareProps> = ({
                   Income
                 </th>
                 <th className="px-6 py-4 text-center text-base font-semibold text-text-primary border-b">
-                  Expanse
+                  Expense
                 </th>
                 <th className="px-6 py-4 text-right text-base font-semibold text-text-primary border-b">
                   Net Income

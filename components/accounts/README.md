@@ -13,12 +13,12 @@ This module provides the Accounts management interface for gym managers, allowin
 ### Core Components
 
 - `BaseFeesSetup.tsx` - Configure admission and monthly fees
-- `AddDetails.tsx` - Tab-based interface for Package and Expanse management
+- `AddDetails.tsx` - Tab-based interface for Package and Expense management
 
 ### Tabs
 
 - `tabs/PackageTab.tsx` - Membership package management
-- `tabs/ExpanseTab.tsx` - Expense category and subcategory management
+- `tabs/ExpenseTab.tsx` - Expense category and subcategory management
 
 ### Modals
 
@@ -94,7 +94,7 @@ components/accounts/
 ├── README.md
 ├── tabs/
 │   ├── PackageTab.tsx
-│   └── ExpanseTab.tsx
+│   └── ExpenseTab.tsx
 └── modals/
     ├── CreatePackageModal.tsx
     ├── EditPackageModal.tsx

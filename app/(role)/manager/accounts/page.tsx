@@ -7,7 +7,7 @@ import { BaseFeesSetup } from "@/components/accounts/BaseFeesSetup";
 import { AddDetails } from "@/components/accounts/AddDetails";
 
 export default function AccountsPage() {
-  const [activeTab, setActiveTab] = useState<"package" | "expanse">("package");
+  const [activeTab, setActiveTab] = useState<"package" | "expense">("package");
 
   return (
     <CanAccess

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Member } from "@/types/member";
 import { Input } from "@/components/ui/input";
 import { Check, ChevronDown, Printer } from "lucide-react";
+import { toast } from "sonner";
 
 interface CreateBillFormProps {
   member: Member;
@@ -13,28 +14,23 @@ interface CreateBillFormProps {
   onSave: () => void;
 }
 
+type MonthStatus = "paid" | "due" | "available";
+
+interface MonthState {
+  name: string;
+  status: MonthStatus;
+  index: number;
+}
+
 export default function CreateBillForm({ member, onCancel, onSave }: CreateBillFormProps) {
   const [selectedPackage, setSelectedPackage] = useState("Monthly");
-  const [monthlyAmount, setMonthlyAmount] = useState("1000.00");
-  const [selectedYear, setSelectedYear] = useState("2025");
+  const [monthlyAmount, setMonthlyAmount] = useState(1000);
+  const [selectedYear, setSelectedYear] = useState("2024");
   const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
   const [paymentMethod, setPaymentMethod] = useState("Cash");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const months = [
-    "Jan", "Feb", "Mar", "Apr",
-    "May", "Jun", "Jul", "Aug",
-    "Sep", "Oct", "Nov", "Dec"
-  ];
-
-  const toggleMonth = (month: string) => {
-    if (selectedMonths.includes(month)) {
-      setSelectedMonths(selectedMonths.filter(m => m !== month));
-    } else {
-      setSelectedMonths([...selectedMonths, month]);
-    }
-  };
-
-  // Mock payment history
+  // Realistic payment history based on the images
   const paymentHistory = [
     { month: "Jun", package: "Quarterly Yearly", amount: "15,000.00", status: "Pay" },
     { month: "Jun", package: "Quarterly Yearly", amount: "15,000.00", status: "Pay" },
@@ -47,13 +43,79 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
     { month: "Sep", package: "Half-Yearly", amount: "2,000.00", status: "Due" },
   ];
 
-  const subTotal = selectedMonths.length * parseFloat(monthlyAmount.replace(/,/g, ""));
+  // Define month states: paid (Jan-Aug), due (Sep-Oct), available (Nov-Dec)
+  const getMonthStates = (): MonthState[] => {
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr",
+      "May", "Jun", "Jul", "Aug",
+      "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    return monthNames.map((name, index) => {
+      let status: MonthStatus = "available";
+      
+      // Jan-Aug are paid
+      if (index <= 7) {
+        status = "paid";
+      }
+      // Sep-Oct are due
+      else if (index === 8 || index === 9) {
+        status = "due";
+      }
+      // Nov-Dec are available
+      else {
+        status = "available";
+      }
+
+      return { name, status, index };
+    });
+  };
+
+  const monthStates = getMonthStates();
+
+  const toggleMonth = (month: string, status: MonthStatus) => {
+    // Can't select paid months
+    if (status === "paid") return;
+
+    if (selectedMonths.includes(month)) {
+      setSelectedMonths(selectedMonths.filter(m => m !== month));
+    } else {
+      setSelectedMonths([...selectedMonths, month]);
+    }
+  };
+
+  // Calculate totals
+  const subTotal = selectedMonths.length * monthlyAmount;
   const discount = 0;
   const dueAmount = 0;
   const paidTotal = subTotal - discount;
 
+  // Count due months
+  const dueMonths = monthStates.filter(m => m.status === "due").length;
+  const totalDueAmount = dueMonths * 2000; // Based on payment history
+
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleSave = async () => {
+    if (selectedMonths.length === 0) {
+      toast.error("Please select at least one month to pay");
+      return;
+    }
+
+    setIsLoading(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsLoading(false);
+    toast.success(`Payment of ${paidTotal.toLocaleString()} TK saved successfully!`);
+    
+    // Call parent onSave after a short delay
+    setTimeout(() => {
+      onSave();
+    }, 500);
   };
 
   return (
@@ -114,10 +176,10 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
           </div>
 
           {/* Payment List */}
-          <div className="print:hidden ">
+          <div className="print:hidden">
             <div className="flex justify-between items-center mb-2">
               <h4 className="text-sm font-medium text-gray-medium">Payment List</h4>
-              <span className="text-xs text-red-500 font-medium">Due: 2 months</span>
+              <span className="text-xs text-red-500 font-medium">Due: {dueMonths} months</span>
             </div>
             <div className="border border-border-2 rounded-lg overflow-hidden p-2">
               <div className="grid grid-cols-4 bg-[#E1E1E1] px-4 py-3 text-xs font-semibold text-gray-medium rounded-sm">
@@ -141,8 +203,8 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
                 ))}
               </div>
               <div className="bg-white border-t border-gray-200 px-4 py-3 flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-medium">Total Due (2 months)</span>
-                <span className="text-sm font-bold text-red-500">4,000.00 TK</span>
+                <span className="text-sm font-medium text-gray-medium">Total Due ({dueMonths} months)</span>
+                <span className="text-sm font-bold text-red-500">{totalDueAmount.toLocaleString()}.00 TK</span>
               </div>
             </div>
           </div>
@@ -187,7 +249,7 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
             <p className="text-xs text-gray-medium mb-2">Choose whether this package should include the admission fee</p>
             <div className="flex items-center justify-between bg-gray-50 border border-border-2 rounded-sm px-4 py-3">
               <span className="text-sm text-gray-medium">Monthly Amount</span>
-              <span className="text-sm font-medium text-gray-medium">{monthlyAmount}</span>
+              <span className="text-sm font-medium text-gray-medium">{monthlyAmount.toLocaleString()}.00</span>
             </div>
           </div>
 
@@ -207,26 +269,43 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
             </div>
           </div>
 
-          {/* Month Selection */}
+          {/* Month Selection with States */}
           <div className="grid grid-cols-4 gap-3 mb-6 print:hidden">
-            {months.map((month) => (
-              <button
-                key={month}
-                onClick={() => toggleMonth(month)}
-                className={`flex items-center justify-center gap-2 px-2 py-2 rounded-sm border text-sm transition-colors ${
-                  selectedMonths.includes(month)
-                    ? "border-purple text-purple bg-purple/5"
-                    : "border-border-2 text-gray-medium hover:bg-gray-50"
-                }`}
-              >
-                <div className={`w-4 h-4 rounded-xs border flex items-center justify-center ${
-                  selectedMonths.includes(month) ? "border-purple bg-purple text-white" : "border-gray-300"
-                }`}>
-                  {selectedMonths.includes(month) && <Check className="w-3 h-3" />}
-                </div>
-                {month}
-              </button>
-            ))}
+            {monthStates.map((monthState) => {
+              const isSelected = selectedMonths.includes(monthState.name);
+              const isPaid = monthState.status === "paid";
+              const isDue = monthState.status === "due";
+              
+              return (
+                <button
+                  key={monthState.name}
+                  onClick={() => toggleMonth(monthState.name, monthState.status)}
+                  disabled={isPaid}
+                  className={`flex items-center justify-center gap-2 px-2 py-2 rounded-sm border text-sm transition-colors ${
+                    isPaid
+                      ? "border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed"
+                      : isSelected
+                      ? "border-purple text-white bg-purple"
+                      : isDue
+                      ? "border-red-500 text-red-500 hover:bg-red-50"
+                      : "border-border-2 text-gray-medium hover:bg-gray-50"
+                  }`}
+                >
+                  <div className={`w-4 h-4 rounded-xs border flex items-center justify-center ${
+                    isPaid
+                      ? "border-gray-300 bg-gray-200"
+                      : isSelected
+                      ? "border-white bg-white text-purple"
+                      : isDue
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}>
+                    {(isSelected || isPaid) && <Check className="w-3 h-3" />}
+                  </div>
+                  {monthState.name}
+                </button>
+              );
+            })}
           </div>
           
           <div className="hidden print:block mb-4">
@@ -277,8 +356,8 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
 
           {/* Payment Method */}
           <div className="mb-6 print:hidden">
-            <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 flex justify-between items-center">
-              <span className="text-sm text-gray-600">Payment Method</span>
+            <div className="bg-gray-50 border border-border-2 rounded-sm px-4 py-3 flex justify-between items-center">
+              <span className="text-sm text-gray-medium">Payment Method</span>
               <div className="relative">
                 <select
                   value={paymentMethod}
@@ -302,19 +381,29 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
           <div className="flex gap-3 print:hidden">
             <button
               onClick={onCancel}
-              className="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              disabled={isLoading}
+              className="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
             <button
-              onClick={onSave}
-              className="flex-1 px-4 py-2.5 bg-purple text-white rounded-lg text-sm font-medium hover:bg-purple/90 transition-colors"
+              onClick={handleSave}
+              disabled={isLoading}
+              className="flex-1 px-4 py-2.5 bg-purple text-white rounded-lg text-sm font-medium hover:bg-purple/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Save
+              {isLoading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Save"
+              )}
             </button>
             <button 
               onClick={handlePrint}
-              className="flex-1 px-4 py-2.5 bg-[#E25C3C] text-white rounded-lg text-sm font-medium hover:bg-[#E25C3C]/90 transition-colors flex items-center justify-center gap-2"
+              disabled={isLoading}
+              className="flex-1 px-4 py-2.5 bg-[#E25C3C] text-white rounded-lg text-sm font-medium hover:bg-[#E25C3C]/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Printer className="w-4 h-4" />
               Print

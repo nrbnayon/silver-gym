@@ -8,7 +8,7 @@ export const pieChartData = [
     color: "#AA81FE",
   },
   {
-    name: "Expanse",
+    name: "Expense",
     value: 5500,
     color: "#EEF674",
   },

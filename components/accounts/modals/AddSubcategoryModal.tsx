@@ -56,7 +56,7 @@ export const AddSubcategoryModal = ({
       <DialogContent className="max-w-md">
         <div className="flex items-center justify-between">
           <DialogHeader>
-            <DialogTitle>Add Expanse Subcategory</DialogTitle>
+            <DialogTitle>Add Expense Subcategory</DialogTitle>
           </DialogHeader>
         </div>
 

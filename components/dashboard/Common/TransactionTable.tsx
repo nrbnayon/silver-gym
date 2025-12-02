@@ -60,7 +60,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
   // Calculate total balance from filtered data
   const totalBalance = filteredData.reduce((acc, transaction) => {
-    if (transaction.category === "Expanse") {
+    if (transaction.category === "Expense") {
       return acc - transaction.amount;
     }
     return acc + transaction.amount;
@@ -202,7 +202,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   <td className="py-4 px-4">
                     <span
                       className={`text-sm ${
-                        transaction.category === "Expanse"
+                        transaction.category === "Expense"
                           ? "text-primary-500"
                           : "text-gray-medium"
                       }`}
@@ -216,7 +216,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   <td className="py-4 px-4">
                     <span
                       className={`text-sm font-medium ${
-                        transaction.category === "Expanse"
+                        transaction.category === "Expense"
                           ? "text-primary-500"
                           : "text-[#4A9FF5]"
                       }`}
