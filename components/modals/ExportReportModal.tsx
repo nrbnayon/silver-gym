@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { ImageIcon } from "@/components/utils/ImageIcon";
+import { toast } from "sonner";
 
 interface ExportReportModalProps {
   isOpen: boolean;
@@ -24,6 +25,10 @@ export default function ExportReportModal({
   const handleExport = () => {
     // Handle export logic here based on exportFormat, startDate, and endDate
     console.log(`Exporting as ${exportFormat} from ${startDate} to ${endDate}`);
+     toast.success(`Report exported successfully as ${exportFormat.toUpperCase()}!`, {
+      description: `Date range: ${startDate} to ${endDate}`,
+      duration: 3000,
+    });
     onClose();
   };
 
