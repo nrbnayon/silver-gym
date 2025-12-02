@@ -2,133 +2,110 @@
 "use client";
 
 import { useState } from "react";
-import Modal from "../ui/modal";
-import { Input } from "../ui/input";
-import { FileSpreadsheet } from "lucide-react";
-import { toast } from "sonner";
+import { X } from "lucide-react";
+import { ImageIcon } from "@/components/utils/ImageIcon";
 
 interface ExportReportModalProps {
   isOpen: boolean;
   onClose: () => void;
+  exportFormat: "pdf" | "excel";
 }
 
 export default function ExportReportModal({
   isOpen,
   onClose,
+  exportFormat,
 }: ExportReportModalProps) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleClose = () => {
-    setStartDate("");
-    setEndDate("");
+  if (!isOpen) return null;
+
+  const handleExport = () => {
+    // Handle export logic here based on exportFormat, startDate, and endDate
+    console.log(`Exporting as ${exportFormat} from ${startDate} to ${endDate}`);
     onClose();
   };
 
-  const handleDownload = async () => {
-    // Validation
-    if (!startDate) {
-      toast.error("Please select a start date");
-      return;
-    }
-    if (!endDate) {
-      toast.error("Please select an end date");
-      return;
-    }
-
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    if (start > end) {
-      toast.error("Start date must be before end date");
-      return;
-    }
-
-    setIsLoading(true);
-
-    // Simulate download
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsLoading(false);
-    toast.success("Report downloaded successfully!");
-    handleClose();
-  };
-
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={handleClose}
-      title=""
-      className="max-w-md"
-    >
-      <div className="text-center">
-        {/* Excel Icon */}
-        <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-lg flex items-center justify-center">
-          <FileSpreadsheet className="w-8 h-8 text-green-600" />
-        </div>
-
-        {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 mb-2">
-          Export Your Report
-        </h3>
-        <p className="text-sm text-gray-500 mb-6">
-          Download your income records by selecting a start and end date.
-        </p>
-
-        {/* Date Inputs */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="text-left">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Start date
-            </label>
-            <Input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              className="w-full"
-              placeholder="DD/MM/YYYY"
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm bg-opacity-50">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-xl mx-4">
+        {/* Header */}
+        <div className="flex items-start gap-4 p-6 border-b">
+          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-green-50">
+            <ImageIcon 
+              activeImage={exportFormat === "pdf" ? "/icons/pdf.svg" : "/icons/excel.svg"} 
+              size={32} 
             />
           </div>
-          <div className="text-left">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              End date
-            </label>
-            <Input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              className="w-full"
-              placeholder="DD/MM/YYYY"
-            />
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold text-gray-800">Export Your Report</h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Download your income records by selecting a start and end date.
+            </p>
           </div>
-        </div>
-
-        {/* Actions */}
-        <div className="flex gap-3 justify-center">
           <button
-            onClick={handleClose}
-            disabled={isLoading}
-            className="px-6 py-2.5 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors disabled:opacity-50"
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Start Date */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Start date
+              </label>
+              <div className="relative">
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  placeholder="12/MM/YYYY"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple focus:border-transparent"
+                />
+              </div>
+            </div>
+
+            {/* End Date */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                End date
+              </label>
+              <div className="relative">
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  placeholder="DD/MM/YYYY"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple focus:border-transparent"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-end gap-3 p-6 border-t">
+          <button
+            onClick={onClose}
+            className="px-6 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
           >
             Cancel
           </button>
           <button
-            onClick={handleDownload}
-            disabled={isLoading}
-            className="px-6 py-2.5 bg-purple text-white rounded-lg text-sm font-medium hover:bg-purple/90 transition-colors disabled:opacity-50 flex items-center gap-2"
+            onClick={handleExport}
+            disabled={!startDate || !endDate}
+            className="px-6 py-2.5 text-sm font-medium text-white bg-purple hover:bg-[#6A3FE0] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                Downloading...
-              </>
-            ) : (
-              "Download Now"
-            )}
+            Download Now
           </button>
         </div>
       </div>
-    </Modal>
+    </div>
   );
 }

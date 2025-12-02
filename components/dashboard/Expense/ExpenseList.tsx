@@ -28,6 +28,7 @@ export default function ExpenseList() {
   const [showSummaryOnly, setShowSummaryOnly] = useState(false);
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
+  const [exportFormat, setExportFormat] = useState<"pdf" | "excel">("pdf");
 
   // Filter expenses
   const filteredExpenses = useMemo(() => {
@@ -127,6 +128,11 @@ export default function ExpenseList() {
     setExpenses([expense, ...expenses]);
   };
 
+  const handleExportClick = (format: "pdf" | "excel") => {
+    setExportFormat(format);
+    setShowExportModal(true);
+  };
+
   return (
     <div className="min-h-screen">
       <div className="w-full">
@@ -142,7 +148,7 @@ export default function ExpenseList() {
           {/* Action Buttons */}
           <div className="flex gap-3">
             <button 
-              onClick={() => setShowExportModal(true)}
+              onClick={() => handleExportClick("pdf")}
               className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
             >
               <ImageIcon
@@ -152,7 +158,7 @@ export default function ExpenseList() {
               Download
             </button>
             <button 
-              onClick={() => setShowExportModal(true)}
+              onClick={() => handleExportClick("excel")}
               className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
             >
               <ImageIcon
@@ -501,6 +507,7 @@ export default function ExpenseList() {
       <ExportReportModal
         isOpen={showExportModal}
         onClose={() => setShowExportModal(false)}
+        exportFormat={exportFormat}
       />
     </div>
   );
