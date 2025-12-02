@@ -11,7 +11,7 @@ import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Edit02Icon, PlusSignSquareIcon, Delete02Icon, ArchiveArrowDownIcon } from "@hugeicons/core-free-icons";
 import { toast } from "sonner";
-import { ExpenseCategory, ExpenseSubcategory } from "@/types/expense";
+import { ExpenseCategory, ExpenseSubcategory } from "@/types/expense-category";
 
 export const ExpenseTab = () => {
   const [categories, setCategories] = useState<ExpenseCategory[]>([

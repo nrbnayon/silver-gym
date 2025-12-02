@@ -1,3 +1,4 @@
+
 // components/dashboard/Header/DashboardHeader.tsx
 "use client";
 
@@ -15,6 +16,8 @@ import Modal from "@/components/ui/modal";
 import AddIncomeModal from "@/components/modals/AddIncomeModal";
 import AddExpenseModal from "@/components/modals/AddExpenseModal";
 import AddMemberModal from "@/components/modals/AddMemberModal";
+
+import { membersData } from "@/data/memberData";
 
 interface DashboardHeaderProps {
   onMenuClick?: () => void;
@@ -75,37 +78,6 @@ const getRoleBasedActions = (role: string) => {
   }
 };
 
-const mockMembers = [
-  {
-    id: "1",
-    name: "Hari Sellers",
-    email: "harisellers@example.com",
-    memberId: "66538135",
-    phone: "(252) 555-0126",
-    status: "Inactive" as const,
-    duration: "3 Months",
-    payment: "Due" as const,
-  },
-  {
-    id: "2",
-    name: "Hang Tran",
-    email: "hangtran@example.com",
-    memberId: "78031847",
-    phone: "(217) 555-0113",
-    status: "Inactive" as const,
-    duration: "3 Months",
-    payment: "Due" as const,
-  },
-];
-
-const mockCategories = [
-  { id: "1", name: "Trainer Salary", type: "Salary" },
-  { id: "2", name: "Receptionist Salary", type: "Salary" },
-  { id: "3", name: "Cleaner Salary", type: "Salary" },
-  { id: "4", name: "Snack", type: "Food" },
-  { id: "5", name: "Shop Transport", type: "Transport" },
-];
-
 export default function DashboardHeader({
   onMenuClick,
   isSidebarOpen,
@@ -124,34 +96,6 @@ export default function DashboardHeader({
   const closeModal = () => {
     setModalType(null);
   };
-
-  const getModalContent = () => {
-    switch (modalType) {
-      case "income":
-        return {
-          title: "Add Income",
-          content: (
-            <AddIncomeModal onClose={closeModal} members={mockMembers} />
-          ),
-        };
-      case "expense":
-        return {
-          title: "Add Daily Expense",
-          content: (
-            <AddExpenseModal onClose={closeModal} categories={mockCategories} />
-          ),
-        };
-      case "member":
-        return {
-          title: "Add New Member",
-          content: <AddMemberModal onClose={closeModal} />,
-        };
-      default:
-        return { title: "", content: null };
-    }
-  };
-
-  const { title, content } = getModalContent();
 
   return (
     <>
@@ -194,8 +138,27 @@ export default function DashboardHeader({
         </div>
       </header>
 
-      <Modal isOpen={modalType !== null} onClose={closeModal} title={title}>
-        {content}
+      <AddIncomeModal
+        isOpen={modalType === "income"}
+        onClose={closeModal}
+        members={membersData}
+      />
+
+      <AddExpenseModal
+        isOpen={modalType === "expense"}
+        onClose={closeModal}
+        onSave={(data) => {
+          console.log("Expense saved:", data);
+          closeModal();
+        }}
+      />
+
+      <Modal
+        isOpen={modalType === "member"}
+        onClose={closeModal}
+        title="Add New Member"
+      >
+        <AddMemberModal onClose={closeModal} />
       </Modal>
     </>
   );
