@@ -57,22 +57,22 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
   };
 
   return (
-    <div className="bg-white rounded-lg w-full max-w-6xl mx-auto p-6 print:p-0 print:max-w-none">
-      <h2 className="text-xl font-bold text-gray-900 mb-6 print:hidden">Create Bill</h2>
+    <div className="bg-white rounded-lg w-full p-6 print:p-0 print:max-w-none">
+      <h2 className="text-xl font-bold text-text-primary mb-6 print:hidden">Create Bill</h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 print:block print:gap-0">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 print:block print:gap-0">
         {/* Left Column - Member Info & Payment List */}
-        <div className="print:mb-8">
+        <div className="print:mb-8 border-border p-3 rounded-lg col-span-2">
           {/* Member Info Card */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6 flex items-start gap-4 print:border-0 print:p-0">
-            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 print:hidden">
+          <div className="bg-white border border-border-2 rounded-lg p-4 mb-6 flex items-start gap-4 print:border-0 print:p-0">
+            <div className="w-16 h-16 rounded-sm overflow-hidden bg-gray-100 flex-shrink-0 print:hidden border p-1">
               {member.profileImage ? (
                 <Image
                   src={member.profileImage}
                   alt={member.name}
                   width={64}
                   height={64}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-sm"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-xl font-bold text-gray-400">
@@ -83,14 +83,14 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
             <div className="flex-1">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
-                  <span className={`inline-block px-2 py-0.5 text-xs rounded mt-1 ${
+                  <h3 className="text-lg font-bold text-text-primary">{member.name}</h3>
+                  <span className={`inline-block px-2 py-0.5 text-xs rounded-sm mt-1 ${
                     member.status === "Active" ? "bg-orange-100 text-orange-600" : "bg-gray-100 text-gray-600"
                   } print:hidden`}>
                     {member.status}
                   </span>
                 </div>
-                <div className="bg-gray-50 px-3 py-1 rounded text-sm text-gray-600 print:bg-transparent print:p-0">
+                <div className="bg-gray-primary h-10 flex items-center px-3 py-1 rounded-sm text-sm text-gray-medium print:bg-transparent print:p-0">
                   ID: {member.memberId || "12434"}
                 </div>
               </div>
@@ -103,35 +103,35 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
               type="text"
               value={member.name}
               readOnly
-              className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded text-gray-600 text-sm"
+              className="w-full px-4 py-2 border border-border-2 rounded-sm h-11 text-gray-medium text-sm"
             />
             <input
               type="text"
               value={member.phone}
               readOnly
-              className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded text-gray-600 text-sm"
+              className="w-full px-4 py-2 border border-border-2 rounded-sm h-11 text-gray-medium text-sm"
             />
           </div>
 
           {/* Payment List */}
-          <div className="print:hidden">
+          <div className="print:hidden ">
             <div className="flex justify-between items-center mb-2">
-              <h4 className="text-sm font-medium text-gray-700">Payment List</h4>
+              <h4 className="text-sm font-medium text-gray-medium">Payment List</h4>
               <span className="text-xs text-red-500 font-medium">Due: 2 months</span>
             </div>
-            <div className="border border-gray-200 rounded-lg overflow-hidden">
-              <div className="grid grid-cols-4 bg-gray-100 px-4 py-2 text-xs font-semibold text-gray-600">
+            <div className="border border-border-2 rounded-lg overflow-hidden p-2">
+              <div className="grid grid-cols-4 bg-[#E1E1E1] px-4 py-3 text-xs font-semibold text-gray-medium rounded-sm">
                 <div>Month</div>
                 <div>Package</div>
                 <div className="text-right">Amount</div>
                 <div className="text-right">Status</div>
               </div>
-              <div className="max-h-[300px] overflow-y-auto">
+              <div className="max-h-auto overflow-y-auto">
                 {paymentHistory.map((item, index) => (
                   <div key={index} className="grid grid-cols-4 px-4 py-3 border-b border-gray-100 text-sm last:border-0">
-                    <div className="text-gray-600">{item.month}</div>
-                    <div className="text-gray-600">{item.package}</div>
-                    <div className="text-right text-gray-900">{item.amount}</div>
+                    <div className="text-gray-medium">{item.month}</div>
+                    <div className="text-gray-medium">{item.package}</div>
+                    <div className="text-right text-gray-medium">{item.amount}</div>
                     <div className={`text-right font-medium ${
                       item.status === "Due" ? "text-red-500" : "text-gray-900"
                     }`}>
@@ -141,7 +141,7 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
                 ))}
               </div>
               <div className="bg-white border-t border-gray-200 px-4 py-3 flex justify-between items-center">
-                <span className="text-sm font-medium text-gray-600">Total Due (2 months)</span>
+                <span className="text-sm font-medium text-gray-medium">Total Due (2 months)</span>
                 <span className="text-sm font-bold text-red-500">4,000.00 TK</span>
               </div>
             </div>
@@ -149,25 +149,25 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
         </div>
 
         {/* Right Column - Membership Details */}
-        <div>
+        <div className="border-border p-4 rounded-lg">
           <div className="mb-6 print:hidden">
-            <h3 className="text-lg font-semibold text-gray-900">Membership Details</h3>
-            <p className="text-xs text-gray-500">Package selection and payment calculation</p>
+            <h3 className="text-lg font-semibold text-text-primary">Membership Details</h3>
+            <p className="text-xs text-gray-medium">Package selection and payment calculation</p>
           </div>
           
           <div className="hidden print:block mb-6">
              <h1 className="text-2xl font-bold mb-2">Invoice</h1>
-             <p className="text-sm text-gray-600">Date: {new Date().toLocaleDateString()}</p>
+             <p className="text-sm text-gray-medium">Date: {new Date().toLocaleDateString()}</p>
           </div>
 
           {/* Select Package */}
           <div className="mb-4 print:hidden">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Select Package</label>
+            <label className="block text-sm font-medium text-gray-medium mb-1">Select Package</label>
             <div className="relative">
               <select
                 value={selectedPackage}
                 onChange={(e) => setSelectedPackage(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg appearance-none bg-white text-sm text-gray-700 focus:outline-none focus:border-purple"
+                className="w-full px-4 py-3 border border-border-2 rounded-sm appearance-none bg-white text-sm text-gray-medium focus:outline-none focus:border-purple"
               >
                 <option>Monthly</option>
                 <option>Quarterly</option>
@@ -183,11 +183,11 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
 
           {/* Monthly Fee */}
           <div className="mb-4 print:hidden">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Fee</label>
-            <p className="text-xs text-gray-500 mb-2">Choose whether this package should include the admission fee</p>
-            <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-lg px-4 py-2">
-              <span className="text-sm text-gray-600">Monthly Amount</span>
-              <span className="text-sm font-medium text-gray-900">{monthlyAmount}</span>
+            <label className="block text-sm font-medium text-gray-medium mb-1">Monthly Fee</label>
+            <p className="text-xs text-gray-medium mb-2">Choose whether this package should include the admission fee</p>
+            <div className="flex items-center justify-between bg-gray-50 border border-border-2 rounded-sm px-4 py-3">
+              <span className="text-sm text-gray-medium">Monthly Amount</span>
+              <span className="text-sm font-medium text-gray-medium">{monthlyAmount}</span>
             </div>
           </div>
 
@@ -197,7 +197,7 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg appearance-none bg-white text-sm text-gray-700 focus:outline-none focus:border-purple"
+                className="w-full px-4 py-3 border border-border-2 rounded-sm appearance-none bg-white text-sm text-gray-medium focus:outline-none focus:border-purple"
               >
                 <option>2024</option>
                 <option>2025</option>
@@ -213,13 +213,13 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
               <button
                 key={month}
                 onClick={() => toggleMonth(month)}
-                className={`flex items-center justify-center gap-2 px-2 py-2 rounded border text-sm transition-colors ${
+                className={`flex items-center justify-center gap-2 px-2 py-2 rounded-sm border text-sm transition-colors ${
                   selectedMonths.includes(month)
                     ? "border-purple text-purple bg-purple/5"
-                    : "border-gray-200 text-gray-500 hover:bg-gray-50"
+                    : "border-border-2 text-gray-medium hover:bg-gray-50"
                 }`}
               >
-                <div className={`w-4 h-4 rounded border flex items-center justify-center ${
+                <div className={`w-4 h-4 rounded-xs border flex items-center justify-center ${
                   selectedMonths.includes(month) ? "border-purple bg-purple text-white" : "border-gray-300"
                 }`}>
                   {selectedMonths.includes(month) && <Check className="w-3 h-3" />}
@@ -234,9 +234,9 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
           </div>
 
           {/* Next Payment Date */}
-          <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 mb-6 flex justify-between items-center print:bg-transparent print:border-0 print:p-0 print:mb-2">
-            <span className="text-sm text-gray-600">Next Payment Date</span>
-            <span className="text-sm font-medium text-gray-900">31/01/2026</span>
+          <div className="bg-gray-50 border border-border-2 rounded-sm px-4 py-3 mb-6 flex justify-between items-center print:bg-transparent print:border-0 print:p-0 print:mb-2">
+            <span className="text-sm text-gray-medium">Next Payment Date</span>
+            <span className="text-sm font-medium text-gray-medium">31/01/2026</span>
           </div>
 
           {/* Totals */}
@@ -251,7 +251,7 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
                 <Input
                   type="text"
                   value={discount.toFixed(2)}
-                  className="text-right h-8 text-sm"
+                  className="text-right h-8 text-sm border border-border-2 rounded-sm"
                   readOnly
                 />
               </div>
@@ -263,7 +263,7 @@ export default function CreateBillForm({ member, onCancel, onSave }: CreateBillF
                 <Input
                   type="text"
                   value={dueAmount.toFixed(2)}
-                  className="text-right h-8 text-sm"
+                  className="text-right h-8 text-sm border border-border-2 rounded-sm"
                   readOnly
                 />
               </div>

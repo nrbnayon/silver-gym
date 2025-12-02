@@ -96,14 +96,14 @@ export default function DateFilterDropdown({
 
       {/* Custom Date Picker Modal */}
       {showCustomDatePicker && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+        <div className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm flex items-center justify-center">
+          <div className="bg-white rounded-lg shadow-xl p-6 max-w-xl w-full mx-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Select your date duration
             </h3>
 
-            <div className="space-y-4">
-              <div>
+            <div className="flex justify-between items-center gap-4">
+              <div className="w-full">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Start date
                 </label>
@@ -117,7 +117,7 @@ export default function DateFilterDropdown({
                 </div>
               </div>
 
-              <div>
+              <div className="w-full">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   End date
                 </label>

@@ -81,7 +81,11 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             {sidebarSections.map((section, sectionIndex) => (
               <div key={sectionIndex}>
                 {section.items.map((item) => {
-                  const isActive = pathname === item.path;
+                  // For the overview page (/dashboard), use exact match
+                  // For all other pages, use startsWith to match child routes
+                  const isActive = item.path === "/dashboard" 
+                    ? pathname === "/dashboard"
+                    : pathname.startsWith(item.path);
 
                   return (
                     <Link

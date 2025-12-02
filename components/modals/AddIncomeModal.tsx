@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
 import Modal from "../ui/modal";
 import { Member } from "@/types/member";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Search01Icon } from "@hugeicons/core-free-icons";
 
 interface AddIncomeModalProps {
   isOpen: boolean;
@@ -45,7 +47,7 @@ export default function AddIncomeModal({
       isOpen={isOpen}
       onClose={handleClose}
       title="Add Income"
-      className="max-w-2xl"
+      className="max-w-4xl"
     >
       <div>
         <div className="mb-4">
@@ -54,22 +56,37 @@ export default function AddIncomeModal({
             placeholder="Search by User ID / Name / Phone Number"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent h-12"
           />
         </div>
 
         {searchQuery === "" ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-              <User className="w-8 h-8 text-gray-400" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full text-gray-medium flex items-center justify-center">
+              <HugeiconsIcon icon={Search01Icon} size={64} />
             </div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            <h3 className="text-lg font-semibold text-gray-medium mb-2">
               Start Billing by Searching Records
             </h3>
             <p className="text-sm text-gray-500">
               Start typing a member&apos;s name, phone number or ID to quickly
               <br />
               find the right person and continue billing
+            </p>
+          </div>
+        ) : filteredMembers.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
+              <HugeiconsIcon icon={Search01Icon} size={48} />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              No Members Found
+            </h3>
+            <p className="text-sm text-gray-500 mb-1">
+              We couldn&apos;t find any members matching &quot;{searchQuery}&quot;
+            </p>
+            <p className="text-xs text-gray-400">
+              Try searching with a different name, phone number, or member ID
             </p>
           </div>
         ) : (

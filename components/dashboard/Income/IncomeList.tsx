@@ -317,9 +317,12 @@ export default function IncomeList() {
                               <td className="px-6 py-4 text-center text-sm text-gray-medium rounded-r-md">
                                 <button 
                                   onClick={() => router.push(`/dashboard/income/create-bill/${income.memberId}`)}
-                                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                                  className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer hover:scale-110"
                                 >
-                                  <Edit className="w-4 h-4 inline" />
+                                  <ImageIcon
+                                    activeImage="/icons/edit.svg"
+                                    size={20}
+                                  />
                                 </button>
                               </td>
                             </tr>

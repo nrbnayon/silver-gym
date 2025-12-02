@@ -33,7 +33,7 @@ export default function CreateBillPage() {
   }
 
   return (
-    <div className="min-h-screen pb-12">
+    <div className="min-h-screen">
       <div className="mb-6">
         <button
           onClick={() => router.back()}
