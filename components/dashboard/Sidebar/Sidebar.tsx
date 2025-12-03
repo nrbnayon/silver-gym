@@ -121,7 +121,11 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         </nav>
 
         <div className="p-4 border-t border-gray-200">
-          <div className="flex items-center gap-3 mb-4 px-2">
+          <Link 
+            href="/dashboard/profile"
+            onClick={handleNavClick}
+            className="flex items-center gap-3 mb-4 px-2 hover:bg-gray-50 rounded-lg p-2 transition-colors cursor-pointer"
+          >
             <div className="w-10 h-10 rounded-full bg-gray-300 overflow-hidden flex items-center justify-center">
               {user.avatar || user.profileImage ? (
                 <Image
@@ -149,7 +153,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 {user.role || "Member"}
               </p>
             </div>
-          </div>
+          </Link>
 
           <button
             onClick={handleLogoutClick}
