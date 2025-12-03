@@ -15,6 +15,7 @@ import AddIncomeModal from "@/components/modals/AddIncomeModal";
 import { ImageIcon } from "@/components/utils/ImageIcon";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlusSignSquareIcon } from "@hugeicons/core-free-icons";
+import ExportReportModal from "@/components/modals/ExportReportModal";
 
 export default function IncomeList() {
   const router = useRouter();
@@ -25,9 +26,27 @@ export default function IncomeList() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [showSummaryOnly, setShowSummaryOnly] = useState(false);
   const [showAddIncomeModal, setShowAddIncomeModal] = useState(false);
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [exportFormat, setExportFormat] = useState<"pdf" | "excel">("pdf");
+
+  const incomeColumns = [
+    { header: "Date & Time", key: "dateTime" },
+    { header: "Invoice No", key: "invoiceNo" },
+    { header: "Name", key: "name" },
+    { header: "Member ID", key: "memberId" },
+    { header: "Category", key: "category" },
+    { header: "Payment", key: "payment" },
+    { header: "Amount", key: "amount" },
+  ];
+
+  const handleExportClick = (format: "pdf" | "excel") => {
+    setExportFormat(format);
+    setShowExportModal(true);
+  };
 
   // Filter income data
   const filteredIncome = useMemo(() => {
+    // ... existing filter logic ...
     let filtered = incomeData;
 
     // Search filter
@@ -108,14 +127,20 @@ export default function IncomeList() {
 
           {/* Action Buttons */}
           <div className="flex gap-3">
-            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
+            <button 
+              onClick={() => handleExportClick("pdf")}
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+            >
               <ImageIcon
                 activeImage="/icons/pdf.svg"
                 size={24}
               />
               Download
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
+            <button 
+              onClick={() => handleExportClick("excel")}
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+            >
               <ImageIcon
                 activeImage="/icons/excel.svg"
                 size={24}
@@ -474,6 +499,15 @@ export default function IncomeList() {
         isOpen={showAddIncomeModal}
         onClose={() => setShowAddIncomeModal(false)}
         members={membersData}
+      />
+
+      <ExportReportModal
+        isOpen={showExportModal}
+        onClose={() => setShowExportModal(false)}
+        exportFormat={exportFormat}
+        data={filteredIncome}
+        reportType="Income"
+        columns={incomeColumns}
       />
     </div>
   );

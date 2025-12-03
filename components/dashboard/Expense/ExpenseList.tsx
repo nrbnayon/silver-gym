@@ -16,7 +16,6 @@ import ExportReportModal from "@/components/modals/ExportReportModal";
 import { ImageIcon } from "@/components/utils/ImageIcon";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { PlusSignSquareIcon } from "@hugeicons/core-free-icons";
-import { toast } from "sonner";
 
 export default function ExpenseList() {
   const [expenses, setExpenses] = useState<Expense[]>(expenseData);
@@ -30,6 +29,15 @@ export default function ExpenseList() {
   const [showExportModal, setShowExportModal] = useState(false);
   const [exportFormat, setExportFormat] = useState<"pdf" | "excel">("pdf");
 
+
+  const expenseColumns = [
+    { header: "Date & Time", key: "dateTime" },
+    { header: "Invoice No", key: "invoiceNo" },
+    { header: "Category", key: "categoryTitle" },
+    { header: "Description", key: "description" },
+    { header: "Payment", key: "payment" },
+    { header: "Amount", key: "amount" },
+  ];
   // Filter expenses
   const filteredExpenses = useMemo(() => {
     let filtered = expenses;
@@ -508,6 +516,9 @@ export default function ExpenseList() {
         isOpen={showExportModal}
         onClose={() => setShowExportModal(false)}
         exportFormat={exportFormat}
+        data={filteredExpenses}
+        reportType="Expense"
+        columns={expenseColumns}
       />
     </div>
   );
