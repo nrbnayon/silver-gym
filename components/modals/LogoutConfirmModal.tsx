@@ -20,7 +20,7 @@ export default function LogoutConfirmModal({
     <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="bg-card rounded-2xl shadow-2xl w-full max-w-md mx-4 border border-border animate-in fade-in zoom-in duration-200">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 pb-4 border-b border-border">
+        <div className="flex items-center justify-between p-6 pb-4 border-b border-border rounded-t-2xl">
           <h2 className="text-xl font-semibold text-foreground">
             Confirm Logout
           </h2>

@@ -28,18 +28,18 @@ export default function MyProfile({ initialData }: MyProfileProps) {
   const [tempValue, setTempValue] = useState("");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   
   const { user } = useUser();
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   // Update data with real user info if available
-  // This is a simple merge for now, in a real app you'd likely fetch this
   const displayData = {
     ...data,
     name: user?.name || data.name,
     role: user?.role || data.role,
-    avatar: user?.avatar || user?.profileImage || data.avatar,
+    avatar: profileImage || user?.avatar || user?.profileImage || data.avatar,
     email: user?.email || data.email,
   };
 
@@ -49,6 +49,11 @@ export default function MyProfile({ initialData }: MyProfileProps) {
   };
 
   const handleSave = (field: keyof UserProfile) => {
+    if (!tempValue.trim()) {
+      toast.error("Field cannot be empty");
+      return;
+    }
+
     setData({ ...data, [field]: tempValue });
     setIsEditing(null);
     toast.success("Profile updated successfully");
@@ -57,6 +62,37 @@ export default function MyProfile({ initialData }: MyProfileProps) {
   const handleCancel = () => {
     setIsEditing(null);
     setTempValue("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent, field: keyof UserProfile) => {
+    if (e.key === "Enter") {
+      handleSave(field);
+    } else if (e.key === "Escape") {
+      handleCancel();
+    }
+  };
+
+  const handleProfileUpload = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        if (file.size > 5 * 1024 * 1024) {
+          toast.error("File size should be less than 5MB");
+          return;
+        }
+        
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setProfileImage(reader.result as string);
+          toast.success("Profile picture updated successfully");
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+    input.click();
   };
 
   const handleLogout = async () => {
@@ -74,6 +110,9 @@ export default function MyProfile({ initialData }: MyProfileProps) {
     setShowDeleteModal(false);
     toast.success("Account scheduled for deletion");
     // In a real app, you would call an API here
+    setTimeout(() => {
+      router.push("/sign-in");
+    }, 2000);
   };
 
   const renderEditableField = (
@@ -85,7 +124,7 @@ export default function MyProfile({ initialData }: MyProfileProps) {
     const isFieldEditing = isEditing === field;
 
     return (
-      <div className="mb-6 last:mb-0">
+      <div className="mb-5 last:mb-0">
         <label className="block text-sm text-gray-500 mb-1.5">{label}</label>
         <div className="relative">
           {isFieldEditing ? (
@@ -94,18 +133,19 @@ export default function MyProfile({ initialData }: MyProfileProps) {
                 type="text"
                 value={tempValue}
                 onChange={(e) => setTempValue(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                onKeyDown={(e) => handleKeyDown(e, field)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
                 autoFocus
               />
               <button 
                 onClick={() => handleSave(field)}
-                className="px-3 py-2 bg-purple text-white rounded-lg text-sm whitespace-nowrap"
+                className="px-3 py-2 bg-purple text-white rounded-sm text-sm whitespace-nowrap hover:bg-purple-600 transition-colors"
               >
                 Save
               </button>
               <button 
                 onClick={handleCancel}
-                className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap"
+                className="px-3 py-2 bg-gray-100 text-gray-700 rounded-sm text-sm whitespace-nowrap hover:bg-gray-200 transition-colors"
               >
                 Cancel
               </button>
@@ -129,25 +169,28 @@ export default function MyProfile({ initialData }: MyProfileProps) {
   return (
     <div className="space-y-6">
       {/* Profile Header */}
-      <div className="bg-white rounded-2xl p-6 border border-gray-100">
+      <div className="bg-white rounded-2xl px-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100 relative">
               <Image
-                src={displayData.avatar || "/avatar-placeholder.png"}
+                src={displayData.avatar || "/images/avatar.png"}
                 alt={displayData.name}
                 fill
                 className="object-cover"
               />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">{displayData.name}</h2>
-              <span className="inline-block px-3 py-1 bg-gray-100 rounded-md text-xs font-medium text-gray-600 capitalize mt-1">
+              <h2 className="text-xl font-bold text-text-primary">{displayData.name}</h2>
+              <span className="inline-block px-3 py-1 bg-gray-secondary rounded-sm border border-border-2 text-xs font-medium text-gray-600 capitalize mt-1">
                 {displayData.role}
               </span>
             </div>
           </div>
-          <button className="px-4 py-2 bg-gray-50 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors">
+          <button 
+            onClick={handleProfileUpload}
+            className="px-4 py-2 bg-gray-50 text-text-primary border border-border-2 text-sm font-medium rounded-sm hover:bg-gray-100 transition-colors cursor-pointer"
+          >
             Upload Profile
           </button>
         </div>
@@ -155,7 +198,7 @@ export default function MyProfile({ initialData }: MyProfileProps) {
 
       {/* Professional Contact */}
       <div className="bg-white rounded-2xl p-6 border border-gray-100">
-        <h3 className="text-lg font-bold text-gray-900 mb-6">Professional Contact</h3>
+        <h3 className="text-lg font-bold text-gray-900 mb-4">Professional Contact</h3>
         
         <div className="space-y-6">
           {renderEditableField("Phone number", "phone", displayData.phone)}
@@ -163,12 +206,18 @@ export default function MyProfile({ initialData }: MyProfileProps) {
           {renderEditableField("Company Address", "companyAddress", displayData.companyAddress)}
         </div>
 
-        <div className="flex gap-3 mt-6">
-          <button className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+        <div className="flex gap-3 mt-5">
+          <button 
+            onClick={() => toast.info("Add address functionality coming soon")}
+            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-sm text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
+          >
             <HugeiconsIcon icon={PlusSignIcon} size={16} />
             Add Address
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+          <button 
+            onClick={() => toast.info("Add age functionality coming soon")}
+            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-sm text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
+          >
             <HugeiconsIcon icon={PlusSignIcon} size={16} />
             Add age
           </button>
@@ -176,12 +225,12 @@ export default function MyProfile({ initialData }: MyProfileProps) {
       </div>
 
       {/* Support Access */}
-      <div className="bg-white rounded-2xl p-6 border border-gray-100">
+      <div className="bg-white rounded-2xl p-6 border border-gray-100 mb-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-bold text-gray-900">Support Access</h3>
-          <button className="text-gray-400 hover:text-purple transition-colors">
+          {/* <button className="text-gray-400 hover:text-purple transition-colors">
             <HugeiconsIcon icon={PencilEdit02Icon} size={20} />
-          </button>
+          </button> */}
         </div>
 
         <div className="space-y-8">
@@ -195,7 +244,7 @@ export default function MyProfile({ initialData }: MyProfileProps) {
             </div>
             <button 
               onClick={() => setShowLogoutModal(true)}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-sm text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
             >
               <HugeiconsIcon icon={Logout01Icon} size={20} />
               Logout
@@ -212,7 +261,7 @@ export default function MyProfile({ initialData }: MyProfileProps) {
             </div>
             <button 
               onClick={() => setShowDeleteModal(true)}
-              className="flex items-center gap-2 px-4 py-2 border border-red-100 bg-red-50 text-red-600 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 border border-red-100 bg-red-50 text-red-600 rounded-sm text-sm font-medium hover:bg-red-100 transition-colors cursor-pointer"
             >
               <HugeiconsIcon icon={Delete02Icon} size={20} />
               Delete Account

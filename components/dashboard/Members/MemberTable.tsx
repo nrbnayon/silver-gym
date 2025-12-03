@@ -82,7 +82,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ members, onSendSMS }) => {
                             src={
                               member.profileImage ||
                               member.avatar ||
-                              "/avatar-placeholder.png"
+                              "/images/avatar.png"
                             }
                             alt={member.name}
                             className="w-full h-full object-cover"

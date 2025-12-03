@@ -3,7 +3,7 @@ import { UserProfile, BusinessProfile } from "@/types/profile";
 export const defaultUserProfile: UserProfile = {
   name: "Mimi Carlos",
   role: "Admin",
-  avatar: "/avatar-placeholder.png", // You might want to replace this with a real image path if available
+  avatar: "/images/avatar.png",
   phone: "+880 1636-828200",
   email: "deanna.curtis@example.com",
   companyAddress: "33 Pendergast Aven e, GA, 30736",

@@ -21,7 +21,7 @@ export default function DeleteAccountModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6 relative animate-in fade-in zoom-in duration-200">
         <div className="flex flex-col items-center text-center">
-          <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mb-4 text-red-500">
+          <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mb-4 text-red-500 border border-primary">
             <HugeiconsIcon icon={Delete02Icon} size={32} />
           </div>
 

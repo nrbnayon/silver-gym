@@ -132,7 +132,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                   src={
                     user.avatar ||
                     user.profileImage ||
-                    "/avatar-placeholder.png"
+                    "/images/avatar.png"
                   }
                   alt={user.name || "User"}
                   width={40}
