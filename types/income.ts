@@ -12,6 +12,7 @@ export interface IncomeRecord {
   category: IncomeCategory;
   payment: PaymentMethod;
   amount: number;
+  date: Date;
 }
 
 export type DateFilterType = "today" | "thisMonth" | "custom";

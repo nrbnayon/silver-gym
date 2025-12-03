@@ -35,16 +35,74 @@ export default function ExportReportModal({
   const filterDataByDateRange = () => {
     if (!startDate || !endDate) return data;
 
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    end.setHours(23, 59, 59, 999); // Include the entire end date
+    // console.log('=== FILTER DEBUG START ===');
+    // console.log('Total data items:', data.length);
+    // console.log('Start date:', startDate);
+    // console.log('End date:', endDate);
+    // console.log('First item sample:', data[0]);
 
-    return data.filter((item) => {
-      // Handle both 'dateTime' and 'date' properties
-      const dateStr = item.dateTime || item.date;
-      const itemDate = new Date(dateStr);
-      return itemDate >= start && itemDate <= end;
+    const start = new Date(startDate);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(endDate);
+    end.setHours(23, 59, 59, 999);
+
+    // console.log('Parsed start:', start);
+    // console.log('Parsed end:', end);
+
+    const filtered = data.filter((item) => {
+      let itemDate: Date;
+      
+      // Check if there's a date property that's a Date object (expense data)
+      if (item.date && item.date instanceof Date) {
+        itemDate = new Date(item.date);
+        // console.log('Using Date object:', item.date);
+      } 
+      // Check if date is a string
+      else if (item.date && typeof item.date === 'string') {
+        itemDate = new Date(item.date);
+        // console.log('Using date string:', item.date);
+      } 
+      // Parse the dateTime string (income data format: "15 May 2020 9:30 am")
+      else if (item.dateTime) {
+        const dateStr = String(item.dateTime);
+        // console.log('Parsing dateTime string:', dateStr);
+        
+        // Parse format like "15 May 2020 9:30 am" or "22 Dec 2025 9:30 am"
+        const parts = dateStr.match(/(\d+)\s+([A-Za-z]+)\s+(\d+)/);
+        if (parts) {
+          const [, day, month, year] = parts;
+          // Create date string in format "Month Day, Year"
+          itemDate = new Date(`${month} ${day}, ${year}`);
+          // console.log('Parsed parts:', { day, month, year }, '-> Date:', itemDate);
+        } else {
+          // Fallback to direct parsing
+          itemDate = new Date(dateStr);
+          // console.log('Fallback parse:', itemDate);
+        }
+      } else {
+        // console.log('No date found for item:', item);
+        return false;
+      }
+      
+      // Check if date is valid and within range
+      if (isNaN(itemDate.getTime())) {
+        // console.log('Invalid date for item:', item);
+        return false;
+      }
+      
+      // Normalize the item date to start of day for comparison
+      itemDate.setHours(0, 0, 0, 0);
+      
+      const inRange = itemDate >= start && itemDate <= end;
+      // console.log('Item date:', itemDate, 'In range?', inRange);
+      
+      return inRange;
     });
+
+    // console.log('Filtered items:', filtered.length);
+    // console.log('=== FILTER DEBUG END ===');
+    
+    return filtered;
   };
 
   const exportToPDF = () => {

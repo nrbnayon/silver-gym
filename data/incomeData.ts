@@ -13,6 +13,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Admission",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "2",
@@ -23,6 +24,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Bank",
     amount: 1000.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "3",
@@ -33,6 +35,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Bkash",
     amount: 2000.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "4",
@@ -43,6 +46,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 1200.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "5",
@@ -53,6 +57,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Due",
     amount: 2000.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "6",
@@ -63,6 +68,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 1500.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "7",
@@ -73,6 +79,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "8",
@@ -83,6 +90,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Admission",
     payment: "Bank",
     amount: 2000.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "9",
@@ -93,6 +101,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 1000.0,
+    date: new Date("2020-05-15"),
   },
   {
     id: "10",
@@ -103,6 +112,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-15"),
   },
   
   // May 16, 2020
@@ -115,6 +125,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-16"),
   },
   {
     id: "12",
@@ -125,6 +136,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 1500.0,
+    date: new Date("2020-05-16"),
   },
   {
     id: "13",
@@ -135,6 +147,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 1000.0,
+    date: new Date("2020-05-16"),
   },
   {
     id: "14",
@@ -145,6 +158,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Admission",
     payment: "Bank",
     amount: 2000.0,
+    date: new Date("2020-05-16"),
   },
   {
     id: "15",
@@ -155,6 +169,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-16"),
   },
   {
     id: "16",
@@ -165,6 +180,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-16"),
   },
   
   // May 17, 2020
@@ -177,6 +193,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Admission",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-17"),
   },
   {
     id: "18",
@@ -187,6 +204,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Bank",
     amount: 1000.0,
+    date: new Date("2020-05-17"),
   },
   {
     id: "19",
@@ -197,6 +215,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Bkash",
     amount: 3000.0,
+    date: new Date("2020-05-17"),
   },
   {
     id: "20",
@@ -207,6 +226,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 1500.0,
+    date: new Date("2020-05-17"),
   },
   
   // May 18, 2020
@@ -219,6 +239,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Bkash",
     amount: 2000.0,
+    date: new Date("2020-05-18"),
   },
   {
     id: "22",
@@ -229,6 +250,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 1200.0,
+    date: new Date("2020-05-18"),
   },
   {
     id: "23",
@@ -239,6 +261,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Bank",
     amount: 1800.0,
+    date: new Date("2020-05-18"),
   },
   
   // May 19, 2020
@@ -251,6 +274,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Due",
     amount: 2000.0,
+    date: new Date("2020-05-19"),
   },
   {
     id: "25",
@@ -261,6 +285,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 1500.0,
+    date: new Date("2020-05-19"),
   },
   {
     id: "26",
@@ -271,6 +296,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Admission",
     payment: "Bkash",
     amount: 2500.0,
+    date: new Date("2020-05-19"),
   },
   
   // May 20, 2020
@@ -283,6 +309,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-20"),
   },
   {
     id: "28",
@@ -293,6 +320,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Admission",
     payment: "Bank",
     amount: 2000.0,
+    date: new Date("2020-05-20"),
   },
   {
     id: "29",
@@ -303,6 +331,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 1700.0,
+    date: new Date("2020-05-20"),
   },
   
   // May 21, 2020
@@ -315,6 +344,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 1000.0,
+    date: new Date("2020-05-21"),
   },
   {
     id: "31",
@@ -325,6 +355,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2020-05-21"),
   },
   {
     id: "32",
@@ -335,6 +366,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Bank",
     amount: 3500.0,
+    date: new Date("2020-05-21"),
   },
   
   // May 22, 2020
@@ -347,6 +379,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Quarterly",
     payment: "Cash",
     amount: 2000.0,
+    date: new Date("2025-12-22"),
   },
   {
     id: "34",
@@ -357,6 +390,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Cash",
     amount: 1500.0,
+    date: new Date("2025-12-22"),
   },
   {
     id: "35",
@@ -367,6 +401,7 @@ export const incomeData: IncomeRecord[] = [
     category: "Monthly",
     payment: "Bkash",
     amount: 1600.0,
+    date: new Date("2025-12-22"),
   },
 ];
 

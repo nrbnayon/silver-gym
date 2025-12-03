@@ -505,7 +505,7 @@ export default function IncomeList() {
         isOpen={showExportModal}
         onClose={() => setShowExportModal(false)}
         exportFormat={exportFormat}
-        data={filteredIncome}
+        data={incomeData}
         reportType="Income"
         columns={incomeColumns}
       />
